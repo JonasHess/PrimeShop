@@ -100,7 +100,7 @@ public class Interface_Shop_Page extends InventoryInterface {
 
     public void reprint_items(Player player) {
         // Add Items to Menu
-        Page page = shop.get_Page(pagenumber);
+        final Page page = shop.get_Page(pagenumber);
         int amount_of_items = page.listOfItems.size();
         int itemsAddedItems = 0;
 
@@ -135,50 +135,27 @@ public class Interface_Shop_Page extends InventoryInterface {
                         @Override
                         public void onClick(InventoryInterface inventoryInterface, Player player, 
                                 ItemStack cursor, ItemStack current, ClickType type) {
-
-                            //The next ~20 lines are used remove lore "Click to have a closer look.". 
-                            //TODO: simplify this code!
-                            ItemStack itemCurrent = current;
-                            ItemStack itemMatched = null;
-                            boolean match = false;
-
-                            for (ItemStack itemListed : shop.listOfItems) {            
-                                if (itemCurrent.getType() == itemListed.getType()) {
-                                    if (itemCurrent.getData().getData() == itemListed.getData().getData()) {
-                                        match = true;
-                                        Map<Enchantment, Integer> map = itemCurrent
-                                                .getEnchantments();
-
-                                        for (Enchantment key : map.keySet()) {
-                                            if (!itemListed.containsEnchantment(key)) {
-                                                match = false;
-                                                break;
-                                            }
-                                        }
-                                        if (match) {
-                                            itemMatched = itemListed;
-                                        }
+                            
+                            int slot_position = -1;
+                            for (int y = 2; y < 5; y++) {
+                                for (int x = 0; x < 9; x++) {
+                                    slot_position++;
+                                    if (inventoryInterface.getOption(x, y).equals(this)) {
+                                        PrimeShop.close_InventoyInterface(player);
+                                        PrimeShop.open_InventoyInterface(
+                                            player,
+                                            new Interface_Buy_Sell_Item(
+                                                inventoryInterface.branch_back_Stack,
+                                                player, shop, page.listOfItems.get(slot_position), 1,
+                                                true, false
+                                            ));
+                                        return;
                                     }
                                 }
-                            }
-
-                            if (match) {
-                                PrimeShop.close_InventoyInterface(player);
-                                PrimeShop.open_InventoyInterface(
-                                    player,
-                                    new Interface_Buy_Sell_Item(
-                                        inventoryInterface.branch_back_Stack,
-                                        player, shop, itemMatched, 1,
-                                        true, false
-                                    )
-                                );
-                            } else {
-                                player.sendMessage("Error: 568 ; Please report this special error to the developer");
                             }
                         }
                     });
                     itemsAddedItems++;
-
                 }
             }
         }
