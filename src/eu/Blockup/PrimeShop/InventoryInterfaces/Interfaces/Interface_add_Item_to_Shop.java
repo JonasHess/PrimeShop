@@ -16,7 +16,6 @@ import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_Confrim_add_Item;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_close_Interface;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_with_no_task;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_Buy_Sell_Item;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Shops.Shop;
@@ -25,7 +24,7 @@ public class Interface_add_Item_to_Shop extends InventoryInterface {
 	
 	public InventoryInterface parentShop;
 	
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	public Interface_add_Item_to_Shop(final List<InventoryInterface> link_Back_Stack, Player player, final ItemStack itemstack_to_be_added, Shop shop) {
 		super(Message_Handler.resolve_to_message(48), 4, link_Back_Stack); // TODO Correct ItemName
 

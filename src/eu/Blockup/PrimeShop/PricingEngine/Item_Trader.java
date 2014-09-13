@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemStack;
 
 import net.milkbowl.vault.economy.Economy;
 import eu.Blockup.PrimeShop.PrimeShop;
-import eu.Blockup.PrimeShop.Other.Item_Comparer;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.Item_Node_of_ItemBloodline;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPrice;

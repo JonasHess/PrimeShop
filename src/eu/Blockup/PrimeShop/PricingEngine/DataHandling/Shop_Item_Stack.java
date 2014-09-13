@@ -1,7 +1,5 @@
 package eu.Blockup.PrimeShop.PricingEngine.DataHandling;
 
-import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnBoolean;
-
 public class Shop_Item_Stack {
 	private Shop_Item sql_Item;
 	private double amount;

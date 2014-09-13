@@ -5,13 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.bukkit.inventory.ItemStack;
-
 import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item;
-import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Variabler_typ;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnBoolean;
 
 public class Database_MySql extends DatabaseIntersection {

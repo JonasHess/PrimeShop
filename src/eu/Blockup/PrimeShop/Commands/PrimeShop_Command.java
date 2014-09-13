@@ -2,13 +2,9 @@ package eu.Blockup.PrimeShop.Commands;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.npc.CitizensNPC;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,30 +13,18 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.NPC;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.util.BlockIterator;
 import org.bukkit.util.Vector;
 
 import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Buy_Sell_Item;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Shop_Page;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_add_Item_to_Shop;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_List_of_Subitems;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_delete_Shop;
-import eu.Blockup.PrimeShop.Other.Item_Comparer;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
-import eu.Blockup.PrimeShop.PricingEngine.Item_Trader;
-import eu.Blockup.PrimeShop.PricingEngine.Pool_of_Item_Traders;
-import eu.Blockup.PrimeShop.PricingEngine.Price_Sorter;
-import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.Item_Node_of_ItemBloodline;
-import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPrice;
 import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class PrimeShop_Command implements CommandExecutor {

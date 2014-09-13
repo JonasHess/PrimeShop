@@ -8,11 +8,8 @@ import org.bukkit.inventory.ItemStack;
 
 import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Button;
-import eu.Blockup.PrimeShop.InventoryInterfaces.ClickHandler;
 import eu.Blockup.PrimeShop.InventoryInterfaces.ClickType;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_close_Interface;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_delete_Item;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_with_no_task;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
@@ -20,7 +17,7 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Interface_delete_Shop_from_Collection extends InventoryInterface{
 
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	public Interface_delete_Shop_from_Collection(final List<InventoryInterface> link_Back_Stack, Player player, final Shop shop, final int collectionID, final boolean npc) {
 		super(Message_Handler.resolve_to_message(70), 4, link_Back_Stack);
 		this.setCloseable(false);

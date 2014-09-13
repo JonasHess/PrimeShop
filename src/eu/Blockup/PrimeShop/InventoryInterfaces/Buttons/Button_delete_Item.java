@@ -1,7 +1,5 @@
 package eu.Blockup.PrimeShop.InventoryInterfaces.Buttons;
 
-import java.util.ArrayList;
-
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -10,9 +8,7 @@ import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.InventoryInterfaces.ClickType;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Button;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Buy_Sell_Item;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Shop_Page;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_delete_Item_from_Shop;
 import eu.Blockup.PrimeShop.Other.Item_Comparer;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Shops.Shop;

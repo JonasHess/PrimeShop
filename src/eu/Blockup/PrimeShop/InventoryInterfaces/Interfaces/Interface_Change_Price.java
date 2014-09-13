@@ -13,18 +13,12 @@ import eu.Blockup.PrimeShop.InventoryInterfaces.Button;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_modify_Price;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_close_Interface;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_Amount;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_with_no_task;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_pricetag_Price;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_Buy_Sell_Item;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
-import eu.Blockup.PrimeShop.PricingEngine.Item_Trader;
-import eu.Blockup.PrimeShop.PricingEngine.Pool_of_Item_Traders;
 import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item;
-import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPrice;
-import eu.Blockup.PrimeShop.Shops.Page;
-import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Interface_Change_Price extends InventoryInterface {
 

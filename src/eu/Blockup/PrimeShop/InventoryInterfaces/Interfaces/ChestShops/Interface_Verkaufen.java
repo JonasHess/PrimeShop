@@ -1,32 +1,22 @@
 package eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.ChestShops;
 
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.ChestShop.ChestShop;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Button;
-import eu.Blockup.PrimeShop.InventoryInterfaces.ClickHandler;
 import eu.Blockup.PrimeShop.InventoryInterfaces.ClickType;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_close_Interface;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_with_no_task;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Buy_Sell_Item;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Collection_of_Shops;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Shop_Page;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_delete_Shop;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_delete_Shop_from_Collection;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
-import eu.Blockup.PrimeShop.Shops.Page;
-import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Interface_Verkaufen extends InventoryInterface {
 
@@ -35,7 +25,7 @@ public class Interface_Verkaufen extends InventoryInterface {
 	private int pagenumber;
 	private int maxPages;
 	
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	public Interface_Verkaufen(final List<InventoryInterface> link_Back_Stack,Player player, final ChestShop chestShop, int pagenumber) {
 		super("VERKAUFEN TITLE", 6, link_Back_Stack);   // TODO
 		

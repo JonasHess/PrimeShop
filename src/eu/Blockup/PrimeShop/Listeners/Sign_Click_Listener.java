@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import net.citizensnpcs.api.event.NPCLeftClickEvent;
-import net.minecraft.server.v1_7_R4.Material;
-
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
@@ -20,11 +16,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-
 import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Collection_of_Shops;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Shop_Page;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;

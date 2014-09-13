@@ -15,11 +15,8 @@ import eu.Blockup.PrimeShop.InventoryInterfaces.ClickHandler;
 import eu.Blockup.PrimeShop.InventoryInterfaces.ClickType;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Button;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
-import eu.Blockup.PrimeShop.InventoryInterfaces.TextField;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_close_Interface;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_Amount;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_with_no_task;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_Buy_Sell_Item;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Shops.Page;
@@ -31,7 +28,7 @@ public class Interface_Shop_Page extends InventoryInterface {
 	final public Interface_Shop_Page current_Menu;
 	public int pagenumber;
 	final int maxPages;
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	public Interface_Shop_Page(final List<InventoryInterface> link_Back_Stack,
 			Player player, final Shop shop, final int pagenumber) {
 		super(shop.shopname, 6, link_Back_Stack);

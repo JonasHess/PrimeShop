@@ -1,9 +1,6 @@
 package eu.Blockup.PrimeShop.InventoryInterfaces.Buttons;
 
-import java.util.Map;
-
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 

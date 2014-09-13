@@ -18,7 +18,7 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Interface_delete_Shop extends InventoryInterface{
 
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	public Interface_delete_Shop(final List<InventoryInterface> link_Back_Stack, Player player, final Shop shop) {
 		super(Message_Handler.resolve_to_message(75), 4, link_Back_Stack); // TODO Correct ItemName
 

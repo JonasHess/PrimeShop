@@ -3,19 +3,14 @@ package eu.Blockup.PrimeShop.Other;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
-
 import eu.Blockup.PrimeShop.PrimeShop;
-import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Message_Handler {
 

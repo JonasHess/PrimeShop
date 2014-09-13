@@ -1,7 +1,6 @@
 package eu.Blockup.PrimeShop.PricingEngine.Item_Analysis;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 

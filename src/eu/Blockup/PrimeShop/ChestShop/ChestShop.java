@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import eu.Blockup.PrimeShop.PrimeShop;
-import eu.Blockup.PrimeShop.Shops.Page;
 
 
 public class ChestShop {

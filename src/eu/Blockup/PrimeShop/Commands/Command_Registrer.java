@@ -1,11 +1,7 @@
 package eu.Blockup.PrimeShop.Commands;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import eu.Blockup.PrimeShop.PrimeShop;
-import eu.Blockup.PrimeShop.Listeners.NPC_Click_Listener;
 
 public class Command_Registrer {
 

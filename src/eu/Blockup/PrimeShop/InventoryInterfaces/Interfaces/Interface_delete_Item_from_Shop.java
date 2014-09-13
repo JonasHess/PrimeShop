@@ -12,10 +12,8 @@ import eu.Blockup.PrimeShop.InventoryInterfaces.ClickHandler;
 import eu.Blockup.PrimeShop.InventoryInterfaces.ClickType;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Button;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_Confrim_add_Item;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_close_Interface;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_with_no_task;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_Buy_Sell_Item;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_delete_Item;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
@@ -24,7 +22,7 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 public class Interface_delete_Item_from_Shop extends InventoryInterface {
 	
 	
-	@SuppressWarnings("deprecation")
+//	@SuppressWarnings("deprecation")
 	public Interface_delete_Item_from_Shop(final List<InventoryInterface> link_Back_Stack, Player player, final ItemStack itemstack_to_be_added, final Shop shop) {
 		super(Message_Handler.resolve_to_message(67), 4, link_Back_Stack); // TODO Correct ItemName
 
