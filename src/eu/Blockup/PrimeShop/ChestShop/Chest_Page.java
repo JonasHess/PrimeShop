@@ -12,7 +12,7 @@ public class Chest_Page { // NO_UCD (use default)
 		public static int amount_of_items_fitting__in_one_page = 26;
 		
 		
-		public Chest_Page(List<Item_Supply> listOfItems, int index_of_this_page, int max_count_of_pages) {
+		Chest_Page(List<Item_Supply> listOfItems, int index_of_this_page, int max_count_of_pages) {
 			super();
 			this.listOfItems = listOfItems;
 			this.index_of_this_page = index_of_this_page;

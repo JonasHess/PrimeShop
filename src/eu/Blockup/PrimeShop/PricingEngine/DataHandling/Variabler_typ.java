@@ -8,7 +8,7 @@ public class Variabler_typ <Typ>{ // NO_UCD (use default)
       private Shop_Item parent;
       private boolean value_is_defaultValue;
       
-      public Variabler_typ(Shop_Item parent, Typ defaultValue)
+      Variabler_typ(Shop_Item parent, Typ defaultValue)
       {	
     	  	this.has_changed = false;
     	  	this.parent = parent;
@@ -34,7 +34,7 @@ public class Variabler_typ <Typ>{ // NO_UCD (use default)
 	public synchronized boolean is_value_eq_defaultValue () {
 		return this.value_is_defaultValue;
 	}
-	public synchronized void set_to_defaultValue() {
+	synchronized void set_to_defaultValue() {
 		this.value_is_defaultValue = true;
 	}
 	
@@ -42,7 +42,7 @@ public class Variabler_typ <Typ>{ // NO_UCD (use default)
 		this.defaultValue = newDefaultValue;
 	}
 	
-	public synchronized Typ get_defaultValue() {
+	synchronized Typ get_defaultValue() {
 		return this.defaultValue;
 	}
 
@@ -59,7 +59,7 @@ public class Variabler_typ <Typ>{ // NO_UCD (use default)
 	}
       
 
-	public Variabler_typ<Typ> clone (Shop_Item parent) {   // TODO testen!  
+	Variabler_typ<Typ> clone (Shop_Item parent) {   // TODO testen!  
 		
 		Variabler_typ<Typ> result = new Variabler_typ<Typ>(parent, defaultValue);
 		result.setValue(this.value);

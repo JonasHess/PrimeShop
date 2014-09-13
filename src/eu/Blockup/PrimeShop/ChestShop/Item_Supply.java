@@ -7,7 +7,7 @@ public class Item_Supply { // NO_UCD (use default)
 	private ItemStack itemStack;
 	private int amount;
 	
-	public Item_Supply (ItemStack itemStack, int amount) {
+	Item_Supply (ItemStack itemStack, int amount) {
 		
 		super();
 		this.itemStack = itemStack;
@@ -31,7 +31,7 @@ public class Item_Supply { // NO_UCD (use default)
 				
 	}
 	
-	public boolean remove_amount_of(int x) {
+	boolean remove_amount_of(int x) {
 		if (!has_amount_of(x)) return false;
 		
 		this.amount = amount - x;
@@ -39,7 +39,7 @@ public class Item_Supply { // NO_UCD (use default)
 	}
 	
 	
-	public void add_amount (int x) {
+	void add_amount (int x) {
 		this.amount = this.amount + x;			
 	}
 	
