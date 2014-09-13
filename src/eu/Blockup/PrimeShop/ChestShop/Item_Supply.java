@@ -25,7 +25,7 @@ public class Item_Supply { // NO_UCD (use default)
 	}
 
 	
-	public boolean has_amount_of (int i) {
+	private boolean has_amount_of (int i) {
 		if (amount >= i) return true;
 		return false;
 				

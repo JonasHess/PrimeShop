@@ -30,16 +30,16 @@ public class EnchantmentHandler {
 	
     public static double getPrice(String name, Integer level) {
         for (EnchantmentData d : list_with_Enchantment_Prices){
-            Logger.getLogger("Minecraft").info
-                ("DEBUG: getPrice checks "+d.getName()+" with level "+d.getEnchantmentLevel());
+//            Logger.getLogger("Minecraft").info
+//                ("DEBUG: getPrice checks "+d.getName()+" with level "+d.getEnchantmentLevel());
             
             if (d.getName().equalsIgnoreCase(name) && (d.getEnchantmentLevel() == level)) {
                 return d.price;
                 
             }
         }
-        Logger.getLogger("Minecraft").info
-            ("DEBUG: getPrice did not find enchantment "+name+" with level "+level);
+//        Logger.getLogger("Minecraft").info
+//            ("DEBUG: getPrice did not find enchantment "+name+" with level "+level);
         return 0;   
     }
 	

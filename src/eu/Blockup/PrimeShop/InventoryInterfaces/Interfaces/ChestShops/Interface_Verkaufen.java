@@ -51,7 +51,7 @@ public class Interface_Verkaufen extends InventoryInterface {
 
 	}
 
-	public void reprint_items(Player player) {
+	private void reprint_items(Player player) {
 		
 		
 		
