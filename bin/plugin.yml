@@ -1,0 +1,114 @@
+name: PrimeShop
+version: 1.0.2
+author: EDMAN_93
+description: Automatic pricing shop plugin
+main: eu.Blockup.PrimeShop.PrimeShop
+depend: [Vault, Citizens]
+commands:
+  PrimeShop:
+    description: Get list of all PrimeShop Commands
+    aliases: [shop, ps, pshop, shop open]
+  PlayerShop:
+    description: Get list of all PlayerShop Commands
+    aliases: [chestshop]
+  pBuy:
+    description: Get list of all PrimeShop Commands
+    aliases: [buy,purchase,acquire,cop]
+  pSell:
+    description: Get list of all PrimeShop Commands
+    aliases: [sell,cash,market,vend,realize,offer]
+  value:
+    description: Get list of all PrimeShop Commands
+    aliases: [lookup,price,worth,virtue,merit,worthiness,stock]
+  pSellAll:
+    description: Sells all items in inventory
+    aliases: [sellall, SellAll, sa, sall]
+  prices:
+    description: Lists ceapest Items
+    aliases: [values, costs, profitable]
+permissions:
+   PrimeShop.Defaults.*:
+      description: Gives access to all PrimeShop admin-commands
+      children:
+         PrimeShop.Defaults.openShop.<Shop>: true
+         PrimeShop.Defaults.interactWithNPCs: true
+         PrimeShop.Defaults.openShop.: true
+         PrimeShop.Defaults.buyfromShop.<Shop>: true
+         PrimeShop.Defaults.sellfromShop.<Shop>: true
+         PrimeShop.Defaults.canUseCommandToGetPriceOfItem: true
+   PrimeShop.Defaults.openShop.<Shop>:
+      description:
+   PrimeShop.Defaults.interactWithNPCs:
+      description:
+   PrimeShop.Defaults.buyfromShop.<Shop>:
+      description:
+   PrimeShop.Defaults.sellfromShop.<Shop>:
+      description:
+   PrimeShop.Defaults.canUseCommandToGetPriceOfItem:
+      description:
+
+   PrimeShop.VIP.*:
+      description: Gives access to all PrimeShop admin-commands
+      children:
+         PrimeShop.VIP.permission_Group.<Number>: true
+         PrimeShop.VIP.useTheOpenShopCommand: true
+         PrimeShop.VIP.sellEntireIventory: true
+         PrimeShop.VIP.seeListOfCeapestItems: true
+         PrimeShop.VIP.seeListOfMostExpensiveItems: true
+         PrimeShop.VIP.useTheBuy_SellCommand: true
+         PrimeShop.VIP.canBuySellAllItemsRegardlessIfTheyWereAddedToAShop: true
+   PrimeShop.VIP.permission_Group.<Number>:
+      description:
+      default: op
+   PrimeShop.VIP.useTheOpenShopCommand:
+      description: 
+      default: op
+   PrimeShop.VIP.sellEntireIventory:
+      description: 
+      default: op
+   PrimeShop.VIP.seeListOfCeapestItems:
+      description: 
+      default: op
+   PrimeShop.VIP.seeListOfMostExpensiveItems:
+      description: 
+      default: op
+   PrimeShop.VIP.useTheBuy_SellCommand:
+      description: 
+      default: op
+   PrimeShop.VIP.canBuySellAllItemsRegardlessIfTheyWereAddedToAShop:
+      description: 
+      default: op
+
+
+
+   PrimeShop.admin.*:
+      description: Gives access to all PrimeShop admin-commands
+      children:
+         PrimeShop.admin.basics: true
+         PrimeShop.admin.createShops: true
+         PrimeShop.admin.deleteShops: true
+         PrimeShop.admin.addItemsToShop.<Shop>: true
+         PrimeShop.admin.addShopsToNPCs.<Shops>: true
+         PrimeShop.admin.changePrices: true
+         PrimeShop.admin.createSigns: true
+   PrimeShop.admin.basics:
+      description:
+      default: op
+   PrimeShop.admin.createSigns:
+      description:
+      default: op
+   PrimeShop.admin.createShops:
+      description:
+      default: op
+   PrimeShop.admin.deleteShops:
+      description: 
+      default: op
+   PrimeShop.admin.addItemsToShop.<Shop>:
+      description: 
+      default: op
+   PrimeShop.admin.addShopsToNPCs.<Shops>:
+      description: 
+      default: op
+   PrimeShop.admin.changePrices:
+      description: 
+      default: op

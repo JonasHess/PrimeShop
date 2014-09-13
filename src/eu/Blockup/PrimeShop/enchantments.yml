@@ -1,0 +1,108 @@
+#  _____        _                    _____  _                   
+# |  __ \      (_)                  / ____|| |                  
+# | |__) |_ __  _  _ __ ___    ___ | (___  | |__    ___   _ __  
+# |  ___/| '__|| || '_ ` _ \  / _ \ \___ \ | '_ \  / _ \ | '_ \ 
+# | |    | |   | || | | | | ||  __/ ____) || | | || (_) || |_) |
+# |_|    |_|   |_||_| |_| |_| \___||_____/ |_| |_| \___/ | .__/ 
+#                                                        | |    
+#                                                        |_| 
+#
+#
+# enchatetPrices will be aggregated to every Item that wears the enchantment.
+# The enchanted name does not have to match. You can name them as you like.
+PROTECTION_ENVIRONMENTAL:
+ enchantmentID: 0
+ enchantmentLevel: 4
+ enchantmentPrice: 0
+DIG_SPEED:
+  enchantmentID: 32
+  enchantmentLevel: 5
+  enchantmentPrice: 0
+PROTECTION_FIRE:
+  enchantmentID: 1
+  enchantmentLevel: 4
+  enchantmentPrice: 0
+SILK_TOUCH:
+  enchantmentID: 33
+  enchantmentLevel: 1
+  enchantmentPrice: 0
+PROTECTION_FALL:
+  enchantmentID: 2
+  enchantmentLevel: 4
+  enchantmentPrice: 0
+DURABILITY:
+  enchantmentID: 34
+  enchantmentLevel: 3
+  enchantmentPrice: 0
+PROTECTION_EXPLOSIONS:
+  enchantmentID: 3
+  enchantmentLevel: 4
+  enchantmentPrice: 0
+LOOT_BONUS_BLOCKS:
+  enchantmentID: 35
+  enchantmentLevel: 3
+  enchantmentPrice: 0
+PROTECTION_PROJECTILE:
+  enchantmentID: 4
+  enchantmentLevel: 4
+  enchantmentPrice: 0
+OXYGEN:
+  enchantmentID: 5
+  enchantmentLevel: 3
+  enchantmentPrice: 0
+WATER_WORKER:
+  enchantmentID: 6
+  enchantmentLevel: 1
+  enchantmentPrice: 0
+THORNS:
+  enchantmentID: 7
+  enchantmentLevel: 3
+  enchantmentPrice: 0
+DAMAGE_ALL:
+  enchantmentID: 16
+  enchantmentLevel: 5
+  enchantmentPrice: 0
+ARROW_DAMAGE:
+  enchantmentID: 48
+  enchantmentLevel: 5
+  enchantmentPrice: 0
+DAMAGE_UNDEAD:
+  enchantmentID: 17
+  enchantmentLevel: 5
+  enchantmentPrice: 0
+ARROW_KNOCKBACK:
+  enchantmentID: 49
+  enchantmentLevel: 2
+  enchantmentPrice: 0
+DAMAGE_ARTHROPODS:
+  enchantmentID: 18
+  enchantmentLevel: 5
+  enchantmentPrice: 0
+ARROW_FIRE:
+  enchantmentID: 50
+  enchantmentLevel: 1
+  enchantmentPrice: 0
+KNOCKBACK:
+  enchantmentID: 19
+  enchantmentLevel: 2
+  enchantmentPrice: 0
+ARROW_INFINITE:
+  enchantmentID: 51
+  enchantmentLevel: 1
+  enchantmentPrice: 0
+FIRE_ASPECT:
+  enchantmentID: 20
+  enchantmentLevel: 2
+  enchantmentPrice: 0
+LOOT_BONUS_MOBS:
+  enchantmentID: 21
+  enchantmentLevel: 3
+  enchantmentPrice: 0
+LUCK:
+  enchantmentID: 61
+  enchantmentLevel: 3
+  enchantmentPrice: 0
+LURE:
+  enchantmentID: 62
+  enchantmentLevel: 3
+  enchantmentPrice: 0
