@@ -209,7 +209,7 @@ public class Sign_Click_Listener implements Listener {
          blockList.add(eventBlock.getRelative(BlockFace.NORTH, 1));
         
         
-        
+        //  
         
         for (Block b : blockList) {
         
@@ -237,8 +237,7 @@ public class Sign_Click_Listener implements Listener {
       }
         
         
-//        
-//        @SuppressWarnings("deprecation")
+
 //		public Location getSchildHalter(Location schildLoc) {
 //          Location halter = schildLoc.clone();
 //          if (schildLoc.getBlock().getTypeId() == 63) {

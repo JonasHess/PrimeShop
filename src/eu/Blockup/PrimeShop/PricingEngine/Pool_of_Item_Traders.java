@@ -4,7 +4,7 @@ import eu.Blockup.PrimeShop.PrimeShop;
 
 public class Pool_of_Item_Traders {
 
-	// TODO ADD Pool behaviour
+	// TODO ADD Pool behaviour for more performance
 
 	public static Item_Trader get_ItemTrader () {
 		
