@@ -493,7 +493,7 @@ public class Metrics {
      * @param input
      * @return
      */
-    public static byte[] gzip(String input) {
+    private static byte[] gzip(String input) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         GZIPOutputStream gzos = null;
 
@@ -690,7 +690,7 @@ public class Metrics {
         /**
          * Called when the server owner decides to opt-out of BukkitMetrics while the server is running.
          */
-        protected void onOptOut() {
+        private void onOptOut() {
         }
     }
 
@@ -716,7 +716,7 @@ public class Metrics {
          *
          * @param name the name of the plotter to use, which will show up on the website
          */
-        public Plotter(final String name) {
+        private Plotter(final String name) {
             this.name = name;
         }
 
@@ -741,7 +741,7 @@ public class Metrics {
         /**
          * Called after the website graphs have been updated
          */
-        public void reset() {
+        private void reset() {
         }
 
         @Override
