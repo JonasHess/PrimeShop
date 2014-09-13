@@ -8,26 +8,39 @@ import java.sql.SQLException;
 
 
 
+
+
+//import me.tubelius.autoprice.GetData;
 import eu.Blockup.PrimeShop.PrimeShop;
+import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnBoolean;
 
 public class MySql {
-	private String host;
-	private int port;
-	private String user;
-	private String password;
-	private String database;
+	private String     host;
+	private int        port;
+	private String     user;
+	private String     password;
+	private String     database;
 	private Connection conn;
-	private PrimeShop plugin;
+//	private PrimeShop  plugin;
 
 	public MySql(PrimeShop plugin) throws Exception {
-		this.plugin = plugin;
+//		this.plugin = plugin;
 
-		host = this.plugin.cofiguration_Handler.host;
-		port = this.plugin.cofiguration_Handler.port;
-		user = this.plugin.cofiguration_Handler.user;
-		password = this.plugin.cofiguration_Handler.password;
-		database = this.plugin.cofiguration_Handler.database;
+//		Cofiguration_Handler  configHandler = new Cofiguration_Handler();
+		
+//		host      = this.plugin.cofiguration_Handler.host;
+//		port      = this.plugin.cofiguration_Handler.port;
+//		user      = this.plugin.cofiguration_Handler.user;
+//		password  = this.plugin.cofiguration_Handler.password;
+//		database  = this.plugin.cofiguration_Handler.database;
+		
+        host      = Cofiguration_Handler.host;
+        port      = Cofiguration_Handler.port;
+        user      = Cofiguration_Handler.user;
+        password  = Cofiguration_Handler.password;
+        database  = Cofiguration_Handler.database;
+		
 		this.conn = openConnection();
 	}
 
