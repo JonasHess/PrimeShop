@@ -3,7 +3,7 @@ package eu.Blockup.PrimeShop.ChestShop;
 import java.util.List;
 
 
-public class Chest_Page {
+public class Chest_Page { // NO_UCD (use default)
 
 		
 		public List<Item_Supply> listOfItems;

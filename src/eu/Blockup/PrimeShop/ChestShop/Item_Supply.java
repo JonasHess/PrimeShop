@@ -2,7 +2,7 @@ package eu.Blockup.PrimeShop.ChestShop;
 
 import org.bukkit.inventory.ItemStack;
 
-public class Item_Supply {
+public class Item_Supply { // NO_UCD (use default)
 	
 	private ItemStack itemStack;
 	private int amount;

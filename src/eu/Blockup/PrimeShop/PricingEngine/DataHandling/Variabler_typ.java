@@ -1,6 +1,6 @@
 package eu.Blockup.PrimeShop.PricingEngine.DataHandling;
 
-public class Variabler_typ <Typ>{
+public class Variabler_typ <Typ>{ // NO_UCD (use default)
 
       private Typ value;
       private Typ defaultValue;
