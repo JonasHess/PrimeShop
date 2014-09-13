@@ -23,8 +23,7 @@ class Interface_Change_Rate extends InventoryInterface {
 
 	private Shop_Item sqlItem;
 	
-	@SuppressWarnings("deprecation")
-	public Interface_Change_Rate(final List<InventoryInterface> link_Back_Stack, Player player, final ItemStack itemStack_to_modify) {
+	@SuppressWarnings("deprecation") Interface_Change_Rate(final List<InventoryInterface> link_Back_Stack, Player player, final ItemStack itemStack_to_modify) {
 		super(Message_Handler.resolve_to_message(65), 4, link_Back_Stack);
 		this.setCloseable(false);
 		

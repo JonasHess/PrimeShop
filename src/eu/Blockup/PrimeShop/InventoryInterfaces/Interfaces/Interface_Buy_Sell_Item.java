@@ -24,12 +24,12 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Interface_Buy_Sell_Item extends InventoryInterface {
 
-	public ItemStack itemStack_to_be_bought;
-	public final Shop shop;
-	public boolean deleteable;
-	public int amount;
-	public String permissionToBUY;
-	public String permissionToSELL;
+	ItemStack itemStack_to_be_bought;
+	final Shop shop;
+	boolean deleteable;
+	int amount;
+	private String permissionToBUY;
+	private String permissionToSELL;
 
 	@SuppressWarnings("deprecation")
 	public Interface_Buy_Sell_Item(final List<InventoryInterface> link_Back_Stack, Player player,
