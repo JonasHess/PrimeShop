@@ -19,7 +19,7 @@ import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item;
 
-public class Interface_Change_Rate extends InventoryInterface {
+class Interface_Change_Rate extends InventoryInterface {
 
 	private Shop_Item sqlItem;
 	
