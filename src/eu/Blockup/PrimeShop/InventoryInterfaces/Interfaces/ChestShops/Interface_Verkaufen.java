@@ -75,7 +75,7 @@ public class Interface_Verkaufen extends InventoryInterface {
 			}
 		}
 
-//		// DISPLAY
+//		// DISPLAY//
 //		this.addOption(4, 0,
 //				new Button_with_no_task(this.shop.displayIcon.getType(),
 //						this.shop.shopname));
