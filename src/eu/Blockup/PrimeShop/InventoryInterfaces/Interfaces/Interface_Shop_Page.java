@@ -90,10 +90,6 @@ public class Interface_Shop_Page extends InventoryInterface {
         });
 
         reprint_items(player);
-        
-
-
-
     }
 
     public void reprint_items(Player player) {
