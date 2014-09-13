@@ -3,6 +3,7 @@ package eu.Blockup.PrimeShop.Listeners;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+//import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
@@ -16,6 +17,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+
 import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Shop_Page;
@@ -165,42 +167,49 @@ public class Sign_Click_Listener implements Listener {
      
      
     @EventHandler(priority = EventPriority.HIGHEST)
-      public void onBlockBreak(BlockBreakEvent event){
-       
-        Block eventBlock  =  event.getBlock();
+    public void onBlockBreak(BlockBreakEvent event) {
+        //This event doesn't get executed?!
         
-        //check surrounding blocks for a Sign
-        List<Block> blockList  =  new ArrayList<Block>();
+        Block eventBlock = event.getBlock();
+
+        // check surrounding blocks for a Sign
+        List<Block> blockList = new ArrayList<Block>();
         blockList.add(eventBlock);
         blockList.add(eventBlock.getRelative(BlockFace.UP, 1));
         blockList.add(eventBlock.getRelative(BlockFace.EAST, 1));
         blockList.add(eventBlock.getRelative(BlockFace.WEST, 1));
         blockList.add(eventBlock.getRelative(BlockFace.SOUTH, 1));
         blockList.add(eventBlock.getRelative(BlockFace.NORTH, 1));
-        
+
         for (Block b : blockList) {
-        
-          if (b !=  null && b.getState() instanceof Sign) {
-            Sign sign  =  (Sign) b.getState();
-            Player player  =  event.getPlayer();
-            String[] lines  =  sign.getLines();
-            if (lines[0].toUpperCase().contains(Cofiguration_Handler.Sign_Shop_Headline.toUpperCase())){
-              
-              
-              if (player !=  null) {
-//                  if ((eventBlock.equals(b) && 
-//                          player.getInventory().getItemInHand().getData().getItemTypeId()  ==  262)) {
-                  if ((eventBlock.equals(b) && player.getItemInHand().getData().getItemTypeId()  ==  262)) {                      
-                      continue;
-                  }
-                  if (PrimeShop.has_player_Permission_for_this_Command(player, "PrimeShop.admin.createSigns") && !eventBlock.equals(b)) {
-                    player.sendMessage(ChatColor.RED + "You have to break the sign first!");
-                  }
-              }
-                event.setCancelled(true);
-                return;   
+            if (b != null && b.getState() instanceof Sign) {
+                Sign sign = (Sign) b.getState();
+                Player player = event.getPlayer();
+                String[] lines = sign.getLines();
+                if (lines[0].toUpperCase().contains(
+                        Cofiguration_Handler.Sign_Shop_Headline.toUpperCase())) {
+                    if (player != null) {
+                        // if ((eventBlock.equals(b) &&
+                        // player.getInventory().getItemInHand().getData().getItemTypeId()
+                        // == 262)) {
+                        // if ((eventBlock.equals(b) &&
+                        // player.getItemInHand().getData().getItemTypeId() ==
+                        // 262)) {
+                        if ((eventBlock.equals(b) && player.getItemInHand()
+                                .getType().name().equalsIgnoreCase("arrow"))) {
+                            continue;
+                        }
+                        if (PrimeShop.has_player_Permission_for_this_Command(
+                                player, "PrimeShop.admin.createSigns")
+                                && !eventBlock.equals(b)) {
+                            player.sendMessage(ChatColor.RED
+                                    + "You have to break the sign first!");
+                        }
+                    }
+                    event.setCancelled(true);
+                    return;
+                }
             }
-          }
         }
     }
 }

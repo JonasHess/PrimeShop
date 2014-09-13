@@ -8,122 +8,132 @@
 #                                                        |_| 
 Version:
   name: PROTECTION_ENVIRONMENTAL
-PROTECTION_ENVIRONMENTAL:
+PROTECTION_ENVIRONMENTAL_lvl4:
   enchantmentID: 0
   enchantmentLevel: 4
   enchantmentPrice: 0
   name: PROTECTION_ENVIRONMENTAL
-DIG_SPEED:
+DIG_SPEED_lvl5:
   enchantmentID: 32
   enchantmentLevel: 5
   enchantmentPrice: 0
   name: DIG_SPEED
-PROTECTION_FIRE:
+PROTECTION_FIRE_lvl4:
   enchantmentID: 1
   enchantmentLevel: 4
   enchantmentPrice: 0
   name: PROTECTION_FIRE
-SILK_TOUCH:
+SILK_TOUCH_lvl1:
   enchantmentID: 33
   enchantmentLevel: 1
   enchantmentPrice: 0
   name: SILK_TOUCH
-PROTECTION_FALL:
+PROTECTION_FALL_lvl4:
   enchantmentID: 2
   enchantmentLevel: 4
   enchantmentPrice: 0
   name: PROTECTION_FALL
-DURABILITY:
+DURABILITY_lvl1:
+  enchantmentID: 34
+  enchantmentLevel: 1
+  enchantmentPrice: 0
+  name: DURABILITY
+DURABILITY_lvl2:
+  enchantmentID: 34
+  enchantmentLevel: 2
+  enchantmentPrice: 0
+  name: DURABILITY
+DURABILITY_lvl3:
   enchantmentID: 34
   enchantmentLevel: 3
   enchantmentPrice: 0
   name: DURABILITY
-PROTECTION_EXPLOSIONS:
+PROTECTION_EXPLOSIONS_lvl4:
   enchantmentID: 3
   enchantmentLevel: 4
   enchantmentPrice: 0
   name: PROTECTION_EXPLOSIONS
-LOOT_BONUS_BLOCKS:
+LOOT_BONUS_BLOCKS_lvl3:
   enchantmentID: 35
   enchantmentLevel: 3
   enchantmentPrice: 0
   name: LOOT_BONUS_BLOCKS
-PROTECTION_PROJECTILE:
+PROTECTION_PROJECTILE_lvl4:
   enchantmentID: 4
   enchantmentLevel: 4
   enchantmentPrice: 0
   name: PROTECTION_PROJECTILE
-OXYGEN:
+OXYGEN_lvl3:
   enchantmentID: 5
   enchantmentLevel: 3
   enchantmentPrice: 0
   name: OXYGEN
-WATER_WORKER:
+WATER_WORKER_lvl1:
   enchantmentID: 6
   enchantmentLevel: 1
   enchantmentPrice: 0
   name: WATER_WORKER
-THORNS:
+THORNS_lvl3:
   enchantmentID: 7
   enchantmentLevel: 3
   enchantmentPrice: 0
   name: THORNS
-DAMAGE_ALL:
+DAMAGE_ALL_lvl5:
   enchantmentID: 16
   enchantmentLevel: 5
   enchantmentPrice: 0
   name: DAMAGE_ALL
-ARROW_DAMAGE:
+ARROW_DAMAGE_lvl5:
   enchantmentID: 48
   enchantmentLevel: 5
   enchantmentPrice: 0
   name: ARROW_DAMAGE
-DAMAGE_UNDEAD:
+DAMAGE_UNDEAD_lvl5:
   enchantmentID: 17
   enchantmentLevel: 5
   enchantmentPrice: 0
   name: DAMAGE_UNDEAD
-ARROW_KNOCKBACK:
+ARROW_KNOCKBACK_lvl2:
   enchantmentID: 49
   enchantmentLevel: 2
   enchantmentPrice: 0
   name: ARROW_KNOCKBACK
-DAMAGE_ARTHROPODS:
+DAMAGE_ARTHROPODS_lvl5:
   enchantmentID: 18
   enchantmentLevel: 5
   enchantmentPrice: 0
   name: DAMAGE_ARTHROPODS
-ARROW_FIRE:
+ARROW_FIRE_lvl1:
   enchantmentID: 50
   enchantmentLevel: 1
   enchantmentPrice: 0
   name: ARROW_FIRE
-KNOCKBACK:
+KNOCKBACK_lvl2:
   enchantmentID: 19
   enchantmentLevel: 2
   enchantmentPrice: 0
   name: KNOCKBACK
-ARROW_INFINITE:
+ARROW_INFINITE_lvl1:
   enchantmentID: 51
   enchantmentLevel: 1
   enchantmentPrice: 0
   name: ARROW_INFINITE
-FIRE_ASPECT:
+FIRE_ASPECT_lvl2:
   enchantmentID: 20
   enchantmentLevel: 2
   enchantmentPrice: 0
   name: FIRE_ASPECT
-LOOT_BONUS_MOBS:
+LOOT_BONUS_MOBS_lvl3:
   enchantmentID: 21
   enchantmentLevel: 3
   enchantmentPrice: 0
   name: LOOT_BONUS_MOBS
-LUCK:
+LUCK_lvl3:
   enchantmentID: 61
   enchantmentLevel: 3
   enchantmentPrice: 0
   name: LUCK
-LURE:
+LURE_lvl3:
   enchantmentID: 62
   enchantmentLevel: 3
   enchantmentPrice: 0
