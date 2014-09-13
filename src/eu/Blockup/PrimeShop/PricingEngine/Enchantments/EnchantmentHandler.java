@@ -2,6 +2,7 @@ package eu.Blockup.PrimeShop.PricingEngine.Enchantments;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class EnchantmentHandler {
 
@@ -16,8 +17,8 @@ public class EnchantmentHandler {
 		list_with_Enchantment_Prices.add(enchantmentData);
 	}
 	
-	public static double getPrice (int id, int level) {
-		
+	public static double getPrice(int id, int level) {
+	    //id is deprecated!
 		for (EnchantmentData d : list_with_Enchantment_Prices){
 			if ((d.getEnchantmentID() == id) && (d.getEnchantmentLevel() == level)) {
 				return d.price;
@@ -27,6 +28,20 @@ public class EnchantmentHandler {
 		return 0;	
 	}
 	
+    public static double getPrice(String name, Integer level) {
+        for (EnchantmentData d : list_with_Enchantment_Prices){
+            Logger.getLogger("Minecraft").info
+                ("DEBUG: getPrice checks "+d.getName()+" with level "+d.getEnchantmentLevel());
+            
+            if (d.getName().equalsIgnoreCase(name) && (d.getEnchantmentLevel() == level)) {
+                return d.price;
+                
+            }
+        }
+        Logger.getLogger("Minecraft").info
+            ("DEBUG: getPrice did not find enchantment "+name+" with level "+level);
+        return 0;   
+    }
 	
 	public static void clear_List () {
 		list_with_Enchantment_Prices.clear();

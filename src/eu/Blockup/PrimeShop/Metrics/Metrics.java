@@ -333,7 +333,9 @@ public class Metrics {
         boolean onlineMode = Bukkit.getServer().getOnlineMode(); // TRUE if online mode is enabled
         String pluginVersion = description.getVersion();
         String serverVersion = Bukkit.getVersion();
+        
         int playersOnline = Bukkit.getServer().getOnlinePlayers().length;
+        //For v1.7.10 or newer: Bukkit.getServer().getOnlinePlayers().size()
 
         // END server software specific section -- all code below does not use any code outside of this class / Java
 

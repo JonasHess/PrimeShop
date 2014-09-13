@@ -1,12 +1,10 @@
 package eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces;
 
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -133,48 +131,47 @@ public class Interface_Shop_Page extends InventoryInterface {
                             Message_Handler.resolve_to_message(89)) {
 
                         @Override
-                        public void onClick(
-                                InventoryInterface inventoryInterface,
-                                Player player, ItemStack cursor,
-                                ItemStack current, ClickType type) {
+                        public void onClick(InventoryInterface inventoryInterface, Player player, 
+                                ItemStack cursor, ItemStack current, ClickType type) {
 
-                            ItemStack itemCurrent = current;
-                            ItemStack itemMatched = null;
-                            boolean match = false;
-
-                            for (ItemStack itemListed : shop.listOfItems) {            
-                                if (itemCurrent.getType() == itemListed.getType()) {
+                            //What is all this? If ItemStack matches another ItemStack in list, we use that instead? But it's same? 
+//                            ItemStack itemCurrent = current;
+//                            ItemStack itemMatched = null;
+//                            boolean match = false;
+//
+//                            for (ItemStack itemListed : shop.listOfItems) {            
+//                                if (itemCurrent.getType() == itemListed.getType()) {
 //                                    if (itemCurrent.getData().getData() == itemListed.getData().getData()) {
-                                    if (itemCurrent.equals(itemListed.getData())) {
-                                        match = true;
-                                        Map<Enchantment, Integer> map = itemCurrent
-                                                .getEnchantments();
-
-                                        for (Enchantment key : map.keySet()) {
-                                            if (!itemListed.containsEnchantment(key)) {
-                                                match = false;
-                                                break;
-                                            }
-                                        }
-                                        if (match) {
-                                            itemMatched = itemListed;
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (match) {
+//                                        match = true;
+//                                        Map<Enchantment, Integer> map = itemCurrent
+//                                                .getEnchantments();
+//
+//                                        for (Enchantment key : map.keySet()) {
+//                                            if (!itemListed.containsEnchantment(key)) {
+//                                                match = false;
+//                                                break;
+//                                            }
+//                                        }
+//                                        if (match) {
+//                                            itemMatched = itemListed;
+//                                        }
+//                                    }
+//                                }
+//                            }
+//
+//                            if (match) {
                                 PrimeShop.close_InventoyInterface(player);
-                                PrimeShop
-                                        .open_InventoyInterface(
-                                                player,
-                                                new Interface_Buy_Sell_Item(
-                                                        inventoryInterface.branch_back_Stack,
-                                                        player, shop, itemMatched, 1,
-                                                        true, false));
-                            } else {
-                                player.sendMessage("Error: 568 ; Please report this special error to the developer");
-                            }
+                                PrimeShop.open_InventoyInterface(
+                                    player,
+                                    new Interface_Buy_Sell_Item(
+                                        inventoryInterface.branch_back_Stack,
+                                        player, shop, current, 1,
+                                        true, false
+                                    )
+                                );
+//                            } else {
+//                                player.sendMessage("Error: 568 ; Please report this special error to the developer");
+//                            }
                         }
                     });
                     itemsAddedItems++;

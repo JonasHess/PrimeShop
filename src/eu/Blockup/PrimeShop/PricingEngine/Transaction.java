@@ -41,13 +41,15 @@ public class Transaction extends Thread{
 
     
     private double get_price_for_enchantments() {
+        //is this supposed to get the total price of _all_ enchantments?
     	double result = 0;
     	
     	Map<Enchantment, Integer> map = itemstack.getEnchantments();
     	
-		for (Enchantment key : map.keySet()) {
+		for (Enchantment enchantment : map.keySet()) {
 			
-			result += EnchantmentHandler.getPrice(key.getId(), map.get(key));
+//			result += EnchantmentHandler.getPrice(enchantment.getId(), map.get(enchantment));
+			result += EnchantmentHandler.getPrice(enchantment.getName() , map.get(enchantment));
 		}
     	
     	return result;
