@@ -24,377 +24,377 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Interface_Shop_Page extends InventoryInterface {
 
-	public Shop shop;
-	final public Interface_Shop_Page current_Menu;
-	public int pagenumber;
-	final int maxPages;
-//	@SuppressWarnings("deprecation")
-	public Interface_Shop_Page(final List<InventoryInterface> link_Back_Stack,
-			Player player, final Shop shop, final int pagenumber) {
-		super(shop.shopname, 6, link_Back_Stack);
-		this.shop = shop;
-		this.setCloseable(false);
-		this.current_Menu = this;
-		this.pagenumber = pagenumber;
-		this.maxPages = this.shop.number_of_pages;
+    public Shop shop;
+    final public Interface_Shop_Page current_Menu;
+    public int pagenumber;
+    final int maxPages;
+//    @SuppressWarnings("deprecation")
+    public Interface_Shop_Page(final List<InventoryInterface> link_Back_Stack,
+            Player player, final Shop shop, final int pagenumber) {
+        super(shop.shopname, 6, link_Back_Stack);
+        this.shop = shop;
+        this.setCloseable(false);
+        this.current_Menu = this;
+        this.pagenumber = pagenumber;
+        this.maxPages = this.shop.number_of_pages;
 
-		// Close Option
-		this.addOption(8, 0, new Button_close_Interface());
+        // Close Option
+        this.addOption(8, 0, new Button_close_Interface());
 
-		if (!PrimeShop.has_player_Permission_for_this_Command(player,
-				"PrimeShop.Defaults.openShop." + shop.shopname)) {
-			player.sendMessage(Message_Handler.resolve_to_message(87));
-			boolean go_back_to_parent = true;
-			if (parentMenu != null) {
-				if (parentMenu instanceof Interface_Collection_of_Shops) {
-					if (((Interface_Collection_of_Shops) parentMenu).list_of_Shops
-							.size() == 1) {
-						go_back_to_parent = false;
-					}
-				}
-				if (go_back_to_parent) {
-					PrimeShop.close_InventoyInterface(player);
-					PrimeShop.open_InventoyInterface(player, parentMenu);
-					return;
-				}
-			}
-			PrimeShop.close_InventoyInterface(player);
-			return;
-		}
+        if (!PrimeShop.has_player_Permission_for_this_Command(player,
+                "PrimeShop.Defaults.openShop." + shop.shopname)) {
+            player.sendMessage(Message_Handler.resolve_to_message(87));
+            boolean go_back_to_parent = true;
+            if (parentMenu != null) {
+                if (parentMenu instanceof Interface_Collection_of_Shops) {
+                    if (((Interface_Collection_of_Shops) parentMenu).list_of_Shops
+                            .size() == 1) {
+                        go_back_to_parent = false;
+                    }
+                }
+                if (go_back_to_parent) {
+                    PrimeShop.close_InventoyInterface(player);
+                    PrimeShop.open_InventoyInterface(player, parentMenu);
+                    return;
+                }
+            }
+            PrimeShop.close_InventoyInterface(player);
+            return;
+        }
 
-		// /////////////////////////////////////////////////#
-		this.setClickHandler(new ClickHandler() {
-			@Override
-			public boolean onClick(Player player, ItemStack cursor,
-					ItemStack current, ClickType type) {
+        // /////////////////////////////////////////////////#
+        this.setClickHandler(new ClickHandler() {
+            @Override
+            public boolean onClick(Player player, ItemStack cursor,
+                    ItemStack current, ClickType type) {
 
-				if ((type == ClickType.SHIFT_LEFT) && (current != null)) {
+                if ((type == ClickType.SHIFT_LEFT) && (current != null)) {
 
-					if (PrimeShop.has_player_Permission_for_this_Command(
-							player, "PrimeShop.admin.addItemsToShop."
-									+ shop.shopname)) {
+                    if (PrimeShop.has_player_Permission_for_this_Command(
+                            player, "PrimeShop.admin.addItemsToShop."
+                                    + shop.shopname)) {
 
-						if (!current.getType().equals(Material.AIR)) {
-							current.setAmount(1);
-							shop.add_ItemStack(current);
-							shop.refresh_pageCount();
-							PrimeShop.shopConfigHandler.write_shops_to_Harddisk();
-							reprint_items(player);
-							player.getInventory().remove(current);
-							player.sendMessage(ChatColor.GREEN + Message_Handler.resolve_to_message(36));
-							
-						}
-					}
-				}
-			return false;
+                        if (!current.getType().equals(Material.AIR)) {
+                            current.setAmount(1);
+                            shop.add_ItemStack(current);
+                            shop.refresh_pageCount();
+                            PrimeShop.shopConfigHandler.write_shops_to_Harddisk();
+                            reprint_items(player);
+                            player.getInventory().remove(current);
+                            player.sendMessage(ChatColor.GREEN + Message_Handler.resolve_to_message(36));
+                            
+                        }
+                    }
+                }
+            return false;
 
-			}
-		});
+            }
+        });
 
-		reprint_items(player);
-		
+        reprint_items(player);
+        
 
 
 
-	}
+    }
 
-	public void reprint_items(Player player) {
-		// Add Items to Menu
-		Page page = shop.get_Page(pagenumber);
-		int amount_of_items = page.listOfItems.size();
-		int itemsAddedItems = 0;
+    public void reprint_items(Player player) {
+        // Add Items to Menu
+        Page page = shop.get_Page(pagenumber);
+        int amount_of_items = page.listOfItems.size();
+        int itemsAddedItems = 0;
 
-		for (int a = 0; a < this.getWidth(); a++) {
-			for (int b = 0; b < this.getHeight(); b++) {
-				this.addOption(a, b, new Button_with_no_task(Cofiguration_Handler.background_ItemStack, " "));
-			}
-		}
+        for (int a = 0; a < this.getWidth(); a++) {
+            for (int b = 0; b < this.getHeight(); b++) {
+                this.addOption(a, b, new Button_with_no_task(Cofiguration_Handler.background_ItemStack, " "));
+            }
+        }
 
-		this.addOption(4, 0,
-				new Button_with_no_task(this.shop.displayIcon.getType(),
-						this.shop.shopname));
+        this.addOption(4, 0,
+                new Button_with_no_task(this.shop.displayIcon.getType(),
+                        this.shop.shopname));
 
-		for (int y = 2; y < 5; y++) {
-			for (int x = 0; x < 9; x++) {
+        for (int y = 2; y < 5; y++) {
+            for (int x = 0; x < 9; x++) {
 
-				this.removeOption(x, y);
-				if (itemsAddedItems < amount_of_items) {
+                this.removeOption(x, y);
+                if (itemsAddedItems < amount_of_items) {
 
-					ItemStack currentItem;
-					try {
-						currentItem = page.listOfItems.get(itemsAddedItems);
-					} catch (Exception e) {
-						PrimeShop.plugin.getLogger().log(Level.SEVERE, "Internal Error finding Item in list of ShopPages");
-						e.printStackTrace();
-						return;
-					}
+                    ItemStack currentItem;
+                    try {
+                        currentItem = page.listOfItems.get(itemsAddedItems);
+                    } catch (Exception e) {
+                        PrimeShop.plugin.getLogger().log(Level.SEVERE, "Internal Error finding Item in list of ShopPages");
+                        e.printStackTrace();
+                        return;
+                    }
 
-					this.addOption(x, y, new Button(currentItem, Message_Handler.resolve_to_message(88),
-							Message_Handler.resolve_to_message(89)) {
+                    this.addOption(x, y, new Button(currentItem, Message_Handler.resolve_to_message(88),
+                            Message_Handler.resolve_to_message(89)) {
 
-						@Override
-						public void onClick(
-								InventoryInterface inventoryInterface,
-								Player player, ItemStack cursor,
-								ItemStack current, ClickType type) {
+                        @Override
+                        public void onClick(
+                                InventoryInterface inventoryInterface,
+                                Player player, ItemStack cursor,
+                                ItemStack current, ClickType type) {
 
-							ItemStack itemA = current;
-							ItemStack itemB = null;
-							boolean match = false;
+                            ItemStack itemCurrent = current;
+                            ItemStack itemMatched = null;
+                            boolean match = false;
 
-							for (ItemStack itemC : shop.listOfItems) {
-								if (itemA.getType() == itemC.getType()) {
-									if (itemA.getData().getData() == itemC
-											.getData().getData()) {
-										match = true;
-										Map<Enchantment, Integer> map = itemA
-												.getEnchantments();
+                            for (ItemStack itemListed : shop.listOfItems) {            
+                                if (itemCurrent.getType() == itemListed.getType()) {
+//                                    if (itemCurrent.getData().getData() == itemListed.getData().getData()) {
+                                    if (itemCurrent.equals(itemListed.getData())) {
+                                        match = true;
+                                        Map<Enchantment, Integer> map = itemCurrent
+                                                .getEnchantments();
 
-										for (Enchantment key : map.keySet()) {
-											if (!itemC.containsEnchantment(key)) {
-												match = false;
-												break;
-											}
-										}
-										if (match) {
-											itemB = itemC;
-										}
-									}
-								}
-							}
+                                        for (Enchantment key : map.keySet()) {
+                                            if (!itemListed.containsEnchantment(key)) {
+                                                match = false;
+                                                break;
+                                            }
+                                        }
+                                        if (match) {
+                                            itemMatched = itemListed;
+                                        }
+                                    }
+                                }
+                            }
 
-							if (match) {
-								PrimeShop.close_InventoyInterface(player);
-								PrimeShop
-										.open_InventoyInterface(
-												player,
-												new Interface_Buy_Sell_Item(
-														inventoryInterface.branch_back_Stack,
-														player, shop, itemB, 1,
-														true, false));
-							} else {
-								player.sendMessage("Error: 568 ; Please report this special error to the developer");
-							}
-						}
-					});
-					itemsAddedItems++;
+                            if (match) {
+                                PrimeShop.close_InventoyInterface(player);
+                                PrimeShop
+                                        .open_InventoyInterface(
+                                                player,
+                                                new Interface_Buy_Sell_Item(
+                                                        inventoryInterface.branch_back_Stack,
+                                                        player, shop, itemMatched, 1,
+                                                        true, false));
+                            } else {
+                                player.sendMessage("Error: 568 ; Please report this special error to the developer");
+                            }
+                        }
+                    });
+                    itemsAddedItems++;
 
-				}
-			}
-		}
-		
-		if (maxPages > 1) {
-			int y_Row_Page_Iterator = this.getHeight() - 1;
-			
-			
-			// Compass
-			this.addOption(4, y_Row_Page_Iterator, new Button_with_no_task(
-					Material.COMPASS, String.valueOf(pagenumber)));
-			
-			
-			// Next Page
+                }
+            }
+        }
+        
+        if (maxPages > 1) {
+            int y_Row_Page_Iterator = this.getHeight() - 1;
+            
+            
+            // Compass
+            this.addOption(4, y_Row_Page_Iterator, new Button_with_no_task(
+                    Material.COMPASS, String.valueOf(pagenumber)));
+            
+            
+            // Next Page
 
-			// for (int counteri = 2; counteri <= 6; counteri++) {
-			// this.removeOption(counteri, y_Row_Page_Iterator);
-			// }
+            // for (int counteri = 2; counteri <= 6; counteri++) {
+            // this.removeOption(counteri, y_Row_Page_Iterator);
+            // }
 
-			if ((maxPages > pagenumber)) {
-				this.addOption(5, y_Row_Page_Iterator, new Button(
-						Material.PAPER, (short) 0, (pagenumber + 1) % 64,
-						Message_Handler.resolve_to_message(90), "", "") {
+            if ((maxPages > pagenumber)) {
+                this.addOption(5, y_Row_Page_Iterator, new Button(
+                        Material.PAPER, (short) 0, (pagenumber + 1) % 64,
+                        Message_Handler.resolve_to_message(90), "", "") {
 
-					@Override
-					public void onClick(InventoryInterface inventoryInterface,
-							Player player, ItemStack cursor, ItemStack current,
-							ClickType type) {
-						PrimeShop.close_InventoyInterface(player);
-						PrimeShop.open_InventoyInterface(
-								player,
-								new Interface_Shop_Page(inventoryInterface
-										.get_brnach_back_list_of_parentMenu(),
-										player, shop, pagenumber + 1));
+                    @Override
+                    public void onClick(InventoryInterface inventoryInterface,
+                            Player player, ItemStack cursor, ItemStack current,
+                            ClickType type) {
+                        PrimeShop.close_InventoyInterface(player);
+                        PrimeShop.open_InventoyInterface(
+                                player,
+                                new Interface_Shop_Page(inventoryInterface
+                                        .get_brnach_back_list_of_parentMenu(),
+                                        player, shop, pagenumber + 1));
 
-					}
-				});
+                    }
+                });
 
-			}
+            }
 
-			// Last Page
-			if (maxPages > pagenumber + 1) {
-				this.addOption(6, y_Row_Page_Iterator, new Button(
-						Material.PAPER, (short) 0, maxPages % 64,
-						Message_Handler.resolve_to_message(91), "", "") {
+            // Last Page
+            if (maxPages > pagenumber + 1) {
+                this.addOption(6, y_Row_Page_Iterator, new Button(
+                        Material.PAPER, (short) 0, maxPages % 64,
+                        Message_Handler.resolve_to_message(91), "", "") {
 
-					@Override
-					public void onClick(InventoryInterface inventoryInterface,
-							Player player, ItemStack cursor, ItemStack current,
-							ClickType type) {
-						PrimeShop.close_InventoyInterface(player);
-						PrimeShop.open_InventoyInterface(
-								player,
-								new Interface_Shop_Page(inventoryInterface
-										.get_brnach_back_list_of_parentMenu(),
-										player, shop, maxPages));
+                    @Override
+                    public void onClick(InventoryInterface inventoryInterface,
+                            Player player, ItemStack cursor, ItemStack current,
+                            ClickType type) {
+                        PrimeShop.close_InventoyInterface(player);
+                        PrimeShop.open_InventoyInterface(
+                                player,
+                                new Interface_Shop_Page(inventoryInterface
+                                        .get_brnach_back_list_of_parentMenu(),
+                                        player, shop, maxPages));
 
-					}
-				});
-			}
+                    }
+                });
+            }
 
-			// previous Page
+            // previous Page
 
-			if (pagenumber > 1) {
-				this.addOption(3, y_Row_Page_Iterator, new Button(
-						Material.PAPER, (short) 0, (pagenumber - 1) % 64,
-						Message_Handler.resolve_to_message(92), "", "") {
+            if (pagenumber > 1) {
+                this.addOption(3, y_Row_Page_Iterator, new Button(
+                        Material.PAPER, (short) 0, (pagenumber - 1) % 64,
+                        Message_Handler.resolve_to_message(92), "", "") {
 
-					@Override
-					public void onClick(InventoryInterface inventoryInterface,
-							Player player, ItemStack cursor, ItemStack current,
-							ClickType type) {
-						PrimeShop.close_InventoyInterface(player);
-						PrimeShop.open_InventoyInterface(
-								player,
-								new Interface_Shop_Page(inventoryInterface
-										.get_brnach_back_list_of_parentMenu(),
-										player, shop, pagenumber - 1));
+                    @Override
+                    public void onClick(InventoryInterface inventoryInterface,
+                            Player player, ItemStack cursor, ItemStack current,
+                            ClickType type) {
+                        PrimeShop.close_InventoyInterface(player);
+                        PrimeShop.open_InventoyInterface(
+                                player,
+                                new Interface_Shop_Page(inventoryInterface
+                                        .get_brnach_back_list_of_parentMenu(),
+                                        player, shop, pagenumber - 1));
 
-					}
-				});
+                    }
+                });
 
-			}
-			// First Page
-			if (pagenumber > 2) {
-				this.addOption(2, y_Row_Page_Iterator,
-						new Button(Material.PAPER, (short) 0, 1,
-								Message_Handler.resolve_to_message(93), "", "") {
+            }
+            // First Page
+            if (pagenumber > 2) {
+                this.addOption(2, y_Row_Page_Iterator,
+                        new Button(Material.PAPER, (short) 0, 1,
+                                Message_Handler.resolve_to_message(93), "", "") {
 
-							@Override
-							public void onClick(
-									InventoryInterface inventoryInterface,
-									Player player, ItemStack cursor,
-									ItemStack current, ClickType type) {
-								PrimeShop.close_InventoyInterface(player);
-								PrimeShop
-										.open_InventoyInterface(
-												player,
-												new Interface_Shop_Page(
-														inventoryInterface
-																.get_brnach_back_list_of_parentMenu(),
-														player, shop, 1));
+                            @Override
+                            public void onClick(
+                                    InventoryInterface inventoryInterface,
+                                    Player player, ItemStack cursor,
+                                    ItemStack current, ClickType type) {
+                                PrimeShop.close_InventoyInterface(player);
+                                PrimeShop
+                                        .open_InventoyInterface(
+                                                player,
+                                                new Interface_Shop_Page(
+                                                        inventoryInterface
+                                                                .get_brnach_back_list_of_parentMenu(),
+                                                        player, shop, 1));
 
-							}
-						});
-			}
-		}
-		
-		
+                            }
+                        });
+            }
+        }
+        
+        
 
-		// Delete Shop from Collection
-		if (PrimeShop.has_player_Permission_for_this_Command(player,
-				"PrimeShop.admin.addShopsToNPCs." + shop.shopname)) {
-			if (parentMenu != null) {
-				if (parentMenu instanceof Interface_Collection_of_Shops) {
-					final Interface_Collection_of_Shops shop_collection = (Interface_Collection_of_Shops) parentMenu;
+        // Delete Shop from Collection
+        if (PrimeShop.has_player_Permission_for_this_Command(player,
+                "PrimeShop.admin.addShopsToNPCs." + shop.shopname)) {
+            if (parentMenu != null) {
+                if (parentMenu instanceof Interface_Collection_of_Shops) {
+                    final Interface_Collection_of_Shops shop_collection = (Interface_Collection_of_Shops) parentMenu;
 
-					this.addOption(
-							7,
-							5,
-							new Button(
-									PrimeShop.convertItemIdStringToItemstack(
-											"160:6", 1), Message_Handler.resolve_to_message(72)) {
+                    this.addOption(
+                            7,
+                            5,
+                            new Button(
+                                    PrimeShop.convertItemIdStringToItemstack(
+                                            "160:6", 1), Message_Handler.resolve_to_message(72)) {
 
-								@Override
-								public void onClick(
-										InventoryInterface inventoryInterface,
-										Player player, ItemStack cursor,
-										ItemStack current, ClickType type) {
+                                @Override
+                                public void onClick(
+                                        InventoryInterface inventoryInterface,
+                                        Player player, ItemStack cursor,
+                                        ItemStack current, ClickType type) {
 
-									PrimeShop.close_InventoyInterface(player);
-									PrimeShop
-											.open_InventoyInterface(
-													player,
-													new Interface_delete_Shop_from_Collection(
-															inventoryInterface.branch_back_Stack,
-															player,
-															shop,
-															shop_collection.collectionID,
-															shop_collection.npc));
-								}
+                                    PrimeShop.close_InventoyInterface(player);
+                                    PrimeShop
+                                            .open_InventoyInterface(
+                                                    player,
+                                                    new Interface_delete_Shop_from_Collection(
+                                                            inventoryInterface.branch_back_Stack,
+                                                            player,
+                                                            shop,
+                                                            shop_collection.collectionID,
+                                                            shop_collection.npc));
+                                }
 
-							});
-				}
-			}
-		}
+                            });
+                }
+            }
+        }
 
-		// delete entire Shop
-		if (PrimeShop.has_player_Permission_for_this_Command(player,
-				"PrimeShop.admin.deleteShops")) {
-			this.addOption(
-					8,
-					5,
-					new Button(PrimeShop.convertItemIdStringToItemstack(
-							"160:14", 1), Message_Handler.resolve_to_message(78)) {
+        // delete entire Shop
+        if (PrimeShop.has_player_Permission_for_this_Command(player,
+                "PrimeShop.admin.deleteShops")) {
+            this.addOption(
+                    8,
+                    5,
+                    new Button(PrimeShop.convertItemIdStringToItemstack(
+                            "160:14", 1), Message_Handler.resolve_to_message(78)) {
 
-						@Override
-						public void onClick(
-								InventoryInterface inventoryInterface,
-								Player player, ItemStack cursor,
-								ItemStack current, ClickType type) {
-							PrimeShop.close_InventoyInterface(player);
-							PrimeShop
-									.open_InventoyInterface(
-											player,
-											new Interface_delete_Shop(
-													inventoryInterface.branch_back_Stack,
-													player, shop));
+                        @Override
+                        public void onClick(
+                                InventoryInterface inventoryInterface,
+                                Player player, ItemStack cursor,
+                                ItemStack current, ClickType type) {
+                            PrimeShop.close_InventoyInterface(player);
+                            PrimeShop
+                                    .open_InventoyInterface(
+                                            player,
+                                            new Interface_delete_Shop(
+                                                    inventoryInterface.branch_back_Stack,
+                                                    player, shop));
 
-						}
-					});
-		}
-		
-		
-		// Add Item Information Block
-		
-		if (PrimeShop.has_player_Permission_for_this_Command(
-				player, "PrimeShop.admin.addItemsToShop."
-						+ shop.shopname))
-		this.addOption(0, 5, new Button_with_no_task(PrimeShop.convertItemIdStringToItemstack("160:13", 1), Message_Handler.resolve_to_message(141), Message_Handler.resolve_to_message(138), Message_Handler.resolve_to_message(139), Message_Handler.resolve_to_message(140)));
+                        }
+                    });
+        }
+        
+        
+        // Add Item Information Block
+        
+        if (PrimeShop.has_player_Permission_for_this_Command(
+                player, "PrimeShop.admin.addItemsToShop."
+                        + shop.shopname))
+        this.addOption(0, 5, new Button_with_no_task(PrimeShop.convertItemIdStringToItemstack("160:13", 1), Message_Handler.resolve_to_message(141), Message_Handler.resolve_to_message(138), Message_Handler.resolve_to_message(139), Message_Handler.resolve_to_message(140)));
 
-		
-		
-		
-		// Go Back Option
-		boolean goBack = true;
-		if (parentMenu != null) {
+        
+        
+        
+        // Go Back Option
+        boolean goBack = true;
+        if (parentMenu != null) {
 
-			if (parentMenu instanceof Interface_Collection_of_Shops) {
-				if (((Interface_Collection_of_Shops) parentMenu).list_of_Shops
-						.size() == 1) {
-					goBack = false;
-				}
+            if (parentMenu instanceof Interface_Collection_of_Shops) {
+                if (((Interface_Collection_of_Shops) parentMenu).list_of_Shops
+                        .size() == 1) {
+                    goBack = false;
+                }
 
-			}
+            }
 
-			if (goBack) {
-				this.addOption(0, 0, new Button(Cofiguration_Handler.backToCollectionButton_ItemStack, Message_Handler.resolve_to_message(61), Message_Handler.resolve_to_message(62)) {
+            if (goBack) {
+                this.addOption(0, 0, new Button(Cofiguration_Handler.backToCollectionButton_ItemStack, Message_Handler.resolve_to_message(61), Message_Handler.resolve_to_message(62)) {
 
-					@Override
-					public void onClick(InventoryInterface inventoryInterface,
-							Player player, ItemStack cursor, ItemStack current,
-							ClickType type) {
-						inventoryInterface.return_to_predecessor(
-								position_in_Stack - 1, player);
-					}
-				});
-			}
+                    @Override
+                    public void onClick(InventoryInterface inventoryInterface,
+                            Player player, ItemStack cursor, ItemStack current,
+                            ClickType type) {
+                        inventoryInterface.return_to_predecessor(
+                                position_in_Stack - 1, player);
+                    }
+                });
+            }
 
-		}
+        }
 
-		
+        
 
-		// Close Option
-		this.addOption(8, 0, new Button_close_Interface());
-		
-		this.refresh(player);
-	}
+        // Close Option
+        this.addOption(8, 0, new Button_close_Interface());
+        
+        this.refresh(player);
+    }
 }
