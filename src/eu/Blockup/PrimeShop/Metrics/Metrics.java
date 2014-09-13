@@ -151,7 +151,7 @@ public class Metrics {
      * @param name The name of the graph
      * @return Graph object created. Will never return NULL under normal circumstances unless bad parameters are given
      */
-    public Graph createGraph(final String name) {
+    public Graph createGraph(final String name) { // NO_UCD (unused code)
         if (name == null) {
             throw new IllegalArgumentException("Graph name cannot be null");
         }
@@ -171,7 +171,7 @@ public class Metrics {
      *
      * @param graph The name of the graph
      */
-    public void addGraph(final Graph graph) {
+    public void addGraph(final Graph graph) { // NO_UCD (unused code)
         if (graph == null) {
             throw new IllegalArgumentException("Graph cannot be null");
         }
@@ -268,7 +268,7 @@ public class Metrics {
      *
      * @throws java.io.IOException
      */
-    public void enable() throws IOException {
+    public void enable() throws IOException { // NO_UCD (unused code)
         // This has to be synchronized or it can collide with the check in the task.
         synchronized (optOutLock) {
             // Check if the server owner has already set opt-out, if not, set it.
@@ -289,7 +289,7 @@ public class Metrics {
      *
      * @throws java.io.IOException
      */
-    public void disable() throws IOException {
+    public void disable() throws IOException { // NO_UCD (unused code)
         // This has to be synchronized or it can collide with the check in the task.
         synchronized (optOutLock) {
             // Check if the server owner has already set opt-out, if not, set it.
@@ -619,7 +619,7 @@ public class Metrics {
     /**
      * Represents a custom graph on the website
      */
-    public static class Graph {
+    private static class Graph {
 
         /**
          * The graph's name, alphanumeric and spaces only :) If it does not comply to the above when submitted, it is
@@ -650,7 +650,8 @@ public class Metrics {
          *
          * @param plotter the plotter to add to the graph
          */
-        public void addPlotter(final Plotter plotter) {
+        @SuppressWarnings("unused")
+        public void addPlotter(final Plotter plotter) { // NO_UCD (unused code)
             plotters.add(plotter);
         }
 
@@ -659,7 +660,8 @@ public class Metrics {
          *
          * @param plotter the plotter to remove from the graph
          */
-        public void removePlotter(final Plotter plotter) {
+        @SuppressWarnings("unused")
+        public void removePlotter(final Plotter plotter) { // NO_UCD (unused code)
             plotters.remove(plotter);
         }
 
@@ -697,7 +699,7 @@ public class Metrics {
     /**
      * Interface used to collect custom data for a plugin
      */
-    public static abstract class Plotter {
+    private static abstract class Plotter {
 
         /**
          * The plot's name
@@ -707,6 +709,7 @@ public class Metrics {
         /**
          * Construct a plotter with the default plot name
          */
+        @SuppressWarnings("unused")
         public Plotter() {
             this("Default");
         }
