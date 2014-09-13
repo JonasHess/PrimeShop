@@ -11,7 +11,7 @@ import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnBoolean;
 
-public class Database_MySql extends DatabaseIntersection {
+public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused code)
 
 	private MySql[] MySQL_Pool;
 	private int MySQL_Pointer;

@@ -16,16 +16,16 @@ public class EnchantmentHandler {
 		list_with_Enchantment_Prices.add(enchantmentData);
 	}
 	
-	public static double getPrice(int id, int level) {
-	    //id is deprecated!
-		for (EnchantmentData d : list_with_Enchantment_Prices){
-			if ((d.getEnchantmentID() == id) && (d.getEnchantmentLevel() == level)) {
-				return d.price;
-				
-			}
-		}
-		return 0;	
-	}
+//	public static double getPrice(int id, int level) {
+//	    //id is deprecated!
+//		for (EnchantmentData d : list_with_Enchantment_Prices){
+//			if ((d.getEnchantmentID() == id) && (d.getEnchantmentLevel() == level)) {
+//				return d.price;
+//				
+//			}
+//		}
+//		return 0;	
+//	}
 	
     public static double getPrice(String name, Integer level) {
         for (EnchantmentData d : list_with_Enchantment_Prices){

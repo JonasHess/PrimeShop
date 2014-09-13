@@ -25,7 +25,7 @@ import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Shops.Shop;
 
-public class Sign_Click_Listener implements Listener {
+public class Sign_Click_Listener implements Listener { // NO_UCD (unused code)
     public Sign_Click_Listener () {
         PrimeShop.plugin.getServer().getPluginManager().registerEvents(this, PrimeShop.plugin);
     }

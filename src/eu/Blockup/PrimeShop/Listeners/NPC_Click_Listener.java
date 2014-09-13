@@ -16,7 +16,7 @@ import net.citizensnpcs.api.event.NPCLeftClickEvent;
 
 
 
-public class NPC_Click_Listener  implements Listener {
+public class NPC_Click_Listener  implements Listener { // NO_UCD (unused code)
 	
 	public NPC_Click_Listener () {
 	PrimeShop.plugin.getServer().getPluginManager().registerEvents(this, PrimeShop.plugin);

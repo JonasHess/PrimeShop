@@ -248,18 +248,18 @@ public class Interface_Buy_Sell_Item extends InventoryInterface {
 		}
 
 	}
-	public static String get_Price2(ItemStack itemStack, boolean kaufen,
-			int amount) {
-		Item_Trader itemTrader = Pool_of_Item_Traders.get_ItemTrader();
-		ReturnPrice ReturnSELL = itemTrader.get_Price_of_Itemstack(itemStack,
-				amount, kaufen);
-		Pool_of_Item_Traders.return_Item_Trader(itemTrader);
-		itemTrader = null;
-
-		if (ReturnSELL.succesful) {
-			return Message_Handler.resolve_to_message(40, PrimeShop.economy.format(ReturnSELL.price));
-		} else {
-			return Message_Handler.resolve_to_message(13);
-		}
-	}
+//	public static String get_Price2(ItemStack itemStack, boolean kaufen,
+//			int amount) {
+//		Item_Trader itemTrader = Pool_of_Item_Traders.get_ItemTrader();
+//		ReturnPrice ReturnSELL = itemTrader.get_Price_of_Itemstack(itemStack,
+//				amount, kaufen);
+//		Pool_of_Item_Traders.return_Item_Trader(itemTrader);
+//		itemTrader = null;
+//
+//		if (ReturnSELL.succesful) {
+//			return Message_Handler.resolve_to_message(40, PrimeShop.economy.format(ReturnSELL.price));
+//		} else {
+//			return Message_Handler.resolve_to_message(13);
+//		}
+//	}
 }
