@@ -33,18 +33,15 @@ public class Item_Comparer {
 		}
 
 		if (checkEnchantmens) {
-			boolean enchantmentsMatch = true;
 			Map<Enchantment, Integer> map = itemA.getEnchantments();
 			for (Enchantment key : map.keySet()) {
 				if (!itemB.containsEnchantment(key)) {
-					enchantmentsMatch = false;
 					return false;
 				}
 			}
 			map = itemB.getEnchantments();
 			for (Enchantment key : map.keySet()) {
 				if (!itemA.containsEnchantment(key)) {
-					enchantmentsMatch = false;
 					return false;
 				}
 			}

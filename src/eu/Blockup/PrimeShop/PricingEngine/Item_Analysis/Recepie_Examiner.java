@@ -16,10 +16,7 @@ import eu.Blockup.PrimeShop.PricingEngine.DataHandling.EvaluatedRecipe;
 
 public class Recepie_Examiner {
 
-    private PrimeShop plugin;
-
     public Recepie_Examiner(PrimeShop plugin) {
-	this.plugin = plugin;
     }
 
     // TODO Globaler iterator für alle Bukkit Rezept.. Welher verkleinert wird,

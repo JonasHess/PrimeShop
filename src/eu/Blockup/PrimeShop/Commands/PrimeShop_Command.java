@@ -220,14 +220,13 @@ public class PrimeShop_Command implements CommandExecutor {
 
 				String shopname = args[1];
 				boolean found = false;
-				String originalShopname = "";
 				Shop shop = null;
 
 				for (Map.Entry<String, Shop> entry : PrimeShop.hashMap_Shops
 						.entrySet()) {
 					if (entry.getKey().toUpperCase().contains(shopname.toUpperCase())) {
 						found = true;
-						originalShopname = entry.getKey();
+						entry.getKey();
 						shop = entry.getValue();
 					}
 				}
@@ -382,7 +381,6 @@ public class PrimeShop_Command implements CommandExecutor {
 				}
 
 				String originalShopname = args[1];
-				String newName = args[2];
 				boolean found = false;
 
 				for (Map.Entry<String, Shop> entry : PrimeShop.hashMap_Shops

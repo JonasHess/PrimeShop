@@ -20,7 +20,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,8 +33,6 @@ import eu.Blockup.PrimeShop.Databse.PreRender_all_Items_in_Shops;
 import eu.Blockup.PrimeShop.Databse.DatabaseIntersection.DatabseTyp;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Listeners.SectionListener;
-import eu.Blockup.PrimeShop.Listeners.NPC_Click_Listener;
-import eu.Blockup.PrimeShop.Listeners.Sign_Click_Listener;
 import eu.Blockup.PrimeShop.Metrics.Metrics;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.CooldownManager;
@@ -74,8 +71,8 @@ public class PrimeShop extends JavaPlugin {
 	public static Map<String, InventoryInterface> hashMap_InventoryInterfaces;
 	public static Map<String, Inventory> hashMap_InventorySessions;
 	static Map<String, ItemStack> hashMap_Inventory_handSave;
-	private NPC_Click_Listener citizensClickListener;
-	private Sign_Click_Listener signClickListener;
+//	private NPC_Click_Listener citizensClickListener;
+//	private Sign_Click_Listener signClickListener;
 	public static Shop_Configuration_Handler shopConfigHandler;
 	public CooldownManager cooldownManager; 
 	
@@ -87,7 +84,7 @@ public class PrimeShop extends JavaPlugin {
 	public void onEnable() {
 
 		PrimeShop.plugin = this;
-		PluginDescriptionFile pdf = this.getDescription();
+		this.getDescription();
 
 		
 		// Copy Configfiles to /Plugin/PrimeShop  
@@ -107,13 +104,13 @@ public class PrimeShop extends JavaPlugin {
 		} else {
 			// Citizens ClickListener
 			citezens_is_enabled = true;
-			citizensClickListener = new NPC_Click_Listener();
+//			citizensClickListener = new NPC_Click_Listener();
 		}
 		
 		
 		
 		// Sign Listener
-		signClickListener = new Sign_Click_Listener();
+//		signClickListener = new Sign_Click_Listener();
 		
 
 		// Initialisiere die SQL Items und Rezept Datenbanken

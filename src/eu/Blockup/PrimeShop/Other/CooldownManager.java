@@ -41,13 +41,13 @@ public class CooldownManager {
 		
 	}
 	
-	private boolean contains(Player player) {
-		return players.containsKey(player.getName());
-	}
+//	private boolean contains(Player player) {
+//		return players.containsKey(player.getName());
+//	}
 	
-	private void remove(Player player) {
-		players.remove(player.getName());
-	}
+//	private void remove(Player player) {
+//		players.remove(player.getName());
+//	}
 	
 	private boolean interact(Player player) {
 		long currentTime = System.currentTimeMillis();
@@ -70,17 +70,17 @@ public class CooldownManager {
 		return true;
 	}
 	
-	private int timeLeft(Player player, Time type) {
-		if(type == Time.SECONDS) {
-			return (int)(((players.get(player.getName()) + time) - System.currentTimeMillis())/1000);
-		}
-		
-		return (int)(((players.get(player.getName()) + time) - System.currentTimeMillis())/1000/type.getValue());
-	}
-	
-	private long timeLeftRaw(Player player) {
-		return (((players.get(player.getName()) + time) - System.currentTimeMillis()));
-	}
+//	private int timeLeft(Player player, Time type) {
+//		if(type == Time.SECONDS) {
+//			return (int)(((players.get(player.getName()) + time) - System.currentTimeMillis())/1000);
+//		}
+//		
+//		return (int)(((players.get(player.getName()) + time) - System.currentTimeMillis())/1000/type.getValue());
+//	}
+//	
+//	private long timeLeftRaw(Player player) {
+//		return (((players.get(player.getName()) + time) - System.currentTimeMillis()));
+//	}
 	
 	
 	public boolean is_player_Spamming(Player player) {
