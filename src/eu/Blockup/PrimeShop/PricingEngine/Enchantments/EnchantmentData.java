@@ -4,7 +4,7 @@ public class EnchantmentData {
     private int      enchantmentID;  //deprecated
     private String   name;           //added by tubelius 20140913
     private int      enchantmentLevel;
-    public double   price;
+    double   price;
 
     public EnchantmentData(int enchantmentID, int enchantmentLevel, 
             double enchantmentPrice, String name) {

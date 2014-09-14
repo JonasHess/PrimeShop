@@ -10,7 +10,7 @@ public class Page {
     public List<ItemStack> listOfItems;
     private int index_of_this_page;
     private int max_count_of_pages;
-    public static int amount_of_items_fitting__in_one_page = 26;
+    static int amount_of_items_fitting__in_one_page = 26;
     
     
     Page(List<ItemStack> listOfItems, int index_of_this_page, int max_count_of_pages) {

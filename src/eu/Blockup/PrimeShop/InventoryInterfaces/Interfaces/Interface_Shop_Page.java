@@ -45,7 +45,7 @@ public class Interface_Shop_Page extends InventoryInterface {
             boolean go_back_to_parent = true;
             if (parentMenu != null) {
                 if (parentMenu instanceof Interface_Collection_of_Shops) {
-                    if (((Interface_Collection_of_Shops) parentMenu).list_of_Shops
+                    if (((Interface_Collection_of_Shops) parentMenu).getList_of_Shops()
                             .size() == 1) {
                         go_back_to_parent = false;
                     }
@@ -339,7 +339,7 @@ public class Interface_Shop_Page extends InventoryInterface {
         if (parentMenu != null) {
 
             if (parentMenu instanceof Interface_Collection_of_Shops) {
-                if (((Interface_Collection_of_Shops) parentMenu).list_of_Shops
+                if (((Interface_Collection_of_Shops) parentMenu).getList_of_Shops()
                         .size() == 1) {
                     goBack = false;
                 }

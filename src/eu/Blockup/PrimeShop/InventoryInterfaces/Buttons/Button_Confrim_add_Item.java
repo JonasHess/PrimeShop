@@ -15,7 +15,7 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 public class Button_Confrim_add_Item extends Button {
 
     private ItemStack item_to_be_added;
-    Shop shop;
+    private Shop shop;
 
     public Button_Confrim_add_Item(Shop shop, ItemStack item_to_be_added, Material type_of_Icon, short data_of_Icon,String name, String... description) {
         super(type_of_Icon, data_of_Icon, item_to_be_added.getEnchantments(), item_to_be_added.getAmount(), name, description);

@@ -12,9 +12,9 @@ public class ChestShop {
     //these are all used (20140914)
     private String UUID;
     private double money_deposite;
-    public List<Item_Supply> list_Verkauf;
-    public List<Item_Supply> list_Ankauf;
-    public List<Item_Supply> list_Mailbox;
+    List<Item_Supply> list_Verkauf;
+    List<Item_Supply> list_Ankauf;
+    List<Item_Supply> list_Mailbox;
     private List<Location> list_Locations;
     
     public ChestShop(String uUID, double money_deposite) {
