@@ -23,7 +23,6 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 public class Interface_Shop_Page extends InventoryInterface {
 
     private Shop shop;
-    final private Interface_Shop_Page current_Menu;
     public int pagenumber;
     private final int maxPages;
 //    @SuppressWarnings("deprecation")
@@ -32,7 +31,6 @@ public class Interface_Shop_Page extends InventoryInterface {
         super(shop.shopname, 6, link_Back_Stack);
         this.shop = shop;
         this.setCloseable(false);
-        this.current_Menu = this;
         this.pagenumber = pagenumber;
         this.maxPages = this.shop.number_of_pages;
 

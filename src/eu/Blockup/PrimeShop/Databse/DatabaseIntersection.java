@@ -16,10 +16,7 @@ public abstract class DatabaseIntersection {
     
     DatabaseIntersection(PrimeShop plugin, DatabseTyp databseTyp) {
         this.plugin = plugin;
-        this.databseTyp = databseTyp;
     }
-
-    private DatabseTyp databseTyp;
 
     public abstract ReturnBoolean link_with_Databse_if_not_allready_linked(Shop_Item sql_Item);
     

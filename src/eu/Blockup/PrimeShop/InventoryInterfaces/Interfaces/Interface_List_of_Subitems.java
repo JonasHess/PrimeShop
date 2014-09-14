@@ -22,12 +22,8 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 
 class Interface_List_of_Subitems extends InventoryInterface {
 
-    final private Interface_List_of_Subitems current_Menu;
-    
     public Interface_List_of_Subitems(final List<InventoryInterface> link_Back_Stack, final ItemStack resultItem, final Shop shop,Player player) {
         super(Message_Handler.resolve_to_message(80), 6, link_Back_Stack);
-        this.current_Menu = this;
-
         this.setClickHandler(new ClickHandler() {
             @Override
             public boolean onClick(Player player, ItemStack cursor,
