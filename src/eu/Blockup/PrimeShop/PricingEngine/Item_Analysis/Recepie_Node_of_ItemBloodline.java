@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.bukkit.inventory.ItemStack;
 
-public class Recepie_Node_of_ItemBloodline {
+class Recepie_Node_of_ItemBloodline {
     public Item_Node_of_ItemBloodline parentNode;
     public int parentRecepieItemAmount;
     public List<Item_Node_of_ItemBloodline> listOfTreeNode;

@@ -11,7 +11,7 @@ import eu.Blockup.PrimeShop.PricingEngine.Item_Trader;
 import eu.Blockup.PrimeShop.PricingEngine.Pool_of_Item_Traders;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPrice;
 
-public class pValue_Command implements CommandExecutor {
+class pValue_Command implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label,

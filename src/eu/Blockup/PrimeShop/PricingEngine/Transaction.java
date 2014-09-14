@@ -12,7 +12,7 @@ import eu.Blockup.PrimeShop.PricingEngine.Enchantments.EnchantmentHandler;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.Item_Node_of_ItemBloodline;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPrice;
 
-public class Transaction extends Thread{
+class Transaction extends Thread{
     // TODO add Player
     private double amount;
     public double priceTotal;

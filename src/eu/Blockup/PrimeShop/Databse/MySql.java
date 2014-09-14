@@ -15,7 +15,7 @@ import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnBoolean;
 
-public class MySql {
+class MySql {
 	private String     host;
 	private int        port;
 	private String     user;

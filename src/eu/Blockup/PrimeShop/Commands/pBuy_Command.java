@@ -12,7 +12,7 @@ import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Buy_Sell_It
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Shops.Shop;
 
-public class pBuy_Command implements CommandExecutor {
+class pBuy_Command implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label,

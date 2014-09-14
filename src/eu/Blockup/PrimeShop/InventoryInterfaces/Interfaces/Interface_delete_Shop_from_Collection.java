@@ -15,7 +15,7 @@ import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Shops.Shop;
 
-public class Interface_delete_Shop_from_Collection extends InventoryInterface{
+class Interface_delete_Shop_from_Collection extends InventoryInterface{
 
 //	@SuppressWarnings("deprecation")
 	public Interface_delete_Shop_from_Collection(final List<InventoryInterface> link_Back_Stack, Player player, final Shop shop, final int collectionID, final boolean npc) {

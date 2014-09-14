@@ -27,7 +27,7 @@ import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_delete_Shop
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Shops.Shop;
 
-public class PrimeShop_Command implements CommandExecutor {
+class PrimeShop_Command implements CommandExecutor {
 
 	private final PrimeShop plugin;
 

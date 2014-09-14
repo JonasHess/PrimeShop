@@ -12,7 +12,7 @@ import eu.Blockup.PrimeShop.ChestShop.ChestShop;
 import eu.Blockup.PrimeShop.ChestShop.Load_and_Store_Chestshops;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.ChestShops.Interface_Verkaufen;
 
-public class PlayerShop_Commands implements CommandExecutor {
+class PlayerShop_Commands implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label,

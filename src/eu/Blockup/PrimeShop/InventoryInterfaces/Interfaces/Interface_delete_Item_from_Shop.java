@@ -19,7 +19,7 @@ import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Shops.Shop;
 
-public class Interface_delete_Item_from_Shop extends InventoryInterface {
+class Interface_delete_Item_from_Shop extends InventoryInterface {
 	
 	
 //	@SuppressWarnings("deprecation")

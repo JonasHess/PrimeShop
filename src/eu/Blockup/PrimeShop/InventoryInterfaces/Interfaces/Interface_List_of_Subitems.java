@@ -20,7 +20,7 @@ import eu.Blockup.PrimeShop.Other.Item_Comparer;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Shops.Shop;
 
-public class Interface_List_of_Subitems extends InventoryInterface {
+class Interface_List_of_Subitems extends InventoryInterface {
 
 	final public Interface_List_of_Subitems current_Menu;
 	

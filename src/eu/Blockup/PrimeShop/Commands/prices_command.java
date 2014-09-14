@@ -9,7 +9,7 @@ import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.PricingEngine.Price_Sorter;
 
-public class prices_command implements CommandExecutor {
+class prices_command implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label,
