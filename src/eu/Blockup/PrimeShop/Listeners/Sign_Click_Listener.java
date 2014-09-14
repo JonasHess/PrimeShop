@@ -125,7 +125,6 @@ public class Sign_Click_Listener implements Listener { // NO_UCD (unused code)
     public void onSignChange(SignChangeEvent event) {
         // clicked on a sign and signs enabled?
         if (event.getPlayer() !=  null) {
-//            Sign sign  =  (Sign) event.getBlock().getState();
             Player player  =  event.getPlayer();
             String[] lines  =  event.getLines();
             
@@ -189,12 +188,6 @@ public class Sign_Click_Listener implements Listener { // NO_UCD (unused code)
                 if (lines[0].toUpperCase().contains(
                         Cofiguration_Handler.Sign_Shop_Headline.toUpperCase())) {
                     if (player != null) {
-                        // if ((eventBlock.equals(b) &&
-                        // player.getInventory().getItemInHand().getData().getItemTypeId()
-                        // == 262)) {
-                        // if ((eventBlock.equals(b) &&
-                        // player.getItemInHand().getData().getItemTypeId() ==
-                        // 262)) {
                         if ((eventBlock.equals(b) && player.getItemInHand()
                                 .getType().name().equalsIgnoreCase("arrow"))) {
                             continue;

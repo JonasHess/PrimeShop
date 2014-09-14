@@ -243,7 +243,7 @@ public class Item_Trader {
 
 
 
-    public boolean hasPlayerThisITem(Player p, ItemStack i, int amount) {
+    private boolean hasPlayerThisITem(Player p, ItemStack i, int amount) {
 
         if (p.getInventory().containsAtLeast(i, amount)) {
             return true;

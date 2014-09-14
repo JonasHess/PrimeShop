@@ -14,31 +14,31 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Button_Confrim_add_Item extends Button {
 
-	private ItemStack item_to_be_added;
-	Shop shop;
+    private ItemStack item_to_be_added;
+    Shop shop;
 
-	public Button_Confrim_add_Item(Shop shop, ItemStack item_to_be_added, Material type_of_Icon, short data_of_Icon,String name, String... description) {
-		super(type_of_Icon, data_of_Icon, item_to_be_added.getEnchantments(), item_to_be_added.getAmount(), name, description);
-		this.shop = shop;
-		this.item_to_be_added = item_to_be_added;
-		
-	}
+    public Button_Confrim_add_Item(Shop shop, ItemStack item_to_be_added, Material type_of_Icon, short data_of_Icon,String name, String... description) {
+        super(type_of_Icon, data_of_Icon, item_to_be_added.getEnchantments(), item_to_be_added.getAmount(), name, description);
+        this.shop = shop;
+        this.item_to_be_added = item_to_be_added;
+        
+    }
 
-	@Override
-	public void onClick(InventoryInterface inventoryInterface, Player player, ItemStack cursor,
-			ItemStack current, ClickType type) {
-		shop.add_ItemStack(item_to_be_added);
-		PrimeShop.shopConfigHandler.write_shops_to_Harddisk();
-		player.sendMessage(Message_Handler.resolve_to_message(36));
-		PrimeShop.close_InventoyInterface(player);
+    @Override
+    public void onClick(InventoryInterface inventoryInterface, Player player, ItemStack cursor,
+            ItemStack current, ClickType type) {
+        shop.add_ItemStack(item_to_be_added);
+        PrimeShop.shopConfigHandler.write_shops_to_Harddisk();
+        player.sendMessage(Message_Handler.resolve_to_message(36));
+        PrimeShop.close_InventoyInterface(player);
 
-		if (inventoryInterface instanceof Interface_add_Item_to_Shop) {
+        if (inventoryInterface instanceof Interface_add_Item_to_Shop) {
 
-			Interface_add_Item_to_Shop parentmenu = (Interface_add_Item_to_Shop) inventoryInterface;
-			if (parentmenu.parentShop != null) {
-				parentmenu.parentShop.refresh(player);
-				PrimeShop.open_InventoyInterface(player, parentmenu);
-			}
-		}
-	}
+            Interface_add_Item_to_Shop parentmenu = (Interface_add_Item_to_Shop) inventoryInterface;
+            if (parentmenu.parentShop != null) {
+                parentmenu.parentShop.refresh(player);
+                PrimeShop.open_InventoyInterface(player, parentmenu);
+            }
+        }
+    }
 }

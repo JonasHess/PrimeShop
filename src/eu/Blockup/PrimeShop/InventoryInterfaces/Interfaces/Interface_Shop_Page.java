@@ -92,7 +92,7 @@ public class Interface_Shop_Page extends InventoryInterface {
         reprint_items(player);
     }
 
-    public void reprint_items(Player player) {
+    private void reprint_items(Player player) {
         // Add Items to Menu
         final Page page = shop.get_Page(pagenumber);
         int amount_of_items = page.listOfItems.size();
