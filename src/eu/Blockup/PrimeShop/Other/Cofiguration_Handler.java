@@ -32,8 +32,10 @@ public class Cofiguration_Handler {
     public static double default_rate_of_price_change = 0.0001;
     public static double default_initial_price = 1.0;
     public static double globalRateOfInflation = 1.0;
-    public static boolean sellingItemsisEnabled = true;
-    public static boolean buyingItemsisEnabled = true;
+// TODO Remove unused code found by UCDetector
+//     public static boolean sellingItemsisEnabled = true;
+// TODO Remove unused code found by UCDetector
+//     public static boolean buyingItemsisEnabled = true;
     public static double smallestValueItemCanHave = 0.00;
     public static double taxValueItemIncreasesWhenItWasCrafted = 0.05;
     public static int amount_of_simultanious_opened_MySQL_Connection = 2;

@@ -138,18 +138,19 @@ import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPric
 		//
 		// }
 
-		public synchronized String get_Price(ItemStack itemStack, boolean kaufen, int amount) {
-			Item_Trader itemTrader = Pool_of_Item_Traders.get_ItemTrader();
-			ReturnPrice ReturnSELL = itemTrader.get_Price_of_Itemstack(itemStack, amount, kaufen);
-			Pool_of_Item_Traders.return_Item_Trader(itemTrader);
-			itemTrader = null;
-
-			if (ReturnSELL.succesful) {
-				return Message_Handler.resolve_to_message(21, PrimeShop.economy.format(ReturnSELL.price));
-			} else {
-				return Message_Handler.resolve_to_message(41);
-			}
-		}
+// TODO Remove unused code found by UCDetector
+// 		public synchronized String get_Price(ItemStack itemStack, boolean kaufen, int amount) {
+// 			Item_Trader itemTrader = Pool_of_Item_Traders.get_ItemTrader();
+// 			ReturnPrice ReturnSELL = itemTrader.get_Price_of_Itemstack(itemStack, amount, kaufen);
+// 			Pool_of_Item_Traders.return_Item_Trader(itemTrader);
+// 			itemTrader = null;
+// 
+// 			if (ReturnSELL.succesful) {
+// 				return Message_Handler.resolve_to_message(21, PrimeShop.economy.format(ReturnSELL.price));
+// 			} else {
+// 				return Message_Handler.resolve_to_message(41);
+// 			}
+// 		}
 
 //		private String offset_to_String(double offset) {
 //			String result;

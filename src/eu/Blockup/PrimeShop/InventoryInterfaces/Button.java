@@ -107,10 +107,11 @@ public abstract class Button {
         return this.name;
     }
     
-    public Button setDescription(List<String> desc) {
-        this.setDescription(desc.toArray(new String[desc.size()]));
-        return this;
-    }
+// TODO Remove unused code found by UCDetector
+//     public Button setDescription(List<String> desc) {
+//         this.setDescription(desc.toArray(new String[desc.size()]));
+//         return this;
+//     }
     
     public Button setDescription(String... desc) {
         this.description = desc;
@@ -125,10 +126,11 @@ public abstract class Button {
         return this.getDescription() != null;
     }
     
-    public Button setClickMessage(String message) {
-        this.clickMessage = message;
-        return this;
-    }
+// TODO Remove unused code found by UCDetector
+//     public Button setClickMessage(String message) {
+//         this.clickMessage = message;
+//         return this;
+//     }
     
     public String getClickMessage() {
         return this.clickMessage;
@@ -138,10 +140,11 @@ public abstract class Button {
         return this.getClickMessage() != null;
     }
     
-    public Button setPermission(String permission) {
-        this.permission = permission;
-        return this;
-    }
+// TODO Remove unused code found by UCDetector
+//     public Button setPermission(String permission) {
+//         this.permission = permission;
+//         return this;
+//     }
     
     public String getPermission() {
         return this.permission;
@@ -151,10 +154,11 @@ public abstract class Button {
         return this.getPermission() != null;
     }
     
-    public Button setPermissionMessage(String message) {
-        this.permissionMessage = message;
-        return this;
-    }
+// TODO Remove unused code found by UCDetector
+//     public Button setPermissionMessage(String message) {
+//         this.permissionMessage = message;
+//         return this;
+//     }
     
     public String getPermissionMessage() {
         return this.permissionMessage;

@@ -35,7 +35,9 @@ public abstract class DatabaseIntersection {
     public abstract  ReturnBoolean write_NEW_Item_to_SQL (Shop_Item sql_Item);
 
     public static enum DatabseTyp {
-        SQLITE, MYSQL, FLATFILE;
+        MYSQL
+// TODO Remove unused code found by UCDetector
+//         SQLITE, MYSQL, FLATFILE;
     }
     
     protected abstract void read_entire_database_to_memory ();
