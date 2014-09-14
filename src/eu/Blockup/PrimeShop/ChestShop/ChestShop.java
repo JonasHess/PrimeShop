@@ -3,7 +3,7 @@ package eu.Blockup.PrimeShop.ChestShop;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Location;
+//import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
 
@@ -15,7 +15,7 @@ public class ChestShop {
     List<Item_Supply> list_Verkauf;
     List<Item_Supply> list_Ankauf;
     List<Item_Supply> list_Mailbox;
-    private List<Location> list_Locations;
+//    private List<Location> list_Locations;
     
     public ChestShop(String uUID, double money_deposite) {
         super();
@@ -24,7 +24,7 @@ public class ChestShop {
         this.list_Verkauf = new ArrayList<Item_Supply>();
         this.list_Ankauf = new ArrayList<Item_Supply>();
         this.list_Mailbox = new ArrayList<Item_Supply>();
-        this.list_Locations = new ArrayList<Location>();
+//        this.list_Locations = new ArrayList<Location>();
     }
  
     String get_UUID () {
@@ -102,23 +102,7 @@ public class ChestShop {
         add_Item_to_Supply_List (list_Mailbox, itemStack, amount);
     }
     
-    // REMOVE
-    private boolean remove_Item_from_Supply_List (List<Item_Supply> list, ItemStack itemStack, int amount) {
-        
-        Item_Supply iS = get_Item_Supply_out_of_List (list,  itemStack);
-        
-        if (iS == null) {
-            return false;
-            
-        } else {
-            return iS.remove_amount_of(amount);
-        }
-        
-    }
-// TODO Remove unused code found by UCDetector
-//     public boolean remove_Item_from_Verkaufen (ItemStack itemStack, int amount) {
-//         return remove_Item_from_Supply_List (list_Verkauf, itemStack, amount);
-//     }
+    
     
 // TODO Remove unused code found by UCDetector
 //     public boolean remove_Item_from_Ankauf (ItemStack itemStack, int amount) {

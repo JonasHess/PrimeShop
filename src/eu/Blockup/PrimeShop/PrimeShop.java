@@ -39,7 +39,7 @@ import eu.Blockup.PrimeShop.Other.CooldownManager;
 import eu.Blockup.PrimeShop.Other.Item_Comparer;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Other.Shop_Configuration_Handler;
-import eu.Blockup.PrimeShop.PricingEngine.Item_Trader;
+//import eu.Blockup.PrimeShop.PricingEngine.Item_Trader;
 import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Custom_Price_Links;
 import eu.Blockup.PrimeShop.PricingEngine.DataHandling.EvaluatedRecipe;
 import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item;
@@ -58,7 +58,7 @@ public class PrimeShop extends JavaPlugin {
     
     public static HashMap<String, ChestShop> hashMap_Chest_Shops;
     private Recepie_Examiner recepie_Examiner;
-    private Item_Trader itemTrader;
+//    private Item_Trader itemTrader;
     public static Economy economy = null;
     private Cofiguration_Handler cofiguration_Handler;
     public static HashMap<String, Shop> hashMap_Shops;
@@ -70,7 +70,7 @@ public class PrimeShop extends JavaPlugin {
 
     public static Map<String, InventoryInterface> hashMap_InventoryInterfaces;
     public static Map<String, Inventory> hashMap_InventorySessions;
-    private static Map<String, ItemStack> hashMap_Inventory_handSave;
+//    private static Map<String, ItemStack> hashMap_Inventory_handSave;
 //    private NPC_Click_Listener citizensClickListener;
 //    private Sign_Click_Listener signClickListener;
     public static Shop_Configuration_Handler shopConfigHandler;
@@ -121,11 +121,11 @@ public class PrimeShop extends JavaPlugin {
         hashMap_Item_Node_of_ItemBloodline = new HashMap<String, Item_Node_of_ItemBloodline>();
         hashMap_InventoryInterfaces = new HashMap<String, InventoryInterface>();
         hashMap_InventorySessions = new HashMap<String, Inventory>();
-        hashMap_Inventory_handSave = new HashMap<String, ItemStack>();
+//        hashMap_Inventory_handSave = new HashMap<String, ItemStack>();
         hashMap_Chest_Shops = new HashMap<String, ChestShop>();
         
         recepie_Examiner = new Recepie_Examiner(this);
-        itemTrader = new Item_Trader(this);
+//        itemTrader = new Item_Trader(this);
 
         // Setup Custom Price Links
         Custom_Price_Links.load_Custom_Price_Links();
@@ -217,9 +217,9 @@ public class PrimeShop extends JavaPlugin {
         hashMap_Item_Node_of_ItemBloodline = null;
         hashMap_InventoryInterfaces = null;
         hashMap_InventorySessions = null;
-        hashMap_Inventory_handSave = null;
+//        hashMap_Inventory_handSave = null;
         recepie_Examiner = null;
-        itemTrader = null;
+//        itemTrader = null;
         PrimeShop.economy = null;
 
         PrimeShop.plugin = null;
