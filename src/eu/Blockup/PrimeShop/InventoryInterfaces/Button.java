@@ -164,7 +164,7 @@ public abstract class Button {
         return this.getPermissionMessage() != null;
     }
     
-    public ItemStack toItemStack() {
+    ItemStack toItemStack() {
         ItemStack item = new ItemStack(this.getType(), this.getAmount(), this.getDamage());
         ItemMeta meta = Bukkit.getItemFactory().getItemMeta(item.getType());
         meta.setDisplayName(this.getName());

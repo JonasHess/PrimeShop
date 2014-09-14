@@ -18,7 +18,7 @@ public class Button_delete_Item extends Button {
     private ItemStack item_to_be_removed;
     Shop shop;
 
-    public Button_delete_Item(Material type, String message) {
+    private Button_delete_Item(Material type, String message) {
         super(type, message);
     }
 

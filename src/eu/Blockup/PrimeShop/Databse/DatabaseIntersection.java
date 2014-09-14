@@ -14,7 +14,7 @@ public abstract class DatabaseIntersection {
     public abstract void close_Database () ;
     
     
-    public DatabaseIntersection(PrimeShop plugin, DatabseTyp databseTyp) {
+    DatabaseIntersection(PrimeShop plugin, DatabseTyp databseTyp) {
         this.plugin = plugin;
         this.databseTyp = databseTyp;
     }

@@ -22,7 +22,7 @@ public class Item_Node_of_ItemBloodline {
 
     private Recepie_Node_of_ItemBloodline parentNode;
 
-    public boolean write_Objects_to_SQL() {
+    boolean write_Objects_to_SQL() {
 
         boolean result = true;
         result = result

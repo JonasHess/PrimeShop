@@ -13,7 +13,7 @@ public class Page {
     public static int amount_of_items_fitting__in_one_page = 26;
     
     
-    public Page(List<ItemStack> listOfItems, int index_of_this_page, int max_count_of_pages) {
+    Page(List<ItemStack> listOfItems, int index_of_this_page, int max_count_of_pages) {
         super();
         this.listOfItems = listOfItems;
         this.index_of_this_page = index_of_this_page;

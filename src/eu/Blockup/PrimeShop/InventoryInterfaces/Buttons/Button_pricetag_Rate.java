@@ -37,7 +37,7 @@ import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item;
 			;
 		}
 		
-		public void refresh_Price() {
+		void refresh_Price() {
 
 		    DecimalFormat df = new DecimalFormat("#.00");
 		    String rate_of_price_change = df.format(sqlItem.rate_of_price_change.getValue());

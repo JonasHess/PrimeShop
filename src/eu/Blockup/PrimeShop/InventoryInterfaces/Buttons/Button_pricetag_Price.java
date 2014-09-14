@@ -35,7 +35,7 @@ import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item;
 			;
 		}
 		
-		public void refresh_Price() {
+		void refresh_Price() {
 			String defualtPrice = PrimeShop.economy.format(sqlItem.initial_price.getValue());
 			String currentPrice = PrimeShop.economy.format(sqlItem.calculate_price(sqlItem.timesItemWasBought.getValue(), sqlItem.timesItemWasSold.getValue()));
 			this.setName(Message_Handler.resolve_to_message(19));

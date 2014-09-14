@@ -8,10 +8,10 @@ import org.bukkit.inventory.ItemStack;
 
 
 public class ChestShop {
-    
+
+    //these are all used (20140914)
     private String UUID;
     private double money_deposite;
-    
     public List<Item_Supply> list_Verkauf;
     public List<Item_Supply> list_Ankauf;
     public List<Item_Supply> list_Mailbox;
@@ -26,29 +26,27 @@ public class ChestShop {
         this.list_Mailbox = new ArrayList<Item_Supply>();
         this.list_Locations = new ArrayList<Location>();
     }
-    
-    
-    
-    public String get_UUID () {
+ 
+    String get_UUID () {
         return this.UUID;
     }
     
-    public double get_Balance () {
+    double get_Balance () {
         return this.money_deposite;
     }
-
-    
-    public boolean has_location (Location location) {
-        for (Location l : this.list_Locations) {   // TODO   equals?
-            if (l.equals(location)) return true;
-            continue;
-        }
-        return false;
-    }
-    
-    public void add_location (Location location) {
-        this.list_Locations.add(location);
-    }
+//
+//    
+//    public boolean has_location (Location location) {
+//        for (Location l : this.list_Locations) {   // TODO   equals?
+//            if (l.equals(location)) return true;
+//            continue;
+//        }
+//        return false;
+//    }
+//    
+//    public void add_location (Location location) {
+//        this.list_Locations.add(location);
+//    }
     
 
     // GET ITEM SUPPLY
