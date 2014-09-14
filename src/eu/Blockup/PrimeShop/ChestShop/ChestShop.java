@@ -52,7 +52,7 @@ public class ChestShop {
     
     public boolean withdraw_money (double value) {
         if (has_money(value)) {
-            this.money_deposite -= value;
+            this.money_deposite += value;
             return true;
         }
         return false;
@@ -222,6 +222,29 @@ public class ChestShop {
         if (item_Supply.getAmount() > 0) {
             player.sendMessage("Your Inventory is full.");
         }
+    }
+    
+    private void remove_empty_supply_slots_from_List (List<Item_Supply> list) {
+        
+        List<Item_Supply> hitList = new ArrayList<Item_Supply>();
+        
+        for (Item_Supply a : list) {
+            if (!a.has_amount_of(1)) {
+                hitList.add(a);
+            }
+        }
+        
+        for (Item_Supply hit : hitList)  {
+            list.remove(hit);
+            System.out.println("REMOVED ITEM FROM CHESTSHOP");  // TODO remove
+        }
+        
+    }
+    
+    public void remove_empty_supply_slots () {
+        remove_empty_supply_slots_from_List(list_Ankauf);
+        remove_empty_supply_slots_from_List(list_Mailbox);
+        remove_empty_supply_slots_from_List(list_Verkauf);
     }
     
 }

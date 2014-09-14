@@ -49,10 +49,8 @@ public class Interface_ChestShop_Page extends InventoryInterface {
         
         
         this.pagenumber = pagenumber;
-        this.maxPages = chestShop.get_PageCount_of_Verkaufen();
-        if (stage == Stage.Mailbox)   this.maxPages = chestShop.get_PageCount_of_Mailbox();
-        if (stage == Stage.Verkaufen) this.maxPages = chestShop.get_PageCount_of_Verkaufen(); 
-        if (stage == Stage.Ankaufen)  this.maxPages = chestShop.get_PageCount_of_Ankaufen();
+        
+
         
         
         // Close Option
@@ -123,6 +121,8 @@ public class Interface_ChestShop_Page extends InventoryInterface {
 //      this.addOption(4, 0,
 //              new Button_with_no_task(this.shop.displayIcon.getType(),
 //                      this.shop.shopname));
+        
+       chestShop.remove_empty_supply_slots();
 
         for (int y = 2; y < 5; y++) {
             for (int x = 0; x < 9; x++) {
@@ -174,6 +174,7 @@ public class Interface_ChestShop_Page extends InventoryInterface {
                                         
                                         if (stage == Stage.Mailbox) {
                                             ChestShop.give_Items_back_to_Player(player, chestShop.get_Page_X_of_Mailbox(pagenumber).listOfItems.get(slot_position));
+                                            reprint_items(player);  // TODO WARNING  This can result in Player seeing empty pages
                                             return;
                                         }
                                     }
@@ -324,4 +325,16 @@ public class Interface_ChestShop_Page extends InventoryInterface {
         
         this.refresh(player);
     }
+    
+    private int get_max_PageCount () {
+        if (stage == Stage.Mailbox)   return chestShop.get_PageCount_of_Mailbox();
+        if (stage == Stage.Verkaufen) return chestShop.get_PageCount_of_Verkaufen(); 
+        if (stage == Stage.Ankaufen)  return chestShop.get_PageCount_of_Ankaufen();
+        return 64;
+    }
+    private void refresh_Page_After_deletion () {
+        chestShop.remove_empty_supply_slots();   // This might be opened twice
+        
+    }
+    
 }

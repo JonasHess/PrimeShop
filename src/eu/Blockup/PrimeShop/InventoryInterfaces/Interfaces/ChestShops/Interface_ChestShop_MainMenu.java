@@ -48,13 +48,50 @@ public class Interface_ChestShop_MainMenu extends InventoryInterface {
         
         // Menu Items
         
-        this.addOption(2, 1, new Button(new ItemStack(Material.DIAMOND), "Buy Items from Shop", "") {
+        // Verkaufen
+        this.addOption(2, 2, new Button(new ItemStack(Material.DIAMOND), "Buy Items from Shop", "") {
             
             @Override
             public void onClick(InventoryInterface inventoryInterface, Player player,
                     ItemStack cursor, ItemStack current, ClickType type) {
                     PrimeShop.close_InventoyInterface(player);
                     PrimeShop.open_InventoyInterface(player, new Interface_ChestShop_Page(branch_back_Stack, player, chestShop, Stage.Verkaufen, 1));
+            }
+        });
+        
+        
+        // Ankaufen
+        this.addOption(3, 2, new Button(new ItemStack(Material.GOLD_INGOT), "Sell Items from Shop", "") {
+            
+            @Override
+            public void onClick(InventoryInterface inventoryInterface, Player player,
+                    ItemStack cursor, ItemStack current, ClickType type) {
+                PrimeShop.close_InventoyInterface(player);
+                PrimeShop.open_InventoyInterface(player, new Interface_ChestShop_Page(branch_back_Stack, player, chestShop, Stage.Ankaufen, 1));
+            }
+        });
+        
+        
+        // Mailbox
+        this.addOption(4, 2, new Button(new ItemStack(Material.BOOKSHELF), "Mailbox", "") {
+            
+            @Override
+            public void onClick(InventoryInterface inventoryInterface, Player player,
+                    ItemStack cursor, ItemStack current, ClickType type) {
+                PrimeShop.close_InventoyInterface(player);
+                PrimeShop.open_InventoyInterface(player, new Interface_ChestShop_Page(branch_back_Stack, player, chestShop, Stage.Mailbox, 1));
+            }
+        });
+        
+        
+        // Money Balance
+        this.addOption(5, 2, new Button(new ItemStack(Material.GOLD_NUGGET), "Shop Balance", "") {
+            
+            @Override
+            public void onClick(InventoryInterface inventoryInterface, Player player,
+                    ItemStack cursor, ItemStack current, ClickType type) {
+                PrimeShop.close_InventoyInterface(player);
+                PrimeShop.open_InventoyInterface(player, new Interface_ChestShop_Balance(branch_back_Stack, player, chestShop));
             }
         });
         
