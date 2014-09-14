@@ -22,7 +22,7 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 public class Interface_Collection_of_Shops extends InventoryInterface{
 
     final int collectionID;
-    final public boolean npc;
+    final boolean npc;
     private final List<Shop> list_of_Shops;
     
     public Interface_Collection_of_Shops(Player player, String title, final List<Shop> list_of_shops, final List<InventoryInterface> Stack_list, final int collectionID, boolean npc) {

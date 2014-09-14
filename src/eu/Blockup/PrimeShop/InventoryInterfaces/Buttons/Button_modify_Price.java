@@ -24,12 +24,13 @@ public class Button_modify_Price extends Button {
 	// private ItemStack itemStack;
 	private Shop_Item sqlItem;
 
-	public Button_modify_Price(Shop_Item sqlItem, double offset, Material display_Material) {
-		super(display_Material);
-		this.offset = offset;
-		this.sqlItem = sqlItem;
-		// this.itemStack = new ItemStack(display_Material);
-	}
+// TODO Remove unused code found by UCDetector
+// 	public Button_modify_Price(Shop_Item sqlItem, double offset, Material display_Material) {
+// 		super(display_Material);
+// 		this.offset = offset;
+// 		this.sqlItem = sqlItem;
+// 		// this.itemStack = new ItemStack(display_Material);
+// 	}
 
 	public Button_modify_Price(Shop_Item sqlItem, double offset, Material display_Material, String name, String... description) {
 		super(display_Material, name, description);
@@ -38,12 +39,13 @@ public class Button_modify_Price extends Button {
 		// this.itemStack = new ItemStack(display_Material);
 	}
 
-	public Button_modify_Price(Shop_Item sqlItem, double offset, Material display_Material, short damage, String name, String... description) {
-		super(display_Material, damage, name, description);
-		this.offset = offset;
-		this.sqlItem = sqlItem;
-		// this.itemStack = new ItemStack(display_Material, 1, damage);
-	}
+// TODO Remove unused code found by UCDetector
+// 	public Button_modify_Price(Shop_Item sqlItem, double offset, Material display_Material, short damage, String name, String... description) {
+// 		super(display_Material, damage, name, description);
+// 		this.offset = offset;
+// 		this.sqlItem = sqlItem;
+// 		// this.itemStack = new ItemStack(display_Material, 1, damage);
+// 	}
 
 	@Override
 		public void onClick(InventoryInterface inventoryInterface, Player player, ItemStack cursor, ItemStack current, ClickType type) {

@@ -22,10 +22,11 @@ public class Button_delete_Item extends Button {
         super(type, message);
     }
 
-    public Button_delete_Item(Material type, String name,
-            String... description) {
-        super(type, name, description);
-    }
+// TODO Remove unused code found by UCDetector
+//     public Button_delete_Item(Material type, String name,
+//             String... description) {
+//         super(type, name, description);
+//     }
 
     public Button_delete_Item(Material type,
             short damage, ItemStack item_to_be_removed, Shop shop,

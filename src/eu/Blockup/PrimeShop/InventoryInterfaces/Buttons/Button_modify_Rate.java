@@ -26,13 +26,14 @@ import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPric
 		// private ItemStack itemStack;
 		private Shop_Item sqlItem;
 
-		public Button_modify_Rate(Shop_Item sqlItem, double offset, Material display_Material) {
-			super(display_Material);
-			this.offset = offset;
-			this.sqlItem = sqlItem;
-//			this.setName(offset_to_String(this.offset));
-			// this.itemStack = new ItemStack(display_Material);
-		}
+// TODO Remove unused code found by UCDetector
+// 		public Button_modify_Rate(Shop_Item sqlItem, double offset, Material display_Material) {
+// 			super(display_Material);
+// 			this.offset = offset;
+// 			this.sqlItem = sqlItem;
+// //			this.setName(offset_to_String(this.offset));
+// 			// this.itemStack = new ItemStack(display_Material);
+// 		}
 
 		public Button_modify_Rate(Shop_Item sqlItem, double offset, Material display_Material, String name, String... description) {
 			super(display_Material, name, description);

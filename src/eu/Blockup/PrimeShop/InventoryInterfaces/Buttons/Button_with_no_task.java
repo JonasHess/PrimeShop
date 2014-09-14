@@ -14,19 +14,21 @@ public class Button_with_no_task extends Button {
         super(type, message);
     }
     
-    public Button_with_no_task(Material type,String name, String... description) {
-        super(type, name, description);
-    }
+// TODO Remove unused code found by UCDetector
+//     public Button_with_no_task(Material type,String name, String... description) {
+//         super(type, name, description);
+//     }
     
     private Button_with_no_task(Material type, short damage, String message) {
         this(type, message);
         super.setDamage(damage);
     }
     
-    public Button_with_no_task(Material type, short damage, int amount, String message) {
-        this(type, damage, message);
-        super.setAmount(amount);
-    }
+// TODO Remove unused code found by UCDetector
+//     public Button_with_no_task(Material type, short damage, int amount, String message) {
+//         this(type, damage, message);
+//         super.setAmount(amount);
+//     }
     
     public Button_with_no_task(ItemStack displayItem, String name, String... description) {
         super(displayItem, name, description);

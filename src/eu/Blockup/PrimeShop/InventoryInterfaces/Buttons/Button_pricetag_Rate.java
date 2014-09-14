@@ -26,10 +26,11 @@ import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item;
 		
 
 		
-		public Button_pricetag_Rate(Shop_Item sqlItem, Material type, short damage) {
-			this(sqlItem, type);
-			super.setDamage(damage);
-		}
+// TODO Remove unused code found by UCDetector
+// 		public Button_pricetag_Rate(Shop_Item sqlItem, Material type, short damage) {
+// 			this(sqlItem, type);
+// 			super.setDamage(damage);
+// 		}
 		
 		
 		@Override

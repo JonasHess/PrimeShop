@@ -9,13 +9,14 @@ public class CooldownManager {
     private long time;
     private HashMap<String, Long> players;
     
-    public CooldownManager(int time, Time type) {
-        if(type == Time.SECONDS)
-            this.time = time * 1000;
-        else
-            this.time = time * 1000 * type.getValue();
-        this.players = new HashMap<String, Long>();
-    }
+// TODO Remove unused code found by UCDetector
+//     public CooldownManager(int time, Time type) {
+//         if(type == Time.SECONDS)
+//             this.time = time * 1000;
+//         else
+//             this.time = time * 1000 * type.getValue();
+//         this.players = new HashMap<String, Long>();
+//     }
     
     public CooldownManager(long miliseconds) {
         this.time = miliseconds;
