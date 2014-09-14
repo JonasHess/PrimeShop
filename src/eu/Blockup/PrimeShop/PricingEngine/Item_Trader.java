@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.milkbowl.vault.economy.Economy;
 import eu.Blockup.PrimeShop.PrimeShop;
+import eu.Blockup.PrimeShop.ChestShop.ChestShop;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.Item_Node_of_ItemBloodline;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPrice;
@@ -72,7 +73,7 @@ public class Item_Trader {
                         transaction.errorMessage = Message_Handler.resolve_to_message(10);
                         e.printStackTrace();
                     }
-                    if (!transaction.transactionisCompleted) {
+                    if (!transaction.transactionIsCompleted) {
                         transaction.stop();
                         result.succesful = false;
                         result.errorMessage = Message_Handler.resolve_to_message(13);
@@ -118,19 +119,22 @@ public class Item_Trader {
 
     @SuppressWarnings("deprecation")
     public synchronized ReturnPrice sell_ItemStack(ItemStack itemStack,
-            int amount, Player player, boolean output_enabled) {
+            int amount, Player player, boolean output_enabled, boolean sell_to_an_Chestshop, ChestShop chestShop) {
 
         ReturnPrice result = new ReturnPrice();
         
+        // Permission check
         if (!PrimeShop.plugin.has_Player_Permission_for_this_Item(player, itemStack)) {
             result.succesful = false;
             result.errorMessage = Message_Handler.resolve_to_message(32);
             return result;
         }
         
+        // Initialization
         result.succesful = false;
         ItemStack players_Item = null;
         PlayerInventory playerInventory = player.getInventory();
+        ReturnPrice futurePrice = null;
 
         if (itemStack == null) {
             result.errorMessage = Message_Handler.resolve_to_message(12);
@@ -141,8 +145,28 @@ public class Item_Trader {
             result.errorMessage = Message_Handler.resolve_to_message(12);
             return result;
         }
-        // if (playerInventory.contains(itemStack)) {
+        
+        // Player has Item he is going to sell?
+        
         if (hasPlayerThisITem(player, itemStack, amount)) {
+            
+            
+            if (sell_to_an_Chestshop) {
+                
+                // check, if ChestShop has enough money to pay the User
+                futurePrice = this.get_Price_of_Itemstack(itemStack, amount, false);
+                if (futurePrice.succesful) {
+                    if (!chestShop.has_money(futurePrice.price)) {
+                        result.succesful = false;
+                        result.errorMessage = "Shop has not enough money"; // TODO 
+                        return result;
+                    }
+                }else {
+                    return futurePrice;
+                }
+            }
+            
+            
             playerInventory.removeItem(itemStack);
             // players_Item = itemStack.clone(); // TODO test if this is valide
             players_Item = itemStack;
@@ -162,7 +186,7 @@ public class Item_Trader {
                         .resolve_to_message(13);
                 e.printStackTrace();
             }
-            if (!transaction.transactionisCompleted) {
+            if (!transaction.transactionIsCompleted) {
                 transaction.stop();
                 result.succesful = false;
                 result.errorMessage = Message_Handler.resolve_to_message(13);
@@ -178,10 +202,15 @@ public class Item_Trader {
 
             }
             if (result.succesful) {
-                this.economy.depositPlayer(player.getName(), result.price);
+                double sell_price = result.price;
+                if (sell_to_an_Chestshop) {
+                    sell_price = futurePrice.price;
+                    chestShop.withdraw_money(sell_price);
+                }                    
+                this.economy.depositPlayer(player.getName(), sell_price);
                 if (output_enabled) {
                     player.sendMessage(Message_Handler.resolve_to_message(15,
-                            this.convert_price_to_String(result.price)));
+                            this.convert_price_to_String(sell_price)));
                 }
             } else {
                 player.getInventory().addItem(players_Item);
@@ -223,7 +252,7 @@ public class Item_Trader {
             transaction.errorMessage = Message_Handler.resolve_to_message(13);
             e.printStackTrace();
         }
-        if (!transaction.transactionisCompleted) {
+        if (!transaction.transactionIsCompleted) {
             transaction.stop();
             result.succesful = false;
             result.errorMessage = Message_Handler.resolve_to_message(13);

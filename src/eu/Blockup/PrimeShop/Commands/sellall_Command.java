@@ -53,7 +53,7 @@ class sellall_Command implements CommandExecutor {
             if (item_to_be_added != null) {
                 Item_Trader itemTrader = Pool_of_Item_Traders.get_ItemTrader();
 
-                ReturnPrice resultPrice = itemTrader.sell_ItemStack(item_to_be_added, item_to_be_added.getAmount(), p, false);
+                ReturnPrice resultPrice = itemTrader.sell_ItemStack(item_to_be_added, item_to_be_added.getAmount(), p, false, false, null);
                 
                 Pool_of_Item_Traders.return_Item_Trader(itemTrader);
 

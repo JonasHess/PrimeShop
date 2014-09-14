@@ -64,20 +64,13 @@ public class Interface_Verkaufen_SELL extends InventoryInterface {
             }
         }
 
-//        // Kaufen
-//
-//        
-//        Button_Buy_Sell_Item buy_Button = new Button_Buy_Sell_Item(permissionToBUY, true, 55, itemStack_to_be_bought, "");
-//        this.addOption(3, 2, buy_Button);
-//        buy_Button.setDisplayIcon(Cofiguration_Handler.buyButton_ItemStack);
-//        buy_Button.refresh_price(this.amount);
         
 
         // Verkaufen
 
-        Button_Buy_Sell_Item_in_ChestShop sell_Button = new Button_Buy_Sell_Item_in_ChestShop(itemStack_to_be_bought, permissionToSELL, false, this.amount, itemStack_to_be_bought.getItemStack(),"");
+        Button_Buy_Sell_Item_in_ChestShop sell_Button = new Button_Buy_Sell_Item_in_ChestShop(chestShop, itemStack_to_be_bought, permissionToSELL, true, this.amount, itemStack_to_be_bought.getItemStack(),"");
         this.addOption(4, 2, sell_Button);
-        sell_Button.setDisplayIcon(Cofiguration_Handler.sellButton_ItemStack);
+        sell_Button.setDisplayIcon(Cofiguration_Handler.buyButton_ItemStack);
         sell_Button.refresh_price(this.amount);
         
         

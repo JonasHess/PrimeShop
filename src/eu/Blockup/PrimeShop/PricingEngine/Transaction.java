@@ -18,7 +18,7 @@ class Transaction extends Thread{
     public double priceTotal;
     private boolean Kaufen;
     public boolean transactionWasSuccessful;
-    public boolean transactionisCompleted = false;
+    public boolean transactionIsCompleted = false;
     public String errorMessage;
     private boolean save_priceChanges_to_Backend;
     private Item_Node_of_ItemBloodline tree;
@@ -70,11 +70,11 @@ class Transaction extends Thread{
 	    this.priceTotal = this.priceTotal * Cofiguration_Handler.globalRateOfInflation;
 	    this.transactionWasSuccessful = result.succesful;
 	    this.errorMessage = result.errorMessage;
-	    this.transactionisCompleted = true;
+	    this.transactionIsCompleted = true;
 	} else {
 	    this.errorMessage = Message_Handler.resolve_to_message(13);
 	    this.transactionWasSuccessful = false;
-	    this.transactionisCompleted = true;  
+	    this.transactionIsCompleted = true;  
 	}
 	this.latch.countDown();
 	

@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import eu.Blockup.PrimeShop.PrimeShop;
+import eu.Blockup.PrimeShop.ChestShop.ChestShop;
 import eu.Blockup.PrimeShop.ChestShop.Item_Supply;
 import eu.Blockup.PrimeShop.InventoryInterfaces.ClickType;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Button;
@@ -21,7 +22,8 @@ public class Button_Buy_Sell_Item_in_ChestShop extends Button {
     private boolean kaufen;
     private static Material material = Material.DIAMOND_ORE;
     private String permission;
-    Item_Supply item_Supply;
+    private Item_Supply item_Supply;
+    private ChestShop chestShop;
 
 //    public SellOption(boolean kaufen, int amount, Material type) {
 //        super(material);
@@ -52,11 +54,12 @@ public class Button_Buy_Sell_Item_in_ChestShop extends Button {
 //        this.refresh_price();
 //    }
 
-    public Button_Buy_Sell_Item_in_ChestShop(Item_Supply item_Supply, String permission, boolean kaufen, int amount, ItemStack itemstack, String name, String... description) {
+    public Button_Buy_Sell_Item_in_ChestShop(ChestShop chestShop, Item_Supply item_Supply, String permission, boolean kaufen, int amount, ItemStack itemstack, String name, String... description) {
         super(material, name, description);
         this.kaufen = kaufen;
         this.menge = amount;
         this.item_Supply = item_Supply;
+        this.chestShop = chestShop;
         this.itemStack = itemstack;
         this.itemStack.setAmount(amount);
         this.setAmount(amount);
@@ -126,7 +129,7 @@ public class Button_Buy_Sell_Item_in_ChestShop extends Button {
             if (kaufen) {
                 result = itemTrader.buy_ItemStack(this.itemStack, this.menge, player);
             } else {
-                result = itemTrader.sell_ItemStack(this.itemStack, this.menge, player, true);
+                result = itemTrader.sell_ItemStack(this.itemStack, this.menge, player, true, true, chestShop);
             }
             Pool_of_Item_Traders.return_Item_Trader(itemTrader);
             itemTrader = null;
@@ -134,6 +137,10 @@ public class Button_Buy_Sell_Item_in_ChestShop extends Button {
                 player.sendMessage(result.errorMessage);
             }else {
                 item_Supply.remove_amount_of(menge);
+                
+                if (kaufen) {
+                    this.chestShop.add_money(result.price);
+                }
             }
             
         } else {

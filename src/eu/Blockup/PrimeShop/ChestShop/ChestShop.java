@@ -27,13 +27,33 @@ public class ChestShop {
 //        this.list_Locations = new ArrayList<Location>();
     }
  
-    String get_UUID () {
+    public String get_UUID () {
         return this.UUID;
     }
     
-    double get_Balance () {
+    public double get_Balance () {
         return this.money_deposite;
     }
+    
+    public void add_money (double value) {
+        this.money_deposite += value;
+    }
+    
+    public boolean has_money (double value) {
+        if (this.money_deposite >= value) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean withdraw_money (double value) {
+        if (has_money(value)) {
+            this.money_deposite -= value;
+            return true;
+        }
+        return false;
+    }
+    
 //
 //    
 //    public boolean has_location (Location location) {

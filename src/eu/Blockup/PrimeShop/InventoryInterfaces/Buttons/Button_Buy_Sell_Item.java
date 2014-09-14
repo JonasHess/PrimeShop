@@ -134,7 +134,7 @@ public class Button_Buy_Sell_Item extends Button {
         if (kaufen) {
             result = itemTrader.buy_ItemStack(this.itemStack, this.menge, player);
         } else {
-            result = itemTrader.sell_ItemStack(this.itemStack, this.menge, player, true);
+            result = itemTrader.sell_ItemStack(this.itemStack, this.menge, player, true, false, null);
         }
         Pool_of_Item_Traders.return_Item_Trader(itemTrader);
         itemTrader = null;

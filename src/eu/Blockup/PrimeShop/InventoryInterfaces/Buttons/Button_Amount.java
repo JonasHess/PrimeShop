@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import eu.Blockup.PrimeShop.InventoryInterfaces.ClickType;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Button;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
+import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.ChestShops.Button_Buy_Sell_Item_in_ChestShop;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 
 public class Button_Amount extends Button {
@@ -91,6 +92,13 @@ public class Button_Amount extends Button {
 					player.sendMessage(Message_Handler.resolve_to_message(1));
 				}
 			}
+			if (button instanceof Button_Buy_Sell_Item_in_ChestShop) {
+                try {
+                    ((Button_Buy_Sell_Item_in_ChestShop) button).refresh_price(amount);
+                } catch (Exception e) {
+                    player.sendMessage(Message_Handler.resolve_to_message(1));
+                }
+            }
 		}
 
 		inventoryInterface.refresh(player);
