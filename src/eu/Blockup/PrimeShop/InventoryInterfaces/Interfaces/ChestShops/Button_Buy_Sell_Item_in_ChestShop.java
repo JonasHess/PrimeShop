@@ -84,20 +84,20 @@ public class Button_Buy_Sell_Item_in_ChestShop extends Button {
         }
         PrimeShop.plugin.cooldownManager.player_Clicked(player);
         
-        if (type == ClickType.RIGHT) {
-//            this.setName(this.get_Price(this.itemStack, this.kaufen, this.menge));
-            
-//            String buttonTitle;
-            if (kaufen) {
-                this.setName(Message_Handler.resolve_to_message(120));
-            } else {
-                this.setName(Message_Handler.resolve_to_message(121));
-            }
-            this.setDescription(Message_Handler.resolve_to_message(122, String.valueOf(getAmount())), this.get_Price(this.itemStack, this.kaufen, this.menge));
-            
-            inventoryInterface.refresh(player);
-            return;
-        }
+//        if (type == ClickType.RIGHT) {
+////            this.setName(this.get_Price(this.itemStack, this.kaufen, this.menge));
+//            
+////            String buttonTitle;
+//            if (kaufen) {
+//                this.setName(Message_Handler.resolve_to_message(120));
+//            } else {
+//                this.setName(Message_Handler.resolve_to_message(121));
+//            }
+//            this.setDescription(Message_Handler.resolve_to_message(122, String.valueOf(getAmount())), this.get_Price(this.itemStack, this.kaufen, this.menge));
+//            
+//            inventoryInterface.refresh(player);
+//            return;
+//        }
         
         ReturnPrice result = new ReturnPrice();
         if (!PrimeShop.has_player_Permission_for_this_Command(player, permission)) {
@@ -113,37 +113,35 @@ public class Button_Buy_Sell_Item_in_ChestShop extends Button {
             }
         }
         
-        Item_Trader itemTrader = Pool_of_Item_Traders.get_ItemTrader();
+        // TODO prüfen, ob ChestShop genug items hat
+
         
         
-//        ////////
-//        
-//        
-//        
-//        for(Material material:Material.values()) {
-//             ItemStack item = new ItemStack(material);
-//             
-//             itemTrader.buy_ItemStack(item, 1, player);
-//             player.getInventory().clear();
-//             
-//        }
-//    
-//        
-//        /////////////
-        
-        
-        
-        
-        if (kaufen) {
-            result = itemTrader.buy_ItemStack(this.itemStack, this.menge, player);
+        if (item_Supply.has_amount_of(menge)) {
+            
+            Item_Trader itemTrader = Pool_of_Item_Traders.get_ItemTrader();
+            
+            
+            
+            if (kaufen) {
+                result = itemTrader.buy_ItemStack(this.itemStack, this.menge, player);
+            } else {
+                result = itemTrader.sell_ItemStack(this.itemStack, this.menge, player, true);
+            }
+            Pool_of_Item_Traders.return_Item_Trader(itemTrader);
+            itemTrader = null;
+            if (!result.succesful) {
+                player.sendMessage(result.errorMessage);
+            }else {
+                item_Supply.remove_amount_of(menge);
+            }
+            
         } else {
-            result = itemTrader.sell_ItemStack(this.itemStack, this.menge, player, true);
+            player.sendMessage("This Chest shop does not have enough of this item");
         }
-        Pool_of_Item_Traders.return_Item_Trader(itemTrader);
-        itemTrader = null;
-        if (!result.succesful) {
-            player.sendMessage(result.errorMessage);
-        }
+        
+        
+        
         
         for (Button button : inventoryInterface.getButtons()) {
 

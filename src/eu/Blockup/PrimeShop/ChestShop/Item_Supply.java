@@ -25,13 +25,13 @@ public class Item_Supply { // NO_UCD (use default)
 	}
 
 	
-	private boolean has_amount_of (int i) {
+	public boolean has_amount_of (int i) {
 		if (amount >= i) return true;
 		return false;
 				
 	}
 	
-	boolean remove_amount_of(int x) {
+	public boolean remove_amount_of(int x) {
 		if (!has_amount_of(x)) return false;
 		
 		this.amount = amount - x;
@@ -39,7 +39,7 @@ public class Item_Supply { // NO_UCD (use default)
 	}
 	
 	
-	void add_amount (int x) {
+	public void add_amount (int x) {
 		this.amount = this.amount + x;			
 	}
 	
