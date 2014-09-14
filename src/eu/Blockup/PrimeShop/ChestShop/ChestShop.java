@@ -115,17 +115,20 @@ public class ChestShop {
         }
         
     }
-    public boolean remove_Item_from_Verkaufen (ItemStack itemStack, int amount) {
-        return remove_Item_from_Supply_List (list_Verkauf, itemStack, amount);
-    }
+// TODO Remove unused code found by UCDetector
+//     public boolean remove_Item_from_Verkaufen (ItemStack itemStack, int amount) {
+//         return remove_Item_from_Supply_List (list_Verkauf, itemStack, amount);
+//     }
     
-    public boolean remove_Item_from_Ankauf (ItemStack itemStack, int amount) {
-        return remove_Item_from_Supply_List (list_Ankauf, itemStack, amount);
-    }
+// TODO Remove unused code found by UCDetector
+//     public boolean remove_Item_from_Ankauf (ItemStack itemStack, int amount) {
+//         return remove_Item_from_Supply_List (list_Ankauf, itemStack, amount);
+//     }
     
-    public boolean remove_Item_from_Mailbox (ItemStack itemStack, int amount) {
-        return remove_Item_from_Supply_List (list_Mailbox, itemStack, amount);
-    }
+// TODO Remove unused code found by UCDetector
+//     public boolean remove_Item_from_Mailbox (ItemStack itemStack, int amount) {
+//         return remove_Item_from_Supply_List (list_Mailbox, itemStack, amount);
+//     }
         
     // Pages
     

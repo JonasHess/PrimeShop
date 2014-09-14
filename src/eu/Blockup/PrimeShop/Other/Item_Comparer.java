@@ -264,12 +264,13 @@ public class Item_Comparer {
 	// return false;
 	// }
 
-	public static boolean do_Items_match_typ_data_enchantments_meta(  // TODO replace with new one
-			ItemStack itemA, ItemStack itemB) {
-		itemB.setAmount(itemA.getAmount());
-		if (itemA.isSimilar(itemB)) {
-			return false;
-		}
-		return true;
-	}
+// TODO Remove unused code found by UCDetector
+// 	public static boolean do_Items_match_typ_data_enchantments_meta(  // TODO replace with new one
+// 			ItemStack itemA, ItemStack itemB) {
+// 		itemB.setAmount(itemA.getAmount());
+// 		if (itemA.isSimilar(itemB)) {
+// 			return false;
+// 		}
+// 		return true;
+// 	}
 }

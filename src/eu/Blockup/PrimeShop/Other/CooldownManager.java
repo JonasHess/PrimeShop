@@ -23,25 +23,6 @@ public class CooldownManager {
         this.players = new HashMap<String, Long>();
     }
     
-    private enum Time {
-        
-        SECONDS(0),
-        MINUTES(60),
-        HOURS(3600),
-        DAYS(86400);
-        
-        private int value;
-        
-        Time(int value) {
-            this.value = value;
-        }
-        
-        public int getValue() {
-            return value;
-        }
-        
-    }
-    
     private boolean interact(Player player) {
         long currentTime = System.currentTimeMillis();
         

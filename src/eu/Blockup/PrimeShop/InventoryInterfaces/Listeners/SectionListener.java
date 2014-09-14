@@ -17,7 +17,7 @@ import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
 public class SectionListener implements Listener {
 
     @EventHandler (priority = EventPriority.HIGHEST)
-    public void onClick(InventoryClickEvent event) {
+    public void onClick(InventoryClickEvent event) { // NO_UCD (unused code)
         HumanEntity he = event.getWhoClicked();
         if (he instanceof Player) {
             Player player = (Player) he;
@@ -74,7 +74,7 @@ public class SectionListener implements Listener {
     }
     
     @EventHandler
-    public void onClose(InventoryCloseEvent event) {
+    public void onClose(InventoryCloseEvent event) { // NO_UCD (unused code)
         HumanEntity he = event.getPlayer();
         if (he instanceof Player) {
             Player player = (Player) he;

@@ -19,10 +19,7 @@ public class Button_with_no_task extends Button {
 //         super(type, name, description);
 //     }
     
-    private Button_with_no_task(Material type, short damage, String message) {
-        this(type, message);
-        super.setDamage(damage);
-    }
+    
     
 // TODO Remove unused code found by UCDetector
 //     public Button_with_no_task(Material type, short damage, int amount, String message) {

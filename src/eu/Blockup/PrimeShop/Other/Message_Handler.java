@@ -283,8 +283,9 @@ public class Message_Handler {
         return result;
     }
 
-    public static void clear_hashmap() {
-        hashMap_Messages.clear();
-    }
+// TODO Remove unused code found by UCDetector
+//     public static void clear_hashmap() {
+//         hashMap_Messages.clear();
+//     }
 
 }

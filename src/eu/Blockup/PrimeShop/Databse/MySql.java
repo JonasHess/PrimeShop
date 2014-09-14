@@ -42,20 +42,21 @@ class MySql {
 
     }
 
-    public synchronized boolean hasConnection(Connection conn) {
-        boolean result = false;
-        if (conn == null) {
-            result = false;
-        } else {
-            try {
-                result = conn.isValid(1);
-            } catch (SQLException e) {
-                return false;
-            }
-        }
-        notifyAll();
-        return result;
-    }
+// TODO Remove unused code found by UCDetector
+//     public synchronized boolean hasConnection(Connection conn) {
+//         boolean result = false;
+//         if (conn == null) {
+//             result = false;
+//         } else {
+//             try {
+//                 result = conn.isValid(1);
+//             } catch (SQLException e) {
+//                 return false;
+//             }
+//         }
+//         notifyAll();
+//         return result;
+//     }
 
     private synchronized ReturnBoolean queryUpdate(String query) {
         ReturnBoolean result = new ReturnBoolean();

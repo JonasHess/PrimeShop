@@ -26,7 +26,7 @@ public abstract class Button {
     private String permission = null;
     private String permissionMessage = null;
     
-    public Button(Material type) {
+    private Button(Material type) {
         this.setType(type);
     }
     
