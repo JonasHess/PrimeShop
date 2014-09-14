@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.ChestShop.ChestShop;
+import eu.Blockup.PrimeShop.ChestShop.Chest_Page;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Button;
 import eu.Blockup.PrimeShop.InventoryInterfaces.ClickHandler;
 import eu.Blockup.PrimeShop.InventoryInterfaces.ClickType;
@@ -47,8 +48,13 @@ public class Interface_ChestShop_Page extends InventoryInterface {
             kaufen = false;
         }
         
+        maxPages = get_max_PageCount();
         
-        this.pagenumber = pagenumber;
+        if (pagenumber > maxPages) {
+            this.pagenumber = get_max_PageCount();
+        } else {
+            this.pagenumber = pagenumber;            
+        }
         
 
         
@@ -106,23 +112,24 @@ public class Interface_ChestShop_Page extends InventoryInterface {
     public void reprint_items(Player player) {
         
         
+        chestShop.remove_empty_supply_slots();
         
-        // Add Items to Menu
-        int amount_of_items = chestShop.get_Page_X_of_Verkaufen(pagenumber).listOfItems.size();
-        int itemsAddedItems = 0;
-
+        // Background
         for (int a = 0; a < this.getWidth(); a++) {
             for (int b = 0; b < this.getHeight(); b++) {
                 this.addOption(a, b, new Button_with_no_task(Cofiguration_Handler.background_ItemStack, " "));
             }
         }
-
-//      // DISPLAY//
-//      this.addOption(4, 0,
-//              new Button_with_no_task(this.shop.displayIcon.getType(),
-//                      this.shop.shopname));
         
-       chestShop.remove_empty_supply_slots();
+        // Close Option
+        this.addOption(8, 0, new Button_close_Interface());
+        
+        // Add Items to Menu
+        int amount_of_items = get_Page(pagenumber).listOfItems.size();
+        int itemsAddedItems = 0;
+
+        
+        
 
         for (int y = 2; y < 5; y++) {
             for (int x = 0; x < 9; x++) {
@@ -174,7 +181,10 @@ public class Interface_ChestShop_Page extends InventoryInterface {
                                         
                                         if (stage == Stage.Mailbox) {
                                             ChestShop.give_Items_back_to_Player(player, chestShop.get_Page_X_of_Mailbox(pagenumber).listOfItems.get(slot_position));
-                                            reprint_items(player);  // TODO WARNING  This can result in Player seeing empty pages
+                                            PrimeShop.close_InventoyInterface(player);
+                                            PrimeShop.open_InventoyInterface(player,new Interface_ChestShop_Page(inventoryInterface
+                                                            .get_brnach_back_list_of_parentMenu(),
+                                                            player, chestShop, stage, pagenumber));
                                             return;
                                         }
                                     }
@@ -320,8 +330,7 @@ public class Interface_ChestShop_Page extends InventoryInterface {
 
         
 
-        // Close Option
-        this.addOption(8, 0, new Button_close_Interface());
+        
         
         this.refresh(player);
     }
@@ -331,10 +340,12 @@ public class Interface_ChestShop_Page extends InventoryInterface {
         if (stage == Stage.Verkaufen) return chestShop.get_PageCount_of_Verkaufen(); 
         if (stage == Stage.Ankaufen)  return chestShop.get_PageCount_of_Ankaufen();
         return 64;
-    }
-    private void refresh_Page_After_deletion () {
-        chestShop.remove_empty_supply_slots();   // This might be opened twice
-        
-    }
+    } 
     
+    private Chest_Page get_Page (int pagenumber) {
+        if (stage == Stage.Mailbox)   return chestShop.get_Page_X_of_Ankaufen(pagenumber);
+        if (stage == Stage.Verkaufen) return chestShop.get_Page_X_of_Verkaufen(pagenumber);
+        if (stage == Stage.Ankaufen)  return chestShop.get_Page_X_of_Mailbox(pagenumber);
+        return null;
+    } 
 }
