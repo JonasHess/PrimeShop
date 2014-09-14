@@ -13,11 +13,8 @@ import eu.Blockup.PrimeShop.InventoryInterfaces.Button;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
-import eu.Blockup.PrimeShop.PricingEngine.Item_Trader;
-import eu.Blockup.PrimeShop.PricingEngine.Pool_of_Item_Traders;
 import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnBoolean;
-import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPrice;
 
 
 	public class Button_modify_Rate extends Button {

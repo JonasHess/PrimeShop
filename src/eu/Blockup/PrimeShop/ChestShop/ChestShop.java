@@ -61,17 +61,20 @@ public class ChestShop {
         
     }
     
-    public Item_Supply get_Supply_of_Verkaufen (ItemStack itemStack) {
-        return get_Item_Supply_out_of_List(list_Verkauf, itemStack);
-    }
+// TODO Remove unused code found by UCDetector
+//     public Item_Supply get_Supply_of_Verkaufen (ItemStack itemStack) {
+//         return get_Item_Supply_out_of_List(list_Verkauf, itemStack);
+//     }
     
-    public Item_Supply get_Supply_of_Ankauf (ItemStack itemStack) {
-        return get_Item_Supply_out_of_List(list_Ankauf, itemStack);
-    }
+// TODO Remove unused code found by UCDetector
+//     public Item_Supply get_Supply_of_Ankauf (ItemStack itemStack) {
+//         return get_Item_Supply_out_of_List(list_Ankauf, itemStack);
+//     }
     
-    public Item_Supply get_Supply_of_Mailbox (ItemStack itemStack) {
-        return get_Item_Supply_out_of_List(list_Mailbox, itemStack);
-    }
+// TODO Remove unused code found by UCDetector
+//     public Item_Supply get_Supply_of_Mailbox (ItemStack itemStack) {
+//         return get_Item_Supply_out_of_List(list_Mailbox, itemStack);
+//     }
     
     
     // ADD ITEM
@@ -140,12 +143,14 @@ public class ChestShop {
     public int get_PageCount_of_Verkaufen() {
         return get_PageCount_of_List(list_Verkauf);
     }
-    public int get_PageCount_of_Ankaufen() {
-        return get_PageCount_of_List(list_Ankauf);
-    }
-    public int get_PageCount_of_Mailbox() {
-        return get_PageCount_of_List(list_Verkauf);
-    }
+// TODO Remove unused code found by UCDetector
+//     public int get_PageCount_of_Ankaufen() {
+//         return get_PageCount_of_List(list_Ankauf);
+//     }
+// TODO Remove unused code found by UCDetector
+//     public int get_PageCount_of_Mailbox() {
+//         return get_PageCount_of_List(list_Verkauf);
+//     }
     
     
     // Get Page
@@ -168,12 +173,14 @@ public class ChestShop {
     public Chest_Page get_Page_X_of_Verkaufen(int pagenumber) {
         return get_Page(list_Verkauf, pagenumber);
     }
-    public Chest_Page get_Page_X_of_Ankaufen(int pagenumber) {
-        return get_Page(list_Ankauf, pagenumber);
-    }
-    public Chest_Page get_Page_X_of_Mailbox(int pagenumber) {
-        return get_Page(list_Mailbox, pagenumber);
-    }
+// TODO Remove unused code found by UCDetector
+//     public Chest_Page get_Page_X_of_Ankaufen(int pagenumber) {
+//         return get_Page(list_Ankauf, pagenumber);
+//     }
+// TODO Remove unused code found by UCDetector
+//     public Chest_Page get_Page_X_of_Mailbox(int pagenumber) {
+//         return get_Page(list_Mailbox, pagenumber);
+//     }
     
     // Calculate Page Roundup
     private int roundup (double givennumber) {
