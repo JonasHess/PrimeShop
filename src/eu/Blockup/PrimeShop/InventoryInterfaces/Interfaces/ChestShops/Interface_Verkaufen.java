@@ -14,15 +14,17 @@ import eu.Blockup.PrimeShop.InventoryInterfaces.ClickType;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_close_Interface;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Buttons.Button_with_no_task;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.Interface_Collection_of_Shops;
 import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 
 public class Interface_Verkaufen extends InventoryInterface {
+
+
     private ChestShop chestShop;
     private int pagenumber;
     private int maxPages;
     
+//  @SuppressWarnings("deprecation")
     public Interface_Verkaufen(final List<InventoryInterface> link_Back_Stack,Player player, final ChestShop chestShop, int pagenumber) {
         super("VERKAUFEN TITLE", 6, link_Back_Stack);   // TODO
         
@@ -36,10 +38,22 @@ public class Interface_Verkaufen extends InventoryInterface {
         
         // Close Option
         this.addOption(8, 0, new Button_close_Interface());
+        
+    
+    
+        
+        
         reprint_items(player);
+        
+
+
+
     }
 
-    private void reprint_items(Player player) {
+    public void reprint_items(Player player) {
+        
+        
+        
         // Add Items to Menu
         int amount_of_items = chestShop.get_Page_X_of_Verkaufen(pagenumber).listOfItems.size();
         int itemsAddedItems = 0;
@@ -49,6 +63,11 @@ public class Interface_Verkaufen extends InventoryInterface {
                 this.addOption(a, b, new Button_with_no_task(Cofiguration_Handler.background_ItemStack, " "));
             }
         }
+
+//      // DISPLAY//
+//      this.addOption(4, 0,
+//              new Button_with_no_task(this.shop.displayIcon.getType(),
+//                      this.shop.shopname));
 
         for (int y = 2; y < 5; y++) {
             for (int x = 0; x < 9; x++) {
@@ -74,7 +93,25 @@ public class Interface_Verkaufen extends InventoryInterface {
                                 Player player, ItemStack cursor,
                                 ItemStack current, ClickType type) {
 
-                            player.sendMessage("You have Clicked");
+                            player.sendMessage("You have Clicked ");
+                            
+                            int slot_position = -1;
+                            for (int y = 2; y < 5; y++) {
+                                for (int x = 0; x < 9; x++) {
+                                    slot_position++;
+                                    if (inventoryInterface.getOption(x, y).equals(this)) {
+                                        PrimeShop.close_InventoyInterface(player);
+                                        PrimeShop.open_InventoyInterface(
+                                            player,
+                                            new Interface_Verkaufen_SELL(
+                                                inventoryInterface.branch_back_Stack,
+                                                player, chestShop, chestShop.get_Page_X_of_Verkaufen(pagenumber).listOfItems.get(slot_position), 1
+                                            ));
+                                        return;
+                                    }
+                                }
+                            }
+                            
                         }
                     });
                     itemsAddedItems++;
@@ -93,6 +130,11 @@ public class Interface_Verkaufen extends InventoryInterface {
             
             
             // Next Page
+
+            // for (int counteri = 2; counteri <= 6; counteri++) {
+            // this.removeOption(counteri, y_Row_Page_Iterator);
+            // }
+
             if ((maxPages > pagenumber)) {
                 this.addOption(5, y_Row_Page_Iterator, new Button(
                         Material.PAPER, (short) 0, (pagenumber + 1) % 64,
@@ -183,18 +225,17 @@ public class Interface_Verkaufen extends InventoryInterface {
         }
         
         // Go Back Option
-        boolean goBack = true;
+//        boolean goBack = true;
         if (parentMenu != null) {
 
-            if (parentMenu instanceof Interface_Collection_of_Shops) {
-                if (((Interface_Collection_of_Shops) parentMenu).getList_of_Shops()
-                        .size() == 1) {
-                    goBack = false;
-                }
+//            if (parentMenu instanceof Interface_Collection_of_Shops) {
+//                if (((Interface_Collection_of_Shops) parentMenu).list_of_Shops
+//                        .size() == 1) {
+//                    goBack = false;
+//                }
+//
+//            }
 
-            }
-
-            if (goBack) {
                 this.addOption(0, 0, new Button(Cofiguration_Handler.backToCollectionButton_ItemStack, Message_Handler.resolve_to_message(61), Message_Handler.resolve_to_message(62)) {
 
                     @Override
@@ -205,9 +246,10 @@ public class Interface_Verkaufen extends InventoryInterface {
                                 position_in_Stack - 1, player);
                     }
                 });
-            }
 
         }
+
+        
 
         // Close Option
         this.addOption(8, 0, new Button_close_Interface());
