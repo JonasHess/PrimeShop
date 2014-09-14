@@ -10,9 +10,9 @@ import org.bukkit.inventory.ItemStack;
 import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.ChestShop.ChestShop;
 import eu.Blockup.PrimeShop.ChestShop.Load_and_Store_Chestshops;
-import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.ChestShops.Interface_Verkaufen;
+import eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.ChestShops.Interface_ChestShop_MainMenu;
 
-class PlayerShop_Commands implements CommandExecutor {
+class ChestShop_Commands implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender cs, Command cmd, String label,
@@ -24,7 +24,7 @@ class PlayerShop_Commands implements CommandExecutor {
             if (cs instanceof Player) {
                 p = (Player) cs;
                 // Verkaufen
-                if (args[0].equalsIgnoreCase("verkaufen")) {
+                if (args[0].equalsIgnoreCase("main")) {
 
                     ChestShop cS = new ChestShop("asdf79as7df987sdf", 99.99D);
 
@@ -37,7 +37,7 @@ class PlayerShop_Commands implements CommandExecutor {
                     }
 
                     PrimeShop.open_InventoyInterface(p,
-                            new Interface_Verkaufen(null, p, cS, 1));
+                            new Interface_ChestShop_MainMenu(p, cS));
                 }
             }
 

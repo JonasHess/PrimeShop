@@ -3,8 +3,12 @@ package eu.Blockup.PrimeShop.ChestShop;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+import org.bukkit.entity.Player;
 //import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 
 public class ChestShop {
@@ -81,20 +85,17 @@ public class ChestShop {
         
     }
     
-// TODO Remove unused code found by UCDetector
-//     public Item_Supply get_Supply_of_Verkaufen (ItemStack itemStack) {
-//         return get_Item_Supply_out_of_List(list_Verkauf, itemStack);
-//     }
+     public Item_Supply get_Supply_of_Verkaufen (ItemStack itemStack) {
+         return get_Item_Supply_out_of_List(list_Verkauf, itemStack);
+     }
     
-// TODO Remove unused code found by UCDetector
-//     public Item_Supply get_Supply_of_Ankauf (ItemStack itemStack) {
-//         return get_Item_Supply_out_of_List(list_Ankauf, itemStack);
-//     }
+     public Item_Supply get_Supply_of_Ankauf (ItemStack itemStack) {
+         return get_Item_Supply_out_of_List(list_Ankauf, itemStack);
+     }
     
-// TODO Remove unused code found by UCDetector
-//     public Item_Supply get_Supply_of_Mailbox (ItemStack itemStack) {
-//         return get_Item_Supply_out_of_List(list_Mailbox, itemStack);
-//     }
+     public Item_Supply get_Supply_of_Mailbox (ItemStack itemStack) {
+         return get_Item_Supply_out_of_List(list_Mailbox, itemStack);
+     }
     
     
     // ADD ITEM
@@ -124,12 +125,10 @@ public class ChestShop {
     
     
     
-// TODO Remove unused code found by UCDetector
 //     public boolean remove_Item_from_Ankauf (ItemStack itemStack, int amount) {
 //         return remove_Item_from_Supply_List (list_Ankauf, itemStack, amount);
 //     }
-    
-// TODO Remove unused code found by UCDetector
+//    
 //     public boolean remove_Item_from_Mailbox (ItemStack itemStack, int amount) {
 //         return remove_Item_from_Supply_List (list_Mailbox, itemStack, amount);
 //     }
@@ -150,14 +149,14 @@ public class ChestShop {
     public int get_PageCount_of_Verkaufen() {
         return get_PageCount_of_List(list_Verkauf);
     }
-// TODO Remove unused code found by UCDetector
-//     public int get_PageCount_of_Ankaufen() {
-//         return get_PageCount_of_List(list_Ankauf);
-//     }
-// TODO Remove unused code found by UCDetector
-//     public int get_PageCount_of_Mailbox() {
-//         return get_PageCount_of_List(list_Verkauf);
-//     }
+    
+     public int get_PageCount_of_Ankaufen() {
+         return get_PageCount_of_List(list_Ankauf);
+     }
+     
+     public int get_PageCount_of_Mailbox() {
+         return get_PageCount_of_List(list_Verkauf);
+     }
     
     
     // Get Page
@@ -180,14 +179,15 @@ public class ChestShop {
     public Chest_Page get_Page_X_of_Verkaufen(int pagenumber) {
         return get_Page(list_Verkauf, pagenumber);
     }
-// TODO Remove unused code found by UCDetector
-//     public Chest_Page get_Page_X_of_Ankaufen(int pagenumber) {
-//         return get_Page(list_Ankauf, pagenumber);
-//     }
-// TODO Remove unused code found by UCDetector
-//     public Chest_Page get_Page_X_of_Mailbox(int pagenumber) {
-//         return get_Page(list_Mailbox, pagenumber);
-//     }
+    
+    
+     public Chest_Page get_Page_X_of_Ankaufen(int pagenumber) {
+         return get_Page(list_Ankauf, pagenumber);
+     }
+     
+     public Chest_Page get_Page_X_of_Mailbox(int pagenumber) {
+         return get_Page(list_Mailbox, pagenumber);
+     }
     
     // Calculate Page Roundup
     private int roundup (double givennumber) {
@@ -201,4 +201,27 @@ public class ChestShop {
         }
         return result;
     }
+    
+    
+    public boolean is_this_player_the_owner_of_the_ChestShop (Player player) {
+        if (player.getUniqueId().toString().equalsIgnoreCase(this.UUID)) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static void give_Items_back_to_Player (Player player , Item_Supply item_Supply) {
+        
+        PlayerInventory playerInventory = player.getInventory();
+        item_Supply.getItemStack().setAmount(1);
+        
+        while (!(playerInventory.firstEmpty() == -1) && item_Supply.getAmount() > 0) {
+            playerInventory.addItem(item_Supply.getItemStack().clone());
+            item_Supply.remove_amount_of(1);
+        }
+        if (item_Supply.getAmount() > 0) {
+            player.sendMessage("Your Inventory is full.");
+        }
+    }
+    
 }

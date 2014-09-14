@@ -20,7 +20,7 @@ public class Command_Registrer {
 		plugin.getCommand("value").setExecutor(new pValue_Command());
 		plugin.getCommand("pSellAll").setExecutor(new sellall_Command());
 		plugin.getCommand("prices").setExecutor(new prices_command());
-		plugin.getCommand("PlayerShop").setExecutor(new PlayerShop_Commands());
+		plugin.getCommand("PlayerShop").setExecutor(new ChestShop_Commands());
 	
 		
 	}
