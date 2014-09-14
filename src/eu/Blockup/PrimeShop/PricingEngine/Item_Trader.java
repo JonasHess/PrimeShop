@@ -19,7 +19,7 @@ public class Item_Trader {
 //    private PrimeShop plugin;
     private Economy economy;
 
-    public Item_Trader(PrimeShop plugin) {
+    Item_Trader(PrimeShop plugin) {
 //        this.plugin = plugin;
         this.economy = PrimeShop.getEconomy();
     }
