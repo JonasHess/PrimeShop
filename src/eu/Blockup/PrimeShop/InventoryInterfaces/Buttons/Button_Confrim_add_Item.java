@@ -14,7 +14,7 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Button_Confrim_add_Item extends Button {
 
-	ItemStack item_to_be_added;
+	private ItemStack item_to_be_added;
 	Shop shop;
 
 	public Button_Confrim_add_Item(Shop shop, ItemStack item_to_be_added, Material type_of_Icon, short data_of_Icon,String name, String... description) {

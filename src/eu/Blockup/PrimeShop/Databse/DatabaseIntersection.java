@@ -19,7 +19,7 @@ public abstract class DatabaseIntersection {
 		this.databseTyp = databseTyp;
 	}
 
-	public DatabseTyp databseTyp;
+	private DatabseTyp databseTyp;
 
 	public abstract ReturnBoolean link_with_Databse_if_not_allready_linked(Shop_Item sql_Item);
 	

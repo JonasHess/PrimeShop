@@ -22,10 +22,10 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Interface_Shop_Page extends InventoryInterface {
 
-    public Shop shop;
-    final public Interface_Shop_Page current_Menu;
+    private Shop shop;
+    final private Interface_Shop_Page current_Menu;
     public int pagenumber;
-    final int maxPages;
+    private final int maxPages;
 //    @SuppressWarnings("deprecation")
     public Interface_Shop_Page(final List<InventoryInterface> link_Back_Stack,
             Player player, final Shop shop, final int pagenumber) {

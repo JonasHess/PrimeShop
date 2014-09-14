@@ -1,9 +1,9 @@
 package eu.Blockup.PrimeShop.PricingEngine.Enchantments;
 
 public class EnchantmentData {
-    public int      enchantmentID;  //deprecated
-    public String   name;           //added by tubelius 20140913
-    public int      enchantmentLevel;
+    private int      enchantmentID;  //deprecated
+    private String   name;           //added by tubelius 20140913
+    private int      enchantmentLevel;
     public double   price;
 
     public EnchantmentData(int enchantmentID, int enchantmentLevel, 

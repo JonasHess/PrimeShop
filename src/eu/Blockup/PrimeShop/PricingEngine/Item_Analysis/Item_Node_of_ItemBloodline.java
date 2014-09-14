@@ -12,8 +12,8 @@ import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item_Stack;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPrice;
 
 public class Item_Node_of_ItemBloodline {
-	public List<Recepie_Node_of_ItemBloodline> listOfRecepieNodes;
-	public Shop_Item_Stack sqlItemStack;
+	private List<Recepie_Node_of_ItemBloodline> listOfRecepieNodes;
+	private Shop_Item_Stack sqlItemStack;
 	private PrimeShop plugin;
 
 	public PrimeShop getPlugin() {

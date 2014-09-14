@@ -14,7 +14,7 @@ import eu.Blockup.PrimeShop.PrimeShop;
 
 public class Message_Handler {
 
-	public static HashMap<Integer, String> hashMap_Messages;
+	private static HashMap<Integer, String> hashMap_Messages;
 
 	public static void fill_hashmap() {
 

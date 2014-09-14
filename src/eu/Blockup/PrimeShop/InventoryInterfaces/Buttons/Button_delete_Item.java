@@ -15,7 +15,7 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Button_delete_Item extends Button {
 
-	ItemStack item_to_be_removed;
+	private ItemStack item_to_be_removed;
 	Shop shop;
 
 	public Button_delete_Item(Material type, String message) {

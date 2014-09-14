@@ -15,7 +15,7 @@ public class ChestShop {
 	public List<Item_Supply> list_Verkauf;
 	public List<Item_Supply> list_Ankauf;
 	public List<Item_Supply> list_Mailbox;
-	public List<Location> list_Locations;
+	private List<Location> list_Locations;
 	
 	
 	

@@ -54,23 +54,23 @@ public class PrimeShop extends JavaPlugin {
 	public static DatabaseIntersection databaseHandler;
 	public static HashMap<String, Shop_Item> hashMap_SQL_Item;
 	public static HashMap<String, List<EvaluatedRecipe>> hashMap_EvaluatedRecipe;
-	public static HashMap<String, Item_Node_of_ItemBloodline> hashMap_Item_Node_of_ItemBloodline;
+	private static HashMap<String, Item_Node_of_ItemBloodline> hashMap_Item_Node_of_ItemBloodline;
 	
 	public static HashMap<String, ChestShop> hashMap_Chest_Shops;
 	private Recepie_Examiner recepie_Examiner;
-	public Item_Trader itemTrader;
+	private Item_Trader itemTrader;
 	public static Economy economy = null;
-	public Cofiguration_Handler cofiguration_Handler;
+	private Cofiguration_Handler cofiguration_Handler;
 	public static HashMap<String, Shop> hashMap_Shops;
 	public static List<String> list_of_deaktivated_PriceLinks;
 	public static HashMap<Integer, List<Shop>> hashMap_CitizensNPCs;
 	
-	public static int permissionGroupMaximum = 100;
-	public static int permissionGroupMinimum = 1;
+	private static int permissionGroupMaximum = 100;
+	private static int permissionGroupMinimum = 1;
 
 	public static Map<String, InventoryInterface> hashMap_InventoryInterfaces;
 	public static Map<String, Inventory> hashMap_InventorySessions;
-	static Map<String, ItemStack> hashMap_Inventory_handSave;
+	private static Map<String, ItemStack> hashMap_Inventory_handSave;
 //	private NPC_Click_Listener citizensClickListener;
 //	private Sign_Click_Listener signClickListener;
 	public static Shop_Configuration_Handler shopConfigHandler;

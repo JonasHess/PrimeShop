@@ -18,8 +18,8 @@ import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Shop_Configuration_Handler {
-	File file;
-	FileConfiguration cfg;
+	private File file;
+	private FileConfiguration cfg;
 
 	public synchronized boolean read_shop_file() {
 

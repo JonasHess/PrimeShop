@@ -15,10 +15,10 @@ public class Shop_Item {
 
 	public boolean changes_since_last_save = false;
 
-	public Variabler_typ<Boolean> itemWasCrafted;
+	private Variabler_typ<Boolean> itemWasCrafted;
 	public Variabler_typ<Double> lastPriceItemWasTradedWith;
 	public Variabler_typ<Boolean> Object_is_linked_with_Database;
-	public int stockFloorId;
+	private int stockFloorId;
 	public Variabler_typ<Long> sqlId;
 	public Variabler_typ<String> itemDisplayname;
 	public String mcItemid;

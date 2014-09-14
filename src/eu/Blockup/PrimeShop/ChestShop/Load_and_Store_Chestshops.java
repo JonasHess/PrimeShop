@@ -15,8 +15,8 @@ import eu.Blockup.PrimeShop.Other.Message_Handler;
 
 public class Load_and_Store_Chestshops {
 
-	File file;
-	FileConfiguration cfg;
+	private File file;
+	private FileConfiguration cfg;
 
 	public synchronized boolean read_shop_file() {
 

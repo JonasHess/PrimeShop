@@ -12,7 +12,7 @@ import eu.Blockup.PrimeShop.PrimeShop;
 
 public class InventoryInterface implements Cloneable {
 
-	public static final int MAX_HEIGHT = 6;
+	private static final int MAX_HEIGHT = 6;
 
 	private String title;
 

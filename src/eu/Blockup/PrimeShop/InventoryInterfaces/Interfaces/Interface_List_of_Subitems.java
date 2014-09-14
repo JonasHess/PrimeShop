@@ -22,7 +22,7 @@ import eu.Blockup.PrimeShop.Shops.Shop;
 
 class Interface_List_of_Subitems extends InventoryInterface {
 
-	final public Interface_List_of_Subitems current_Menu;
+	final private Interface_List_of_Subitems current_Menu;
 	
 //	@SuppressWarnings("deprecation")
 	public Interface_List_of_Subitems(final List<InventoryInterface> link_Back_Stack, final ItemStack resultItem, final Shop shop,Player player) {
