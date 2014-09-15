@@ -102,17 +102,20 @@ public class Button_Buy_Sell_Item_in_ChestShop extends Button {
 //            return;
 //        }
         
+        
+        
+        // TODO PERMISISONS
         ReturnPrice result = new ReturnPrice();
         if (!PrimeShop.has_player_Permission_for_this_Command(player, permission)) {
             result.succesful = false;
             if (kaufen) {
                 result.errorMessage = Message_Handler.resolve_to_message(30);
                 player.sendMessage(result.errorMessage);
-                return;
+//                return;
             }else {
                 result.errorMessage = Message_Handler.resolve_to_message(32);
                 player.sendMessage(result.errorMessage);
-                return;
+//                return;
             }
         }
         
@@ -131,6 +134,7 @@ public class Button_Buy_Sell_Item_in_ChestShop extends Button {
             } else {
                 result = itemTrader.sell_ItemStack(this.itemStack, this.menge, player, true, true, chestShop);
             }
+            
             Pool_of_Item_Traders.return_Item_Trader(itemTrader);
             itemTrader = null;
             if (!result.succesful) {

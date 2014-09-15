@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 //import java.util.logging.Logger;
 
+
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
@@ -25,7 +27,7 @@ import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Shops.Shop;
 
-public class Sign_Click_Listener implements Listener { // NO_UCD (unused code)
+public class Sign_Click_Listener implements Listener {
     public Sign_Click_Listener () {
         PrimeShop.plugin.getServer().getPluginManager().registerEvents(this, PrimeShop.plugin);
     }
@@ -35,10 +37,16 @@ public class Sign_Click_Listener implements Listener { // NO_UCD (unused code)
     public void onPlayerInteract(PlayerInteractEvent event) {
         String name  =  Cofiguration_Handler.Sign_Shop_Headline;
         
+        event.getPlayer().sendMessage("Interact Event");
         
         // clicked on a sign and signs enabled?
+        if (event.getClickedBlock().getTypeId() == Material.SIGN.getId()){
+            event.getPlayer().sendMessage("Wall Sign clicked");
+        }
+        
         if (event.getPlayer() !=  null && event.getClickedBlock() !=  null && event.getClickedBlock().getState() instanceof Sign) {
             Sign sign  =  (Sign) event.getClickedBlock().getState();
+            
             Player player  =  event.getPlayer();
             
             if (event.getAction()  ==  Action.RIGHT_CLICK_BLOCK) {
