@@ -30,17 +30,43 @@ public class Button_ChestShop_Add_and_Withdraw_Money extends Button {
     @Override
         public void onClick(InventoryInterface inventoryInterface, Player player, ItemStack cursor, ItemStack current, ClickType type) {
             if (type == ClickType.LEFT) {
+       
                 this.setName(offset_to_String(this.offset));
                 
-                double balance = chestShop.get_Balance();
+                double amount = offset;
                 
-                if (balance + offset < 0) {
-                    player.sendMessage("There is not enought money in this Shop");
-                    return;
+                boolean add_to_Shop;
+                if (amount <= 0) {
+                    add_to_Shop = false;
+                    amount = amount * -1;
+                } else {
+                    add_to_Shop = true;
                 }
                 
-                chestShop.add_money(offset);
+       
+                if (add_to_Shop) {
+                    
+                    if (!PrimeShop.has_Player_more_Money_than(player, amount)) {
+                        player.sendMessage("You don't have enough money");
+                        return;
+                    }
+                    PrimeShop.withdraw_money_from_Players_Account(player, amount);
+                    chestShop.add_money(amount);
+                    
+                } else {
+                   if (!chestShop.has_money(amount)) {
+                       player.sendMessage("There is not enought money in this Shop");
+                       player.sendMessage("Shop_Balance: "+  chestShop.get_Balance());
+                       player.sendMessage("Offset: "+  amount);
+                       return;
+                   }
+                   chestShop.withdraw_money(amount);
+                   PrimeShop.add_Money_to_Players_Account(player, (amount));
+                       
+                }    
                 
+                
+
                 
                 for (Button button : inventoryInterface.getButtons()) {
                     

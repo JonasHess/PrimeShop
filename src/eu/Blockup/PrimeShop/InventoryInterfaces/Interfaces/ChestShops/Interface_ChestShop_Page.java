@@ -25,7 +25,6 @@ public class Interface_ChestShop_Page extends InventoryInterface {
 
     private ChestShop chestShop;
     private int pagenumber;
-    private int maxPages;
     private final boolean kaufen;
     private final Stage stage;
     public enum Stage {
@@ -48,9 +47,8 @@ public class Interface_ChestShop_Page extends InventoryInterface {
             kaufen = false;
         }
         
-        maxPages = get_max_PageCount();
         
-        if (pagenumber > maxPages) {
+        if (pagenumber > get_max_PageCount()) {
             this.pagenumber = get_max_PageCount();
         } else {
             this.pagenumber = pagenumber;            
@@ -112,7 +110,6 @@ public class Interface_ChestShop_Page extends InventoryInterface {
     public void reprint_items(Player player) {
         
         
-        chestShop.remove_empty_supply_slots();
         
         // Background
         for (int a = 0; a < this.getWidth(); a++) {
@@ -126,24 +123,23 @@ public class Interface_ChestShop_Page extends InventoryInterface {
         
         // Add Items to Menu
         int amount_of_items = get_Page(pagenumber).listOfItems.size();
-        int itemsAddedItems = 0;
+        int loopCount = -1;
 
         
+        chestShop.remove_empty_supply_slots();
         
 
         for (int y = 2; y < 5; y++) {
             for (int x = 0; x < 9; x++) {
 
+                loopCount++;
+                
                 this.removeOption(x, y);
-                if (itemsAddedItems < amount_of_items) {
+                if (loopCount < amount_of_items) {
 
                     ItemStack currentItem;
                     try {
-                        currentItem = null;
-                        if (stage == Stage.Mailbox) currentItem = chestShop.get_Page_X_of_Mailbox(pagenumber).listOfItems.get(itemsAddedItems).getItemStack();
-                        if (stage == Stage.Verkaufen) currentItem = chestShop.get_Page_X_of_Verkaufen(pagenumber).listOfItems.get(itemsAddedItems).getItemStack();
-                        if (stage == Stage.Ankaufen) currentItem = chestShop.get_Page_X_of_Ankaufen(pagenumber).listOfItems.get(itemsAddedItems).getItemStack();
-                        
+                        currentItem = get_Page(pagenumber).listOfItems.get(loopCount).getItemStack();   
                     } catch (Exception e) {
                         PrimeShop.plugin.getLogger().log(Level.SEVERE, "Internal Error finding Item in list of SellingPage");
                         e.printStackTrace();
@@ -174,14 +170,15 @@ public class Interface_ChestShop_Page extends InventoryInterface {
                                                     player,
                                                     new Interface_ChestShop_Sell_Buy(
                                                             inventoryInterface.branch_back_Stack,
-                                                            player, chestShop, chestShop.get_Page_X_of_Verkaufen(pagenumber).listOfItems.get(slot_position), kaufen, 1
+                                                            player, chestShop, get_Page(pagenumber).listOfItems.get(slot_position), kaufen, 1
                                                             ));
                                             return;
                                         }
                                         
                                         if (stage == Stage.Mailbox) {
-                                            ChestShop.give_Items_back_to_Player(player, chestShop.get_Page_X_of_Mailbox(pagenumber).listOfItems.get(slot_position));
+                                            ChestShop.give_Items_back_to_Player(player, get_Page(pagenumber).listOfItems.get(slot_position));
                                             PrimeShop.close_InventoyInterface(player);
+                                            chestShop.remove_empty_supply_slots();
                                             PrimeShop.open_InventoyInterface(player,new Interface_ChestShop_Page(inventoryInterface
                                                             .get_brnach_back_list_of_parentMenu(),
                                                             player, chestShop, stage, pagenumber));
@@ -193,13 +190,14 @@ public class Interface_ChestShop_Page extends InventoryInterface {
                             
                         }
                     });
-                    itemsAddedItems++;
+                    
+                    
 
                 }
             }
         }
         
-        if (maxPages > 1) {
+        if (get_max_PageCount() > 1) {
             int y_Row_Page_Iterator = this.getHeight() - 1;
             
             
@@ -214,7 +212,7 @@ public class Interface_ChestShop_Page extends InventoryInterface {
             // this.removeOption(counteri, y_Row_Page_Iterator);
             // }
 
-            if ((maxPages > pagenumber)) {
+            if ((get_max_PageCount() > pagenumber)) {
                 this.addOption(5, y_Row_Page_Iterator, new Button(
                         Material.PAPER, (short) 0, (pagenumber + 1) % 64,
                         Message_Handler.resolve_to_message(90), "", "") {
@@ -236,9 +234,9 @@ public class Interface_ChestShop_Page extends InventoryInterface {
             }
 
             // Last Page
-            if (maxPages > pagenumber + 1) {
+            if (get_max_PageCount() > pagenumber + 1) {
                 this.addOption(6, y_Row_Page_Iterator, new Button(
-                        Material.PAPER, (short) 0, maxPages % 64,
+                        Material.PAPER, (short) 0, get_max_PageCount() % 64,
                         Message_Handler.resolve_to_message(91), "", "") {
 
                     @Override
@@ -250,7 +248,7 @@ public class Interface_ChestShop_Page extends InventoryInterface {
                                 player,
                                 new Interface_ChestShop_Page(inventoryInterface
                                         .get_brnach_back_list_of_parentMenu(),
-                                        player, chestShop, stage, maxPages));
+                                        player, chestShop, stage, get_max_PageCount()));
 
                     }
                 });
@@ -336,16 +334,16 @@ public class Interface_ChestShop_Page extends InventoryInterface {
     }
     
     private int get_max_PageCount () {
-        if (stage == Stage.Mailbox)   return chestShop.get_PageCount_of_Mailbox();
         if (stage == Stage.Verkaufen) return chestShop.get_PageCount_of_Verkaufen(); 
         if (stage == Stage.Ankaufen)  return chestShop.get_PageCount_of_Ankaufen();
+        if (stage == Stage.Mailbox)   return chestShop.get_PageCount_of_Mailbox();
         return 64;
     } 
     
     private Chest_Page get_Page (int pagenumber) {
-        if (stage == Stage.Mailbox)   return chestShop.get_Page_X_of_Ankaufen(pagenumber);
         if (stage == Stage.Verkaufen) return chestShop.get_Page_X_of_Verkaufen(pagenumber);
-        if (stage == Stage.Ankaufen)  return chestShop.get_Page_X_of_Mailbox(pagenumber);
+        if (stage == Stage.Ankaufen)  return chestShop.get_Page_X_of_Ankaufen(pagenumber);
+        if (stage == Stage.Mailbox)   return chestShop.get_Page_X_of_Mailbox(pagenumber);
         return null;
     } 
 }

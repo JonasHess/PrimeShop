@@ -39,22 +39,23 @@ public class ChestShop {
         return this.money_deposite;
     }
     
-    public void add_money (double value) {
-        this.money_deposite += value;
+    public void add_money (double positive_value) {
+        this.money_deposite += positive_value;
     }
     
-    public boolean has_money (double value) {
-        if (this.money_deposite >= value) {
+    public boolean has_money (double positive_value) {
+        if (this.money_deposite >= positive_value) {
             return true;
         }
         return false;
     }
     
-    public boolean withdraw_money (double value) {
-        if (has_money(value)) {
-            this.money_deposite += value;
+    public boolean withdraw_money (double positive_value) {
+        if (has_money(positive_value)) {
+            this.money_deposite -= positive_value;
             return true;
         }
+        System.out.println("WITHDRAW WAS REJECTED");
         return false;
     }
     
@@ -135,14 +136,28 @@ public class ChestShop {
         
     // Pages
     
+//    //Count
+//    private int get_PageCount_of_List(List<Item_Supply> list) {
+//        int listsize = list.size();
+//        if (listsize > 0) {
+//            double exact_number_of_pages = (double) listsize / Chest_Page.amount_of_items_fitting__in_one_page;
+//            return this.roundup (exact_number_of_pages);
+//        } else {
+//            return 1;
+//        }
+//    }
+    
     //Count
     private int get_PageCount_of_List(List<Item_Supply> list) {
         int listsize = list.size();
         if (listsize > 0) {
             double exact_number_of_pages = (double) listsize / Chest_Page.amount_of_items_fitting__in_one_page;
-            return this.roundup (exact_number_of_pages);
+            if ((double) exact_number_of_pages % Chest_Page.amount_of_items_fitting__in_one_page != 0.0) {
+                return ((int) exact_number_of_pages) + 1;
+            }
+            return ((int) exact_number_of_pages);
         } else {
-            return 0;
+            return 1;
         }
     }
 
@@ -155,26 +170,43 @@ public class ChestShop {
      }
      
      public int get_PageCount_of_Mailbox() {
-         return get_PageCount_of_List(list_Verkauf);
+         return get_PageCount_of_List(list_Mailbox);
      }
     
     
     // Get Page
     private Chest_Page get_Page(List<Item_Supply> list, int pagenumber) {
 
-        int this_list_of_Items_Size = list.size();
-        int start_index = (int) ((pagenumber -1) * Chest_Page.amount_of_items_fitting__in_one_page);
+        int list_Size = list.size();
+        int page_Size = Chest_Page.amount_of_items_fitting__in_one_page;
         
-        int added_items = 0;
-        int current_position = start_index;
-        List<Item_Supply> listOfItems = new ArrayList<Item_Supply>();;
-        while ((added_items <= Chest_Page.amount_of_items_fitting__in_one_page) && (current_position <= this_list_of_Items_Size -1)) {
-            listOfItems.add(list.get(current_position));
-            added_items++;
-            current_position++;
+        List<Item_Supply> resultList = new ArrayList<Item_Supply>();
+        
+        for (int i = 0 ; i < page_Size; i++) {
+            int position_in_List = i + (pagenumber -1) * page_Size;
+            
+            if (position_in_List < list_Size) {
+                resultList.add(list.get(position_in_List));
+            }
         }
-        return new Chest_Page(listOfItems, pagenumber, get_PageCount_of_List(list));
+        return new Chest_Page(resultList, pagenumber, get_PageCount_of_List(list));
     }
+//    // Get Page
+//    private Chest_Page get_Page(List<Item_Supply> list, int pagenumber) {
+//        
+//        int list_Size = list.size();
+//        int start_index = (int) ((pagenumber -1) * Chest_Page.amount_of_items_fitting__in_one_page);
+//        
+//        int added_items = 0;
+//        int current_position = start_index;
+//        List<Item_Supply> listOfItems = new ArrayList<Item_Supply>();;
+//        while ((added_items <= Chest_Page.amount_of_items_fitting__in_one_page) && (current_position <= list_Size -1)) {
+//            listOfItems.add(list.get(current_position));
+//            added_items++;
+//            current_position++;
+//        }
+//        return new Chest_Page(listOfItems, pagenumber, get_PageCount_of_List(list));
+//    }
     
     public Chest_Page get_Page_X_of_Verkaufen(int pagenumber) {
         return get_Page(list_Verkauf, pagenumber);

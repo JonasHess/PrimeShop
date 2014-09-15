@@ -233,7 +233,7 @@ public class PrimeShop extends JavaPlugin {
         if (economyProvider != null) {
             setEconomy(economyProvider.getProvider());
         }
-        return (getEconomy() != null);
+        return (PrimeShop.economy != null);
     }
     
 
@@ -532,9 +532,9 @@ public class PrimeShop extends JavaPlugin {
                 mcItemID, 1));
     }
 
-    public static Economy getEconomy() {
-        return economy;
-    }
+//    public static Economy getEconomy() {
+//        return economy;
+//    }
 
     private static void setEconomy(Economy economy) {
         PrimeShop.economy = economy;
@@ -705,4 +705,27 @@ public class PrimeShop extends JavaPlugin {
                 }
             }
     }
+    
+    public static double get_Balance_of_Player (Player player){
+        return economy.getBalance(player);
+    }
+    
+    public static boolean has_Player_more_Money_than (Player player, double value){
+        if (get_Balance_of_Player(player) >= value) return true;
+        return false;
+    }
+    
+    public static boolean withdraw_money_from_Players_Account(Player player, double value) {
+        if (value < 0) return false;
+        if (!has_Player_more_Money_than(player, value)) return false;
+        economy.withdrawPlayer(player, value);
+        return true;
+    }
+    
+    public static void add_Money_to_Players_Account (Player player, double value) {
+        economy.depositPlayer(player, value);
+    }
+    
+    
+    
 }

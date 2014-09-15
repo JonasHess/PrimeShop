@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import net.milkbowl.vault.economy.Economy;
 import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.ChestShop.ChestShop;
 import eu.Blockup.PrimeShop.Other.Message_Handler;
@@ -18,15 +17,12 @@ import org.bukkit.inventory.PlayerInventory;
 public class Item_Trader {
 
 //    private PrimeShop plugin;
-    private Economy economy;
 
     Item_Trader(PrimeShop plugin) {
-//        this.plugin = plugin;
-        this.economy = PrimeShop.getEconomy();
     }
 
     private String convert_price_to_String(double price) {
-        return economy.format(price);
+        return PrimeShop.economy.format(price);
     }
 
     @SuppressWarnings("deprecation")
@@ -57,7 +53,7 @@ public class Item_Trader {
             ReturnPrice futureprice = this.get_Price_of_Itemstack(itemStack,
                     (int) amount, true);
             if (futureprice.succesful) {
-                if (this.economy.has(player.getName(), futureprice.price)) {
+                if (PrimeShop.has_Player_more_Money_than(player, futureprice.price)) {
                     finalPrice = futureprice.price;
                     CountDownLatch latch = new CountDownLatch(1);
                     Item_Node_of_ItemBloodline tree = PrimeShop
@@ -104,7 +100,7 @@ public class Item_Trader {
         }
 
         if (result.succesful) {
-            this.economy.withdrawPlayer(player.getName(), finalPrice);
+            PrimeShop.withdraw_money_from_Players_Account(player, finalPrice);
             player.sendMessage(Message_Handler.resolve_to_message(8,
                     convert_price_to_String(result.price)));
             playerInventory.addItem(itemStack); // TODO hat schon einmal nicht funktioniert!
@@ -206,8 +202,9 @@ public class Item_Trader {
                 if (sell_to_an_Chestshop) {
                     sell_price = futurePrice.price;
                     chestShop.withdraw_money(sell_price);
+                    chestShop.add_Item_to_Mailbox(itemStack, amount); 
                 }                    
-                this.economy.depositPlayer(player.getName(), sell_price);
+                PrimeShop.add_Money_to_Players_Account(player, sell_price);
                 if (output_enabled) {
                     player.sendMessage(Message_Handler.resolve_to_message(15,
                             this.convert_price_to_String(sell_price)));

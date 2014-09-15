@@ -1,6 +1,7 @@
 package eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces.ChestShops;
 
 import java.util.List;
+import java.util.logging.Level;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -88,6 +89,34 @@ public class Interface_ChestShop_Balance extends InventoryInterface {
              // Close Option
              this.addOption(8, 0, new Button_close_Interface());
                 
+             
+             // Remove ALL
+             
+             this.addOption(8, 3, new Button(new ItemStack(Material.ARROW), "Withdraw All", "") {
+                
+                @Override
+                public void onClick(InventoryInterface inventoryInterface, Player player,
+                        ItemStack cursor, ItemStack current, ClickType type) {
+                        
+                        PrimeShop.add_Money_to_Players_Account(player, chestShop.get_Balance());
+                        chestShop.withdraw_money(chestShop.get_Balance());
+                        
+                        for (Button button : inventoryInterface.getButtons()) {
+                            
+                            if (button instanceof Button_ChestShop_Balance_Info) {
+                                try {
+                                    ((Button_ChestShop_Balance_Info) button).refresh_Appearance();
+                                } catch (Exception e) {
+                                    PrimeShop.plugin.getLogger().log(Level.SEVERE, "Error casting Interface_Button to Pricetag");
+                                }
+                                break;
+                            }
+                        }
+                        inventoryInterface.refresh(player);
+                        
+                }
+            });
+            
               // Go Back Option
               
             if (parentMenu != null) {
