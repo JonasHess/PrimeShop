@@ -36,14 +36,7 @@ public class Sign_Click_Listener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteract(PlayerInteractEvent event) {
         String name  =  Cofiguration_Handler.Sign_Shop_Headline;
-        
-        event.getPlayer().sendMessage("Interact Event");
-        
-        // clicked on a sign and signs enabled?
-        if (event.getClickedBlock().getTypeId() == Material.SIGN.getId()){
-            event.getPlayer().sendMessage("Wall Sign clicked");
-        }
-        
+    
         if (event.getPlayer() !=  null && event.getClickedBlock() !=  null && event.getClickedBlock().getState() instanceof Sign) {
             Sign sign  =  (Sign) event.getClickedBlock().getState();
             
