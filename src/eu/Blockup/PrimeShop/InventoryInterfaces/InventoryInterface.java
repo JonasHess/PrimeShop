@@ -39,11 +39,10 @@ public class InventoryInterface implements Cloneable {
             return parentMenu.branch_back_Stack;
         }
     }
-    
-// TODO Remove unused code found by UCDetector
-//     public InventoryInterface(String title, final List<InventoryInterface> link_Back_Stack) {
-//         this(title, 3, link_Back_Stack);
-//     }
+   
+     public InventoryInterface(String title, final List<InventoryInterface> link_Back_Stack) {
+         this(title, 3, link_Back_Stack);
+     }
 
     public InventoryInterface(String title, int lines, final List<InventoryInterface> Stack_List) {
         List<InventoryInterface> branch_List;

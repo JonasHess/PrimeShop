@@ -33,6 +33,7 @@ import eu.Blockup.PrimeShop.Databse.PreRender_all_Items_in_Shops;
 import eu.Blockup.PrimeShop.Databse.DatabaseIntersection.DatabseTyp;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Listeners.SectionListener;
+import eu.Blockup.PrimeShop.Listeners.ChestShop_Sign_Listener;
 import eu.Blockup.PrimeShop.Listeners.NPC_Click_Listener;
 import eu.Blockup.PrimeShop.Listeners.Sign_Click_Listener;
 import eu.Blockup.PrimeShop.Metrics.Metrics;
@@ -73,8 +74,9 @@ public class PrimeShop extends JavaPlugin {
     public static Map<String, InventoryInterface> hashMap_InventoryInterfaces;
     public static Map<String, Inventory> hashMap_InventorySessions;
 //    private static Map<String, ItemStack> hashMap_Inventory_handSave;
-    private NPC_Click_Listener citizensClickListener;
-    private Sign_Click_Listener signClickListener;
+    public NPC_Click_Listener citizensClickListener;
+    public Sign_Click_Listener signClickListener;
+    public ChestShop_Sign_Listener chestShopsignListener;
     public static Shop_Configuration_Handler shopConfigHandler;
     public CooldownManager cooldownManager; 
     
@@ -113,6 +115,9 @@ public class PrimeShop extends JavaPlugin {
         
         // Sign Listener
         signClickListener = new Sign_Click_Listener();
+        
+        // ChestShop Sign Listener
+        chestShopsignListener = new ChestShop_Sign_Listener(); 
         
 
         // Initialisiere die SQL Items und Rezept Datenbanken
