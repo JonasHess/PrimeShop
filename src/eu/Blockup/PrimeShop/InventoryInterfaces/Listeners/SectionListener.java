@@ -1,10 +1,12 @@
 package eu.Blockup.PrimeShop.InventoryInterfaces.Listeners;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +20,9 @@ public class SectionListener implements Listener {
 
     @EventHandler (priority = EventPriority.HIGHEST)
     public void onClick(InventoryClickEvent event) { // NO_UCD (unused code)
+        
+        if (event.isCancelled()) return;
+        
         HumanEntity he = event.getWhoClicked();
         if (he instanceof Player) {
             Player player = (Player) he;
@@ -25,6 +30,19 @@ public class SectionListener implements Listener {
             if (!PrimeShop.has_Player_InventoyInterface(player)) {
                 return;
             }
+            
+            
+            
+            // Prevent Player from loosing Items
+            if (event.getAction() == InventoryAction.SWAP_WITH_CURSOR ||
+                    event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY ||
+                    event.getAction() == InventoryAction.NOTHING) {
+                event.setCancelled(true);
+                return;
+            }
+            
+            
+            player.sendMessage(ChatColor.GREEN + "not canceld");
             
             ClickType type = null;
             boolean left = event.isLeftClick();
