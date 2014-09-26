@@ -90,6 +90,11 @@ class Interface_Change_Price extends InventoryInterface {
 
         
         
+        // Price to 0
+        
+        this.addOption(8, 3, new Button_modify_Price(sqlItem, -1 * sqlItem.initial_price.getValue(), Material.getMaterial(35), Message_Handler.resolve_to_message(146), ""));
+        
+        
         // Close Option
         this.addOption(8, 0, new Button_close_Interface());
 

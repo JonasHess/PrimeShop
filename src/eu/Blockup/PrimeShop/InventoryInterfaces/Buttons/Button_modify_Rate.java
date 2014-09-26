@@ -61,7 +61,8 @@ import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnBool
 					} else {
 						if (offset == 3) {
 							result.succesful = true;
-							sqlItem.rate_of_price_change.setValue(Cofiguration_Handler.default_rate_of_price_change);
+							sqlItem.rate_of_price_change.setValue(300.0);
+//							sqlItem.rate_of_price_change.setValue(Cofiguration_Handler.default_rate_of_price_change);
 							
 						}else {
 							result = sqlItem.change_Changin_Rate(offset);

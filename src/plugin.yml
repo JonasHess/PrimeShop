@@ -1,9 +1,10 @@
 name: PrimeShop
-version: 1.1.0
+version: 1.0.4
 author: EDMAN_93
 description: Automatic pricing shop plugin
 main: eu.Blockup.PrimeShop.PrimeShop
-depend: [Vault, Citizens]
+depend: [Vault]
+softdepend: [Citizens]
 commands:
   PrimeShop:
     description: Get list of all PrimeShop Commands

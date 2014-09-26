@@ -155,7 +155,7 @@ public class Sign_Click_Listener implements Listener {
                     }
 
                     event.setLine(0,ChatColor.BLUE + "[" + name + "]");
-                    event.setLine(1, ChatColor.GOLD + shop.shopname);
+                    event.setLine(1, ChatColor.DARK_PURPLE + shop.shopname);
                     
 
                 } else {  // No Permission
@@ -183,6 +183,7 @@ public class Sign_Click_Listener implements Listener {
         blockList.add(eventBlock.getRelative(BlockFace.SOUTH, 1));
         blockList.add(eventBlock.getRelative(BlockFace.NORTH, 1));
 
+        
         for (Block b : blockList) {
             if (b != null && b.getState() instanceof Sign) {
                 Sign sign = (Sign) b.getState();

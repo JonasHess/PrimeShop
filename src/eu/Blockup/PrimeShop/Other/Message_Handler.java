@@ -115,7 +115,7 @@ public class Message_Handler {
         
         
         /*Not enough arguments
-         * Message_Handler.resolve_to_message(104)
+         * Message_Handler.resolve_to_message(147)
          */
         
         
@@ -176,7 +176,9 @@ public class Message_Handler {
         hashMap_Messages.put(143, ChatColor.GRAY + "Most sold first:");
         hashMap_Messages.put(144, ChatColor.GRAY + "                      Prices TOP");
         hashMap_Messages.put(145, ChatColor.GRAY + "                      Prices FLOOR");
-        hashMap_Messages.put(146, ChatColor.GRAY + "Update available");
+        hashMap_Messages.put(146, ChatColor.GOLD + "Sell item for free");
+        
+        hashMap_Messages.put(2000, ChatColor.GRAY + "Update available");
     }
 
     public static synchronized boolean initialize_language_support() {

@@ -117,7 +117,7 @@ public class PrimeShop extends JavaPlugin {
         signClickListener = new Sign_Click_Listener();
         
         // ChestShop Sign Listener
-        chestShopsignListener = new ChestShop_Sign_Listener(); 
+//        chestShopsignListener = new ChestShop_Sign_Listener(); 
         
 
         // Initialisiere die SQL Items und Rezept Datenbanken
@@ -129,7 +129,7 @@ public class PrimeShop extends JavaPlugin {
         hashMap_InventoryInterfaces = new HashMap<String, InventoryInterface>();
         hashMap_InventorySessions = new HashMap<String, Inventory>();
 //        hashMap_Inventory_handSave = new HashMap<String, ItemStack>();
-        hashMap_Chest_Shops = new HashMap<String, ChestShop>();
+//        hashMap_Chest_Shops = new HashMap<String, ChestShop>();
         
         recepie_Examiner = new Recepie_Examiner(this);
 //        itemTrader = new Item_Trader(this);

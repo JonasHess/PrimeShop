@@ -35,14 +35,13 @@ public class SectionListener implements Listener {
             
             // Prevent Player from loosing Items
             if (event.getAction() == InventoryAction.SWAP_WITH_CURSOR ||
-                    event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY ||
+//                    event.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY ||
                     event.getAction() == InventoryAction.NOTHING) {
                 event.setCancelled(true);
                 return;
             }
             
             
-            player.sendMessage(ChatColor.GREEN + "not canceld");
             
             ClickType type = null;
             boolean left = event.isLeftClick();
