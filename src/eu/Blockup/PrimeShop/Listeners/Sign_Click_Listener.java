@@ -42,6 +42,10 @@ public class Sign_Click_Listener implements Listener {
             
             Player player  =  event.getPlayer();
             
+            String[] lines  =  sign.getLines();
+            if (lines[0].toUpperCase().contains(name.toUpperCase())){
+                
+                
             if (event.getAction()  ==  Action.RIGHT_CLICK_BLOCK) {
                 // Use an Arrow...
                 if (PrimeShop.has_player_Permission_for_this_Command(player, "PrimeShop.admin.createSigns")) {
@@ -53,8 +57,6 @@ public class Sign_Click_Listener implements Listener {
             
             if (event.getAction()  ==  Action.LEFT_CLICK_BLOCK) {
                 
-                String[] lines  =  sign.getLines();
-                if (lines[0].toUpperCase().contains(name.toUpperCase())){
                     // PrimeShop
             
                     
