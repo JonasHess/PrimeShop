@@ -2,6 +2,7 @@ package eu.Blockup.PrimeShop.InventoryInterfaces.Interfaces;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -147,6 +148,10 @@ public class Interface_Buy_Sell_Item extends InventoryInterface {
                                         InventoryInterface inventoryInterface,
                                         Player player, ItemStack cursor,
                                         ItemStack current, ClickType type) {
+                                    if (Cofiguration_Handler.dynamic_pricing_for_all_Items_DISABLED) {
+                                        player.sendMessage(ChatColor.RED + "Dynamic pricing is disabled in the config.yml!");
+                                        return;
+                                    }
                                     PrimeShop.close_InventoyInterface(player);
                                     PrimeShop.databaseHandler
                                             .link_with_Databse_if_not_allready_linked(PrimeShop

@@ -130,6 +130,8 @@ public class Shop_Item {
     // Kaufen / Verkaufen
 
     private synchronized double get_Changing_Rate() {
+        if (Cofiguration_Handler.dynamic_pricing_for_all_Items_DISABLED) return 0.0;
+        
         if (this.rate_of_price_change.is_value_eq_defaultValue())
             return Cofiguration_Handler.default_rate_of_price_change;
         return this.rate_of_price_change.getValue();

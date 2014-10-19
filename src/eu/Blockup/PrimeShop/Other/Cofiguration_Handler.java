@@ -40,6 +40,8 @@ public class Cofiguration_Handler {
     public static double taxValueItemIncreasesWhenItWasCrafted = 0.05;
     public static int amount_of_simultanious_opened_MySQL_Connection = 2;
     public static boolean price_Linking_for_all_Items_DISABLED = false;
+    public static boolean dynamic_pricing_for_all_Items_DISABLED = false;
+    public static boolean allow_ESC_to_close_inventories = false;
     public static double value_every_item_bought_gets_multiplied_with = 1.0;
     public static double value_every_item_sold_gets_multiplied_with = 0.5;
     public static String default_Economy_Name = "PrimeShop_Economy";
@@ -77,14 +79,21 @@ public class Cofiguration_Handler {
         // Price Linking
         cfg.addDefault("Price_Linking.for_all_Items_DISABLED", price_Linking_for_all_Items_DISABLED);
         cfg.getStringList("Price_Linking.list_of_disabled_Items");
-
+        
+        
+        
         // Price Calculation
+        cfg.addDefault("Price_Calculation.dynamic_pricing_for_all_Items_DISABLED", dynamic_pricing_for_all_Items_DISABLED);
         cfg.addDefault("Price_Calculation.globalRateOfInflation", 1.0);
         cfg.addDefault("Price_Calculation.value_every_item_bought_gets_multiplied_with", 1.0);
         cfg.addDefault("Price_Calculation.value_every_item_sold_gets_multiplied_with", 1.0);
         cfg.addDefault("Price_Calculation.taxValueItemIncreasesWhenItWasCrafted", 0.05);
         
         // Appearance
+        
+        // allow_ESC_to_close_inventories
+        cfg.addDefault("Appearance.allow_ESC_to_close_inventories", allow_ESC_to_close_inventories);
+        
         cfg.addDefault("Appearance.Buy_Button", "119:0");
         cfg.addDefault("Appearance.Sell_Button", "119:0");
         cfg.addDefault("Appearance.Close_Button", "160:0");
@@ -118,13 +127,15 @@ public class Cofiguration_Handler {
             add_Item_to_List_of_disabled_PriceLinks(cfg.getStringList("Price_Linking.list_of_disabled_Items"));
             
             // inflation Rates
+            Cofiguration_Handler.dynamic_pricing_for_all_Items_DISABLED = cfg.getBoolean("Price_Calculation.dynamic_pricing_for_all_Items_DISABLED");
             Cofiguration_Handler.globalRateOfInflation = cfg.getDouble("Price_Calculation.globalRateOfInflation");
             Cofiguration_Handler.value_every_item_bought_gets_multiplied_with = cfg.getDouble("Price_Calculation.value_every_item_bought_gets_multiplied_with");
             Cofiguration_Handler.value_every_item_sold_gets_multiplied_with = cfg.getDouble("Price_Calculation.value_every_item_sold_gets_multiplied_with");
             Cofiguration_Handler.taxValueItemIncreasesWhenItWasCrafted = cfg.getDouble("Price_Calculation.taxValueItemIncreasesWhenItWasCrafted");
 
         
-            
+            // Appearance
+            Cofiguration_Handler.allow_ESC_to_close_inventories = cfg.getBoolean("Appearance.allow_ESC_to_close_inventories");
             
             ItemStack tmp = null;
             

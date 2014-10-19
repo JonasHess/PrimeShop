@@ -13,11 +13,13 @@ Price_Linking:
   for_all_Items_DISABLED: false
   list_of_disabled_Items: []
 Price_Calculation:
+  dynamic_prices_for_all_Items_DISABLED: false
   globalRateOfInflation: 1.0
   value_every_item_bought_gets_multiplied_with: 1.0
   value_every_item_sold_gets_multiplied_with: 1.0
   taxValueItemIncreasesWhenItWasCrafted: 0.05
 Appearance:
+  allow_ESC_to_close_inventories: false
   Buy_Button: '119:0'
   Sell_Button: '119:0'
   Close_Button: '160:0'

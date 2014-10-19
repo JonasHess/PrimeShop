@@ -15,6 +15,7 @@ import eu.Blockup.PrimeShop.PrimeShop;
 import eu.Blockup.PrimeShop.InventoryInterfaces.ClickType;
 import eu.Blockup.PrimeShop.InventoryInterfaces.Button;
 import eu.Blockup.PrimeShop.InventoryInterfaces.InventoryInterface;
+import eu.Blockup.PrimeShop.Other.Cofiguration_Handler;
 
 public class SectionListener implements Listener {
 
@@ -98,7 +99,7 @@ public class SectionListener implements Listener {
             if (PrimeShop.has_Player_InventoyInterface(player)) {
                 InventoryInterface inventoryInterface = PrimeShop.get_Players_InventoyInterface(player);
                 PrimeShop.close_InventoyInterface(player);
-                if (!inventoryInterface.isCloseable()) {
+                if (!inventoryInterface.isCloseable() && !Cofiguration_Handler.allow_ESC_to_close_inventories) {
                     PrimeShop.open_InventoyInterface(player, inventoryInterface);
                 }
             }
