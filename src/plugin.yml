@@ -1,5 +1,5 @@
 name: PrimeShop
-version: 1.0.5
+version: 1.0.6
 author: EDMAN_93
 description: Automatic pricing shop plugin
 main: eu.Blockup.PrimeShop.PrimeShop
@@ -53,6 +53,7 @@ permissions:
       children:
          PrimeShop.VIP.permission_Group.<Number>: true
          PrimeShop.VIP.useTheOpenShopCommand: true
+         PrimeShop.VIP.canSeeAListOfAllShops: true
          PrimeShop.VIP.sellEntireIventory: true
          PrimeShop.VIP.seeListOfCeapestItems: true
          PrimeShop.VIP.seeListOfMostExpensiveItems: true
@@ -62,6 +63,9 @@ permissions:
       description:
       default: op
    PrimeShop.VIP.useTheOpenShopCommand:
+      description: 
+      default: op
+   PrimeShop.VIP.canSeeAListOfAllShops:
       description: 
       default: op
    PrimeShop.VIP.sellEntireIventory:

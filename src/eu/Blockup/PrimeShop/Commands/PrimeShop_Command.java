@@ -44,17 +44,100 @@ class PrimeShop_Command implements CommandExecutor {
 
         Player p = null;
 
-        if (!PrimeShop.has_player_Permission_for_this_Command(cs,
-                "PrimeShop.admin.basics")) {
-            cs.sendMessage(Message_Handler.resolve_to_message(104));
-            return true;
-        }
+//        if (!PrimeShop.has_player_Permission_for_this_Command(cs,
+//                "PrimeShop.admin.basics")) {
+//            cs.sendMessage(Message_Handler.resolve_to_message(104));
+//            return true;
+//        }
 
         // Es gibt Parameter
         if (!(args.length == 0)) {
             // if (args[0].equalsIgnoreCase("Shop") ||
             // (args[0].equalsIgnoreCase("s"))) {
 
+            
+         // Open
+
+            if (args[0].equalsIgnoreCase("open")) {
+
+                if (!PrimeShop.has_player_Permission_for_this_Command(cs,
+                        "PrimeShop.VIP.useTheOpenShopCommand")) {
+                    cs.sendMessage(Message_Handler.resolve_to_message(97));
+                    return true;
+                }
+
+                if (!(args.length == 2)) {
+                    cs.sendMessage("");
+                    cs.sendMessage(ChatColor.LIGHT_PURPLE
+                            + "/PrimeShop open <shopname>");
+                    return true;
+                }
+
+                if (!(cs instanceof Player)) {
+                    cs.sendMessage(ChatColor.RED
+                            + Message_Handler.resolve_to_message(27));
+                    return true;
+                }
+
+                p = (Player) cs;
+                String shopname = args[1];
+                boolean found = false;
+                Shop shop = null;
+
+                for (Map.Entry<String, Shop> entry : PrimeShop.hashMap_Shops
+                        .entrySet()) {
+                    if (entry.getKey().toUpperCase()
+                            .contains(shopname.toUpperCase())) {
+                        // if (shopname.contains(entry.getKey())) {
+                        found = true;
+                        shop = entry.getValue();
+                    }
+                }
+
+                if (found && shop != null) {
+
+                    PrimeShop.open_InventoyInterface(p,
+                            new Interface_Shop_Page(
+                                    new ArrayList<InventoryInterface>(), p,
+                                    shop, 1));
+                    return true;
+                } else {
+                    cs.sendMessage("");
+                    p.sendMessage(Message_Handler.resolve_to_message(98));
+                    p.sendMessage(Message_Handler.resolve_to_message(99));
+                    return true;
+                }
+            }
+            
+         // List
+            if (args[0].equalsIgnoreCase("list")) {
+                if (!PrimeShop.has_player_Permission_for_this_Command(cs,
+                        "PrimeShop.VIP.canSeeAListOfAllShops")) {
+                    cs.sendMessage(Message_Handler.resolve_to_message(104));
+                    return true;
+                }
+                
+                cs.sendMessage("");
+                if (PrimeShop.hashMap_Shops.size() == 0) {
+                    cs.sendMessage(Message_Handler.resolve_to_message(16));
+                    return true;
+                }
+                cs.sendMessage(Message_Handler.resolve_to_message(100));
+                for (String key : PrimeShop.hashMap_Shops.keySet()) {
+                    Shop shop = PrimeShop.hashMap_Shops.get(key);
+                    cs.sendMessage(" - " + ChatColor.AQUA + shop.shopname);
+                }
+                return true;
+            }
+            
+            
+            // ADMIN BASIC PERMISSION
+            if (!PrimeShop.has_player_Permission_for_this_Command(cs,
+                    "PrimeShop.admin.basics")) {
+                cs.sendMessage(Message_Handler.resolve_to_message(104));
+                return true;
+            }
+            
             // Create
 
             if (args[0].equalsIgnoreCase("create")
@@ -137,73 +220,9 @@ class PrimeShop_Command implements CommandExecutor {
 
             }
 
-            // Open
+            
 
-            if (args[0].equalsIgnoreCase("open")) {
-
-                if (!PrimeShop.has_player_Permission_for_this_Command(cs,
-                        "PrimeShop.VIP.useTheOpenShopCommand")) {
-                    cs.sendMessage(Message_Handler.resolve_to_message(97));
-                    return true;
-                }
-
-                if (!(args.length == 2)) {
-                    cs.sendMessage("");
-                    cs.sendMessage(ChatColor.LIGHT_PURPLE
-                            + "/PrimeShop open <shopname>");
-                    return true;
-                }
-
-                if (!(cs instanceof Player)) {
-                    cs.sendMessage(ChatColor.RED
-                            + Message_Handler.resolve_to_message(27));
-                    return true;
-                }
-
-                p = (Player) cs;
-                String shopname = args[1];
-                boolean found = false;
-                Shop shop = null;
-
-                for (Map.Entry<String, Shop> entry : PrimeShop.hashMap_Shops
-                        .entrySet()) {
-                    if (entry.getKey().toUpperCase()
-                            .contains(shopname.toUpperCase())) {
-                        // if (shopname.contains(entry.getKey())) {
-                        found = true;
-                        shop = entry.getValue();
-                    }
-                }
-
-                if (found && shop != null) {
-
-                    PrimeShop.open_InventoyInterface(p,
-                            new Interface_Shop_Page(
-                                    new ArrayList<InventoryInterface>(), p,
-                                    shop, 1));
-                    return true;
-                } else {
-                    cs.sendMessage("");
-                    p.sendMessage(Message_Handler.resolve_to_message(98));
-                    p.sendMessage(Message_Handler.resolve_to_message(99));
-                    return true;
-                }
-            }
-
-            // List
-            if (args[0].equalsIgnoreCase("list")) {
-                cs.sendMessage("");
-                if (PrimeShop.hashMap_Shops.size() == 0) {
-                    cs.sendMessage(Message_Handler.resolve_to_message(16));
-                    return true;
-                }
-                cs.sendMessage(Message_Handler.resolve_to_message(100));
-                for (String key : PrimeShop.hashMap_Shops.keySet()) {
-                    Shop shop = PrimeShop.hashMap_Shops.get(key);
-                    cs.sendMessage(" - " + ChatColor.AQUA + shop.shopname);
-                }
-                return true;
-            }
+            
 
             // Delete
             if (args[0].equalsIgnoreCase("delete")) {
@@ -439,42 +458,42 @@ class PrimeShop_Command implements CommandExecutor {
 
             // ////////////////////////
 
-            if (args[0].equalsIgnoreCase("addall")) {
-                if (!(args.length == 2)) {
-                    cs.sendMessage(ChatColor.LIGHT_PURPLE
-                            + "/PrimeShop addall <shopname>");
-                    return true;
-                }
-
-                String originalShopname = args[1];
-                boolean found = false;
-
-                for (Map.Entry<String, Shop> entry : PrimeShop.hashMap_Shops
-                        .entrySet()) {
-                    if (entry.getKey().toUpperCase()
-                            .contains(originalShopname.toUpperCase())) {
-                        found = true;
-                        originalShopname = entry.getKey();
-                    }
-                }
-                if (!found) {
-                    cs.sendMessage(ChatColor.RED
-                            + Message_Handler.resolve_to_message(98));
-                    return true;
-                } else {
-                    Shop shop = PrimeShop.hashMap_Shops.get(originalShopname);
-
-                    Iterator<Recipe> iter = this.plugin.getServer()
-                            .recipeIterator();
-                    while (iter.hasNext()) {
-                        Recipe recipe = iter.next();
-                        shop.add_ItemStack(recipe.getResult());
-                    }
-                    shop.refresh_pageCount();
-                    PrimeShop.shopConfigHandler.write_shops_to_Harddisk();
-                    return true;
-                }
-            }
+//            if (args[0].equalsIgnoreCase("addall")) {
+//                if (!(args.length == 2)) {
+//                    cs.sendMessage(ChatColor.LIGHT_PURPLE
+//                            + "/PrimeShop addall <shopname>");
+//                    return true;
+//                }
+//
+//                String originalShopname = args[1];
+//                boolean found = false;
+//
+//                for (Map.Entry<String, Shop> entry : PrimeShop.hashMap_Shops
+//                        .entrySet()) {
+//                    if (entry.getKey().toUpperCase()
+//                            .contains(originalShopname.toUpperCase())) {
+//                        found = true;
+//                        originalShopname = entry.getKey();
+//                    }
+//                }
+//                if (!found) {
+//                    cs.sendMessage(ChatColor.RED
+//                            + Message_Handler.resolve_to_message(98));
+//                    return true;
+//                } else {
+//                    Shop shop = PrimeShop.hashMap_Shops.get(originalShopname);
+//
+//                    Iterator<Recipe> iter = this.plugin.getServer()
+//                            .recipeIterator();
+//                    while (iter.hasNext()) {
+//                        Recipe recipe = iter.next();
+//                        shop.add_ItemStack(recipe.getResult());
+//                    }
+//                    shop.refresh_pageCount();
+//                    PrimeShop.shopConfigHandler.write_shops_to_Harddisk();
+//                    return true;
+//                }
+//            }
 
             // Get ID
 
@@ -643,19 +662,32 @@ class PrimeShop_Command implements CommandExecutor {
             // Done
         }
 
+        while (true) {
+            int i = 5;
+            break;
+        }
+        
+        
         // Hauptmenu
         for (int i = 0; i < 3; i++) {
             cs.sendMessage("");
         }
         cs.sendMessage(ChatColor.GRAY + "                         PrimeShop");
+        cs.sendMessage(" - " + ChatColor.GOLD + "open " + ChatColor.AQUA
+                + "<shopname>");
+        cs.sendMessage(" - " + ChatColor.GOLD + "list");
+        
+     // ADMIN BASIC PERMISSION
+        if (!PrimeShop.has_player_Permission_for_this_Command(cs,
+                "PrimeShop.admin.basics")) {
+            return true;
+        }
+        
         cs.sendMessage(" - " + ChatColor.GOLD + "create " + ChatColor.AQUA
                 + "<shopname> <itemID | itemName | hand>");
-        cs.sendMessage(" - " + ChatColor.GOLD + "list");
         cs.sendMessage(" - " + ChatColor.GOLD + "rename " + ChatColor.AQUA
                 + "<shopname> <new-name>");
         cs.sendMessage(" - " + ChatColor.GOLD + "delete " + ChatColor.AQUA
-                + "<shopname>");
-        cs.sendMessage(" - " + ChatColor.GOLD + "open " + ChatColor.AQUA
                 + "<shopname>");
         cs.sendMessage(" - " + ChatColor.GOLD + "additem " + ChatColor.AQUA
                 + "<shopname> <itemID>");
