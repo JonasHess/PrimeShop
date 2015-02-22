@@ -95,12 +95,8 @@ public class PrimeShop extends JavaPlugin {
         copy_default_config_Files_to_Plugin_dir("config.yml");
 
         // Lade Citizens
-        if (getServer().getPluginManager().getPlugin("Citizens") == null
-                || getServer().getPluginManager().getPlugin("Citizens")
-                        .isEnabled() == false) {
-            getLogger()
-                    .log(Level.SEVERE,
-                            "Citizens 2.0 not found or not enabled.  NPCs will not be supported");
+        if (getServer().getPluginManager().getPlugin("Citizens") == null || getServer().getPluginManager().getPlugin("Citizens").isEnabled() == false) {
+            getLogger().log(Level.SEVERE,"Citizens 2.0 not found or not enabled.  NPCs will not be supported");
             citezens_is_enabled = false;
             // getServer().getPluginManager().disablePlugin(this);
             // return;
@@ -147,8 +143,7 @@ public class PrimeShop extends JavaPlugin {
         // Lade Vault
         if (!this.setupEconomy()) {
             // TODO Disable plugin
-            getLogger()
-                    .log(Level.SEVERE, Message_Handler.resolve_to_message(2));
+            getLogger().log(Level.SEVERE, Message_Handler.resolve_to_message(2));
             this.getPluginLoader().disablePlugin(this);
             return;
         }

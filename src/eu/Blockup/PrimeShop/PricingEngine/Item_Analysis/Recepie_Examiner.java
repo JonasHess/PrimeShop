@@ -55,10 +55,8 @@ public class Recepie_Examiner {
 
                 // FurnaceRecipe
                 if (recipe instanceof FurnaceRecipe) {
-                    tempEvaluatedRecepie = (new EvaluatedRecipe(
-                            "FurnaceRecipe", recipe.getResult()));
-                    tempEvaluatedRecepie.addImputItem(((FurnaceRecipe) recipe)
-                            .getInput());
+                    tempEvaluatedRecepie = (new EvaluatedRecipe("FurnaceRecipe", recipe.getResult()));
+                    tempEvaluatedRecepie.addImputItem(((FurnaceRecipe) recipe).getInput());
                     result.add(tempEvaluatedRecepie);
                     tempEvaluatedRecepie = null;
                 }

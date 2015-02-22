@@ -12,6 +12,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import eu.Blockup.PrimeShop.PrimeShop;
 
+/**
+ * Handles parsing of messages that are passed to the user 
+ */
 public class Message_Handler {
 
     private static HashMap<Integer, String> hashMap_Messages;
@@ -23,109 +26,66 @@ public class Message_Handler {
          */
 
         hashMap_Messages = new HashMap<Integer, String>();
-        hashMap_Messages.put(1, ChatColor.RED
-                + "ERROR: Can not access Shop.yml");
-        hashMap_Messages.put(2, ChatColor.RED
-                + "Error: Can not find Economy_Plugin compatible with Vault");
+        hashMap_Messages.put(1, ChatColor.RED + "ERROR: Can not access Shop.yml");
+        hashMap_Messages.put(2, ChatColor.RED + "Error: Can not find Economy_Plugin compatible with Vault");
         hashMap_Messages.put(3, ChatColor.RED + "Failed Reading Configfile!");
-        hashMap_Messages.put(4, ChatColor.RED
-                + "ERROR: Can not open items.yml nor write to it");
+        hashMap_Messages.put(4, ChatColor.RED + "ERROR: Can not open items.yml nor write to it");
         hashMap_Messages.put(5, ChatColor.WHITE + "PrimeShop is terminating");
-        hashMap_Messages.put(6, ChatColor.WHITE
-                + " *** Create new MySQL-Connection *** UniQue1/UniQue2");
+        hashMap_Messages.put(6, ChatColor.WHITE + " *** Create new MySQL-Connection *** UniQue1/UniQue2");
         hashMap_Messages.put(7, ChatColor.WHITE + "Cronboy awaked");
-        hashMap_Messages.put(8, ChatColor.GOLD + "Bought for " + ChatColor.RED
-                + "UniQue1UniQue2");
+        hashMap_Messages.put(8, ChatColor.GOLD + "Bought for " + ChatColor.RED + "UniQue1UniQue2");
         hashMap_Messages.put(9, ChatColor.RED + "Not enough money to buy!");
         hashMap_Messages.put(10, ChatColor.RED + "Error in price calculation");
         hashMap_Messages.put(11, ChatColor.RED + "Inventory is full");
-        hashMap_Messages.put(12, ChatColor.RED
-                + "You have to choose an item first!");
-        hashMap_Messages.put(13, ChatColor.RED
-                + "Error in price calculation, please inform an Moderator");
-        hashMap_Messages.put(14, ChatColor.RED
-                + "You don't have enough of this Item");
-        hashMap_Messages.put(15, ChatColor.GOLD + "Sold for: "
-                + ChatColor.GREEN + "UniQue1");
+        hashMap_Messages.put(12, ChatColor.RED + "You have to choose an item first!");
+        hashMap_Messages.put(13, ChatColor.RED + "Error in price calculation, please inform an Moderator");
+        hashMap_Messages.put(14, ChatColor.RED + "You don't have enough of this Item");
+        hashMap_Messages.put(15, ChatColor.GOLD + "Sold for: " + ChatColor.GREEN + "UniQue1");
         hashMap_Messages.put(16, ChatColor.RED + "There are no shops!");
-        hashMap_Messages.put(17, ChatColor.RED
-                + "Price can't be less than zero!");
-        hashMap_Messages.put(18, ChatColor.RED
-                + "Rate of price-change can't be less than 0%");
+        hashMap_Messages.put(17, ChatColor.RED + "Price can't be less than zero!");
+        hashMap_Messages.put(18, ChatColor.RED + "Rate of price-change can't be less than 0%");
         hashMap_Messages.put(19, ChatColor.AQUA + "Price: ");
         hashMap_Messages.put(20, ChatColor.GOLD + "initialPrice: UniQue1");
         hashMap_Messages.put(21, ChatColor.BLUE + "currentPrice: UniQue1");
         hashMap_Messages.put(22, ChatColor.GOLD + "Change default price");
-        hashMap_Messages.put(23, ChatColor.GOLD
-                + "Price doubles every UniQue1 purchases");
-        hashMap_Messages
-                .put(24, ChatColor.GOLD + "Modify rate of price change");
+        hashMap_Messages.put(23, ChatColor.GOLD + "Price doubles every UniQue1 purchases");
+        hashMap_Messages.put(24, ChatColor.GOLD + "Modify rate of price change");
         hashMap_Messages.put(25, ChatColor.RED + "Make price be constant!");
         hashMap_Messages.put(26, ChatColor.GREEN + "Set to default value");
-        hashMap_Messages.put(27, ChatColor.RED
-                + "You can not access this command from terminal");
-        hashMap_Messages.put(28, ChatColor.RED
-                + "You have no item in your hand!");
-        hashMap_Messages.put(29, ChatColor.RED
-                + "Could not recognize this itemID");
-        hashMap_Messages.put(30, ChatColor.RED
-                + "You do not have permission to buy this Item");
-        hashMap_Messages
-                .put(31, ChatColor.RED + "This item was not recognized");
-        hashMap_Messages.put(32, ChatColor.RED
-                + "You do not have the permission to sell this item");
-        hashMap_Messages
-                .put(33,
-                        ChatColor.RED
-                                + "Error: PrimeShop was not able to access the file config.yml");
+        hashMap_Messages.put(27, ChatColor.RED + "You can not access this command from terminal");
+        hashMap_Messages.put(28, ChatColor.RED + "You have no item in your hand!");
+        hashMap_Messages.put(29, ChatColor.RED + "Could not recognize this itemID");
+        hashMap_Messages.put(30, ChatColor.RED + "You do not have permission to buy this Item");
+        hashMap_Messages.put(31, ChatColor.RED + "This item was not recognized");
+        hashMap_Messages.put(32, ChatColor.RED + "You do not have the permission to sell this item");
+        hashMap_Messages.put(33, ChatColor.RED+ "Error: PrimeShop was not able to access the file config.yml");
         hashMap_Messages.put(34, ChatColor.AQUA + "Close");
         hashMap_Messages.put(35, ChatColor.GRAY + "Go back to game");
-        hashMap_Messages.put(36, ChatColor.GREEN
-                + "Item was successfully added to shop");
-        hashMap_Messages.put(37, ChatColor.RED
-                + "were not able to delete this item for unknown reason");
-        hashMap_Messages.put(38, ChatColor.GREEN
-                + "Item was successfully removed from shop");
+        hashMap_Messages.put(36, ChatColor.GREEN + "Item was successfully added to shop");
+        hashMap_Messages.put(37, ChatColor.RED + "were not able to delete this item for unknown reason");
+        hashMap_Messages.put(38, ChatColor.GREEN + "Item was successfully removed from shop");
         hashMap_Messages.put(39, ChatColor.GREEN + "Changed price to: UniQue1");
         hashMap_Messages.put(40, ChatColor.WHITE + "Price: UniQue1");
-        hashMap_Messages.put(41, ChatColor.RED
-                + "Error: This item is currently not available");
-        hashMap_Messages.put(42, ChatColor.GOLD
-                + "Rate of price change: UniQue1");
+        hashMap_Messages.put(41, ChatColor.RED + "Error: This item is currently not available");
+        hashMap_Messages.put(42, ChatColor.GOLD + "Rate of price change: UniQue1");
         hashMap_Messages.put(43, ChatColor.GOLD + "Rate of price change:");
-        hashMap_Messages.put(44, ChatColor.RED
-                + "Item to be added to shop UniQue1");
+        hashMap_Messages.put(44, ChatColor.RED + "Item to be added to shop UniQue1");
         hashMap_Messages.put(45, ChatColor.RED + "Do you confirm?");
         hashMap_Messages.put(46, ChatColor.RED + "YES, add item to shop");
         hashMap_Messages.put(47, ChatColor.AQUA + "NO, don't add item");
         hashMap_Messages.put(48, ChatColor.GREEN + "Adding item to shop");
-        hashMap_Messages.put(49, ChatColor.GOLD
-                + "Click, to list ingredients of this item");
-        hashMap_Messages
-                .put(50,
-                        ChatColor.DARK_GRAY
-                                + "You can not edit the price of this item since pricelinking is enabled for it.");
-        hashMap_Messages
-                .put(51,
-                        ChatColor.DARK_GRAY
-                                + "To change the price, select an ingredient which has no ingredients itself");
-        hashMap_Messages.put(52, ChatColor.GREEN
-                + "Enable pricelinking for this item");
-        hashMap_Messages
-                .put(53,
-                        ChatColor.GREEN
-                                + "Enabling pricechanges will make the price be compound by the prices of its ingredients");
+        hashMap_Messages.put(49, ChatColor.GOLD + "Click, to list ingredients of this item");
+        hashMap_Messages.put(50, ChatColor.DARK_GRAY + "You can not edit the price of this item since pricelinking is enabled for it.");
+        hashMap_Messages.put(51, ChatColor.DARK_GRAY + "To change the price, select an ingredient which has no ingredients itself");
+        hashMap_Messages.put(52, ChatColor.GREEN + "Enable pricelinking for this item");
+        hashMap_Messages.put(53, ChatColor.GREEN + "Enabling pricechanges will make the price be compound by the prices of its ingredients");
         hashMap_Messages.put(54, ChatColor.RED + "Delete Item from Shop");
         hashMap_Messages.put(55, ChatColor.DARK_GRAY + "");
         hashMap_Messages.put(56, ChatColor.GOLD + "Info:");
-        hashMap_Messages
-                .put(57, ChatColor.DARK_GRAY + "  ---> Click HERE <---");
-        hashMap_Messages.put(58, ChatColor.DARK_GRAY
-                + " to manipulate the quantity.");
-        hashMap_Messages.put(59, ChatColor.DARK_GRAY
-                + "Use the SHIFT operator to stack.");
-        hashMap_Messages.put(60, ChatColor.DARK_GRAY
-                + "This item is not stackable");
+        hashMap_Messages.put(57, ChatColor.DARK_GRAY + "  ---> Click HERE <---");
+        hashMap_Messages.put(58, ChatColor.DARK_GRAY + " to manipulate the quantity.");
+        hashMap_Messages.put(59, ChatColor.DARK_GRAY + "Use the SHIFT operator to stack.");
+        hashMap_Messages.put(60, ChatColor.DARK_GRAY + "This item is not stackable");
         hashMap_Messages.put(61, ChatColor.AQUA + "Back");
         hashMap_Messages.put(62, ChatColor.GRAY + "Go Back to previous window");
         hashMap_Messages.put(63, ChatColor.GRAY + "Buy & Sell");
@@ -139,37 +99,22 @@ public class Message_Handler {
         hashMap_Messages.put(71, ChatColor.GREEN + "Shop was removed fom NPC");
         hashMap_Messages.put(72, ChatColor.RED + "Delete shop from NPC");
         hashMap_Messages.put(73, ChatColor.RED + "YES, delete shop from NPC");
-        hashMap_Messages.put(74, ChatColor.GREEN
-                + "NO, don't delete shop from NPC");
+        hashMap_Messages.put(74, ChatColor.GREEN + "NO, don't delete shop from NPC");
         hashMap_Messages.put(75, ChatColor.RED + "Delete this shop?");
         hashMap_Messages.put(76, ChatColor.GREEN + "Shop was deleted!");
-        hashMap_Messages
-                .put(77, ChatColor.GREEN + "NO, don't delete this shop");
+        hashMap_Messages.put(77, ChatColor.GREEN + "NO, don't delete this shop");
         hashMap_Messages.put(78, ChatColor.RED + "Delete this shop!");
         hashMap_Messages.put(79, ChatColor.RED + "YES, delete shop");
         hashMap_Messages.put(80, ChatColor.GRAY + "List of ingredients");
-        hashMap_Messages
-                .put(81,
-                        ChatColor.WHITE
-                                + "You can not edit the price of this item since pricelinking is enabled for it.");
-        hashMap_Messages
-                .put(82,
-                        ChatColor.WHITE
-                                + "To change the price, select an ingredient which has no ingredients itself");
+        hashMap_Messages.put(81, ChatColor.WHITE + "You can not edit the price of this item since pricelinking is enabled for it.");
+        hashMap_Messages.put(82, ChatColor.WHITE + "To change the price, select an ingredient which has no ingredients itself");
         hashMap_Messages.put(83, ChatColor.WHITE + "");
-        hashMap_Messages.put(84, ChatColor.WHITE
-                + "Click to observe this ingredient");
-        hashMap_Messages.put(85, ChatColor.RED
-                + "Disable pricelinking for this item ");
-        hashMap_Messages
-                .put(86,
-                        ChatColor.GRAY
-                                + "Price will no longer be calculated in reference to its ingredients");
-        hashMap_Messages.put(87, ChatColor.RED
-                + "You do not have permission to open this shop!");
+        hashMap_Messages.put(84, ChatColor.WHITE + "Click to observe this ingredient");
+        hashMap_Messages.put(85, ChatColor.RED + "Disable pricelinking for this item ");
+        hashMap_Messages.put(86, ChatColor.GRAY + "Price will no longer be calculated in reference to its ingredients");
+        hashMap_Messages.put(87, ChatColor.RED + "You do not have permission to open this shop!");
         hashMap_Messages.put(88, "");
-        hashMap_Messages.put(89, ChatColor.DARK_GRAY
-                + "Click to have a closer look.");
+        hashMap_Messages.put(89, ChatColor.DARK_GRAY + "Click to have a closer look.");
 
         /*
          * Not enough arguments Message_Handler.resolve_to_message(147)
@@ -179,113 +124,58 @@ public class Message_Handler {
         hashMap_Messages.put(91, ChatColor.AQUA + "Last Page");
         hashMap_Messages.put(92, ChatColor.AQUA + "Previous Page");
         hashMap_Messages.put(93, ChatColor.AQUA + "First Page");
-        hashMap_Messages.put(94, ChatColor.RED
-                + "You do not have permission to create new shops");
+        hashMap_Messages.put(94, ChatColor.RED + "You do not have permission to create new shops");
         hashMap_Messages.put(95, ChatColor.GREEN + "Shop was created");
-        hashMap_Messages.put(96, ChatColor.RED
-                + "Could not recognize this itemID");
-        hashMap_Messages.put(97, ChatColor.RED
-                + "You do not have permission to open shops by command");
-        hashMap_Messages
-                .put(98, ChatColor.RED + "This shop could not be found");
-        hashMap_Messages
-                .put(99,
-                        ChatColor.AQUA
-                                + "Use the command: '/PrimeShop list' to find a list with all available shops");
+        hashMap_Messages.put(96, ChatColor.RED + "Could not recognize this itemID");
+        hashMap_Messages.put(97, ChatColor.RED + "You do not have permission to open shops by command");
+        hashMap_Messages.put(98, ChatColor.RED + "This shop could not be found");
+        hashMap_Messages.put(99, ChatColor.AQUA + "Use the command: '/PrimeShop list' to find a list with all available shops");
         hashMap_Messages.put(100, ChatColor.GRAY + "Available Shops:");
-        hashMap_Messages.put(101, ChatColor.RED
-                + "Shops can only be removed ingame");
-        hashMap_Messages.put(102, ChatColor.RED
-                + "You do not have permission to delete shops");
-        hashMap_Messages.put(103, ChatColor.RED
-                + "Shop UniQue1 could not be found");
-        hashMap_Messages.put(104, ChatColor.RED
-                + "You do not have the permission to use this command");
+        hashMap_Messages.put(101, ChatColor.RED + "Shops can only be removed ingame");
+        hashMap_Messages.put(102, ChatColor.RED + "You do not have permission to delete shops");
+        hashMap_Messages.put(103, ChatColor.RED + "Shop UniQue1 could not be found");
+        hashMap_Messages.put(104, ChatColor.RED + "You do not have the permission to use this command");
         hashMap_Messages.put(105, ChatColor.RED + "Not enough arguments");
-        hashMap_Messages
-                .put(106,
-                        ChatColor.RED
-                                + "You rank on this server is not high enough to buy this item.");
-        hashMap_Messages
-                .put(107,
-                        ChatColor.GOLD
-                                + "This item was not added to a shop yet. You are only able to buy it because of your special permissions.");
-        hashMap_Messages.put(108, ChatColor.RED
-                + "This item was not added to a shop you have access to.");
-        hashMap_Messages
-                .put(109,
-                        ChatColor.RED
-                                + "You have not the permission to use the lookup price information");
-        hashMap_Messages.put(110, ChatColor.WHITE
-                + "The value of 64 'Grass' is: 100.44�");
-        hashMap_Messages.put(111, ChatColor.BLUE
-                + "The value of UniQue1 \"UniQue2\" is: UniQue3");
-        hashMap_Messages.put(112, ChatColor.RED
-                + "You do not have permissions to rename shops");
+        hashMap_Messages.put(106, ChatColor.RED + "You rank on this server is not high enough to buy this item.");
+        hashMap_Messages.put(107, ChatColor.GOLD + "This item was not added to a shop yet. You are only able to buy it because of your special permissions.");
+        hashMap_Messages.put(108, ChatColor.RED + "This item was not added to a shop you have access to.");
+        hashMap_Messages.put(109, ChatColor.RED + "You have not the permission to use the lookup price information");
+        hashMap_Messages.put(110, ChatColor.WHITE + "The value of 64 'Grass' is: 100.44�");
+        hashMap_Messages.put(111, ChatColor.BLUE + "The value of UniQue1 \"UniQue2\" is: UniQue3");
+        hashMap_Messages.put(112, ChatColor.RED + "You do not have permissions to rename shops");
         hashMap_Messages.put(113, ChatColor.GREEN + "Shop was renamed");
-        hashMap_Messages.put(114, ChatColor.RED
-                + "You do not have permission to add items to this shop");
-        hashMap_Messages
-                .put(115,
-                        ChatColor.RED
-                                + "This will delete all your items and transfer them to the shop instead");
-        hashMap_Messages.put(116, ChatColor.GREEN
-                + "All your inventory items have been moved to the shop");
-        hashMap_Messages.put(117, ChatColor.RED
-                + "You do not have permission to link this shop with a NPC");
-        hashMap_Messages.put(118, ChatColor.RED
-                + "This NPC already knows this shop");
-        hashMap_Messages.put(119, ChatColor.GREEN
-                + "NPC: UniQue1 now contains shop UniQue2");
+        hashMap_Messages.put(114, ChatColor.RED + "You do not have permission to add items to this shop");
+        hashMap_Messages.put(115, ChatColor.RED + "This will delete all your items and transfer them to the shop instead");
+        hashMap_Messages.put(116, ChatColor.GREEN + "All your inventory items have been moved to the shop");
+        hashMap_Messages.put(117, ChatColor.RED + "You do not have permission to link this shop with a NPC");
+        hashMap_Messages.put(118, ChatColor.RED + "This NPC already knows this shop");
+        hashMap_Messages.put(119, ChatColor.GREEN + "NPC: UniQue1 now contains shop UniQue2");
         hashMap_Messages.put(120, ChatColor.GOLD + "Buy");
         hashMap_Messages.put(121, ChatColor.GOLD + "Sell");
         hashMap_Messages.put(122, ChatColor.DARK_GRAY + "Amount: UniQue1");
         hashMap_Messages.put(123, ChatColor.WHITE + "");
-        hashMap_Messages.put(124, ChatColor.GRAY
-                + "How many purchases are need to double the price?");
-        hashMap_Messages
-                .put(125,
-                        ChatColor.GRAY
-                                + "How much is this item worth, if demand and supply are perfectly balanced?");
-
-        hashMap_Messages.put(126, ChatColor.RED
-                + "There already is a shop with similar or related name!");
-        hashMap_Messages.put(127, ChatColor.RED
-                + "You have not the permission to create or edit Shop-Signs");
-        hashMap_Messages.put(128, ChatColor.RED
-                + "To destroy this sign, hit it with an arrow.");
-        hashMap_Messages.put(129, ChatColor.RED
-                + "You do not have permission to trade with this NPC");
-        hashMap_Messages.put(130, ChatColor.RED
-                + "You do not have permission to interact with this signs");
-        hashMap_Messages
-                .put(131,
-                        ChatColor.RED
-                                + "This sign is broken. Please inform the server administration");
-        hashMap_Messages.put(132, ChatColor.WHITE + "UniQue1.)"
-                + ChatColor.AQUA + " UniQue2 " + ChatColor.WHITE + "is worth "
-                + ChatColor.GOLD + "UniQue3");
-        hashMap_Messages.put(133, ChatColor.RED
-                + "Don't spam! Preferably change the stack size.");
-        hashMap_Messages.put(135, ChatColor.RED
-                + "WARNING: This command will sell all your inventory-items!");
+        hashMap_Messages.put(124, ChatColor.GRAY + "How many purchases are need to double the price?");
+        hashMap_Messages.put(125, ChatColor.GRAY + "How much is this item worth, if demand and supply are perfectly balanced?");
+        hashMap_Messages.put(126, ChatColor.RED + "There already is a shop with similar or related name!");
+        hashMap_Messages.put(127, ChatColor.RED + "You have not the permission to create or edit Shop-Signs");
+        hashMap_Messages.put(128, ChatColor.RED + "To destroy this sign, hit it with an arrow.");
+        hashMap_Messages.put(129, ChatColor.RED + "You do not have permission to trade with this NPC");
+        hashMap_Messages.put(130, ChatColor.RED + "You do not have permission to interact with this signs");
+        hashMap_Messages.put(131, ChatColor.RED + "This sign is broken. Please inform the server administration");
+        hashMap_Messages.put(132, ChatColor.WHITE + "UniQue1.)" + ChatColor.AQUA + " UniQue2 " + ChatColor.WHITE + "is worth " + ChatColor.GOLD + "UniQue3");
+        hashMap_Messages.put(133, ChatColor.RED + "Don't spam! Preferably change the stack size.");
+        hashMap_Messages.put(135, ChatColor.RED + "WARNING: This command will sell all your inventory-items!");
         hashMap_Messages.put(136, ChatColor.RED + "Confirm with: UniQue1");
-        hashMap_Messages.put(137, ChatColor.AQUA + "Sold all Items for : "
-                + ChatColor.AQUA + "UniQue1");
-        hashMap_Messages.put(138, ChatColor.AQUA
-                + "to add some items to this shop,");
-        hashMap_Messages.put(139, ChatColor.AQUA
-                + "simply make a SHIFT LeftClick on the item");
+        hashMap_Messages.put(137, ChatColor.AQUA + "Sold all Items for : " + ChatColor.AQUA + "UniQue1");
+        hashMap_Messages.put(138, ChatColor.AQUA + "to add some items to this shop,");
+        hashMap_Messages.put(139, ChatColor.AQUA + "simply make a SHIFT LeftClick on the item");
         hashMap_Messages.put(140, ChatColor.AQUA + "you want to be added");
         hashMap_Messages.put(141, ChatColor.GOLD + "Add items to shop");
         hashMap_Messages.put(142, ChatColor.GRAY + "Most bought first:");
         hashMap_Messages.put(143, ChatColor.GRAY + "Most sold first:");
-        hashMap_Messages.put(144, ChatColor.GRAY
-                + "                      Prices TOP");
-        hashMap_Messages.put(145, ChatColor.GRAY
-                + "                      Prices FLOOR");
+        hashMap_Messages.put(144, ChatColor.GRAY + "                      Prices TOP");
+        hashMap_Messages.put(145, ChatColor.GRAY + "                      Prices FLOOR");
         hashMap_Messages.put(146, ChatColor.GOLD + "Sell item for free");
-
         hashMap_Messages.put(2000, ChatColor.GRAY + "Update available");
     }
 
@@ -370,23 +260,58 @@ public class Message_Handler {
         return true;
     }
 
+    /**
+     * resolves the given id to a message in the messages config file
+     * @param id
+     * @return string with contents of line with given id.
+     */
     public static String resolve_to_message(int id) {
         return Message_Handler.resolve_to_message(id, "");
     }
 
+    /**
+     * resolves the given id to a message in the messages config file and replaces UuiQue1 with arg0
+     * @param id
+     * @param arg0 item to replace UniQue1 with.
+     * @return string with contents of line with given id.
+     */
     public static String resolve_to_message(int id, String arg0) {
         return Message_Handler.resolve_to_message(id, arg0, "");
     }
 
+    /**
+     * resolves the given id to a message in the messages config file and replaces UuiQue1 with arg0
+     * @param id
+     * @param arg0 item to replace UniQue1 with.
+     * @param arg1 item to replace UniQue2 with.
+     * @return string with contents of line with given id.
+     */
     public static String resolve_to_message(int id, String arg0, String arg1) {
         return Message_Handler.resolve_to_message(id, arg0, arg1, "");
     }
 
+    /**
+     * resolves the given id to a message in the messages config file and replaces UuiQue1 with arg0
+     * @param id
+     * @param arg0 item to replace UniQue1 with.
+     * @param arg1 item to replace UniQue2 with.
+     * @param arg2 item to replace UniQue3 with.
+     * @return string with contents of line with given id.
+     */
     public static String resolve_to_message(int id, String arg0, String arg1,
             String arg2) {
         return Message_Handler.resolve_to_message(id, arg0, arg1, arg2, "");
     }
 
+    /**
+     * resolves the given id to a message in the messages config file and replaces UuiQue1 with arg0
+     * @param id
+     * @param arg0 item to replace UniQue1 with.
+     * @param arg1 item to replace UniQue2 with.
+     * @param arg2 item to replace UniQue3 with.
+     * @param arg3 item to replace UniQue4 with.
+     * @return string with contents of line with given id.
+     */
     private static String resolve_to_message(int id, String arg0, String arg1,
             String arg2, String arg3) {
 
