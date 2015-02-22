@@ -53,7 +53,8 @@ $RECYCLE.BIN/
 *.msp
 
 # Misc
+*.project
 .project
-.settings
+.settings/*
 /bin/
 /target/
