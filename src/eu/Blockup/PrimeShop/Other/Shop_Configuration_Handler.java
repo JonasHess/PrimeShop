@@ -23,25 +23,26 @@ public class Shop_Configuration_Handler {
 
     public synchronized boolean read_shop_file() {
 
-
         PrimeShop.hashMap_Shops.clear();
 
         try {
             file = new File("plugins/PrimeShop/", "shops.yml"); // TODO
-                                                                        // Name
-                                                                        // ändern
+                                                                // Name
+                                                                // ï¿½ndern
 
             cfg = YamlConfiguration.loadConfiguration(file);
 
             for (String shopname : cfg.getConfigurationSection("").getKeys(
                     false)) {
 
-                if (shopname.equalsIgnoreCase("Version")) continue;
-                
+                if (shopname.equalsIgnoreCase("Version"))
+                    continue;
+
                 String displayiconid = cfg.getString(shopname
                         + ".DisplayIconID");
 
-                ItemStack displayIcon = PrimeShop.convertItemIdStringToItemstack(displayiconid, 1);
+                ItemStack displayIcon = PrimeShop
+                        .convertItemIdStringToItemstack(displayiconid, 1);
 
                 Shop shop = new Shop(shopname, displayIcon);
 
@@ -51,27 +52,30 @@ public class Shop_Configuration_Handler {
                             .getConfigurationSection(shopname + ".Items");
 
                     for (String itemID : itemSection.getKeys(false)) {
-//                        System.out.println("Item Added: " + itemID);
+                        // System.out.println("Item Added: " + itemID);
                         ItemStack loadedItemSack = cfg.getItemStack(shopname
                                 + ".Items." + itemID);
-//                        System.out.println(loadedItemSack.toString());
+                        // System.out.println(loadedItemSack.toString());
                         shop.add_ItemStack(loadedItemSack);
                     }
                 }
-                List<Integer> list_with_shopkeeperIDs = cfg.getIntegerList(shopname + ".NPC_Shopkeeper_IDs");
-                
+                List<Integer> list_with_shopkeeperIDs = cfg
+                        .getIntegerList(shopname + ".NPC_Shopkeeper_IDs");
+
                 for (int shopkeeperID : list_with_shopkeeperIDs) {
                     PrimeShop.plugin.add_Shop_to_NPC(shop, shopkeeperID);
                 }
-                
-//                System.out.println("Adde Shop to Map : " + shopname);
+
+                // System.out.println("Adde Shop to Map : " + shopname);
                 shop.shopname = shopname;
                 PrimeShop.hashMap_Shops.put(shopname, shop);
             }
         } catch (Exception e1) {
             // TODO Auto-generated catch block
-            PrimeShop.plugin.getLogger().log(Level.SEVERE, ChatColor.RED + "error reading shops.yml");
-            PrimeShop.plugin.getLogger().log(Level.SEVERE, ChatColor.RED + (Message_Handler.resolve_to_message(1)));
+            PrimeShop.plugin.getLogger().log(Level.SEVERE,
+                    ChatColor.RED + "error reading shops.yml");
+            PrimeShop.plugin.getLogger().log(Level.SEVERE,
+                    ChatColor.RED + (Message_Handler.resolve_to_message(1)));
             e1.printStackTrace();
             return false;
         }
@@ -82,23 +86,21 @@ public class Shop_Configuration_Handler {
     public synchronized boolean write_shops_to_Harddisk() {
 
         file = new File("plugins/PrimeShop/", "shops.yml"); // TODO Name
-                                                                    // ändern
-//        file.delete();
-        
+                                                            // ï¿½ndern
+                                                            // file.delete();
+
         cfg = YamlConfiguration.loadConfiguration(file);
-        
-        
-        
+
         // Delete all Shops from File
         ConfigurationSection itemSection = cfg.getConfigurationSection("");
         for (String shopname : itemSection.getKeys(false)) {
-            
+
             cfg.set(shopname, null);
         }
-        
-        cfg.addDefault("Version", (Double)1.0);
+
+        cfg.addDefault("Version", (Double) 1.0);
         cfg.options().copyDefaults(true);
-        
+
         // cfg.createSection("Shops");
         for (String key : PrimeShop.hashMap_Shops.keySet()) {
 
@@ -106,31 +108,29 @@ public class Shop_Configuration_Handler {
 
             // cfg.createPath(cfg.getConfigurationSection("Shops"),
             // shop.shopname);
-            cfg.set(shop.shopname + ".DisplayIconID", PrimeShop
-                    .convertItemStacktoToIdString(shop.displayIcon));
-            
+            cfg.set(shop.shopname + ".DisplayIconID",
+                    PrimeShop.convertItemStacktoToIdString(shop.displayIcon));
+
             // Shopkeeper IDs
-            List<Integer> list_with_shopkeepers= new ArrayList<Integer>();
-            
-            
+            List<Integer> list_with_shopkeepers = new ArrayList<Integer>();
+
             Map<Integer, List<Shop>> map = PrimeShop.hashMap_CitizensNPCs;
 
             for (Integer shopkeeperID : map.keySet()) {
-                List<Shop> list_with_shops= map.get(shopkeeperID);
-                
+                List<Shop> list_with_shops = map.get(shopkeeperID);
+
                 for (Shop s : list_with_shops) {
                     if (s.shopname.matches(shop.shopname)) {
                         list_with_shopkeepers.add(shopkeeperID);
                     }
                 }
             }
-            
-            cfg.set(shop.shopname + ".NPC_Shopkeeper_IDs", list_with_shopkeepers);
-                
-            
-            
+
+            cfg.set(shop.shopname + ".NPC_Shopkeeper_IDs",
+                    list_with_shopkeepers);
+
             // Items
-            
+
             for (Iterator<ItemStack> iter = shop.listOfItems.iterator(); iter
                     .hasNext();) {
                 ItemStack item = iter.next();
@@ -151,7 +151,8 @@ public class Shop_Configuration_Handler {
             cfg.save(file);
         } catch (IOException e) {
             e.printStackTrace();
-            PrimeShop.plugin.getLogger().log(Level.SEVERE, ChatColor.RED + (Message_Handler.resolve_to_message(1)));
+            PrimeShop.plugin.getLogger().log(Level.SEVERE,
+                    ChatColor.RED + (Message_Handler.resolve_to_message(1)));
             return false;
         }
         return true;

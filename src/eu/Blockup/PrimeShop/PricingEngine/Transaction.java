@@ -12,7 +12,7 @@ import eu.Blockup.PrimeShop.PricingEngine.Enchantments.EnchantmentHandler;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.Item_Node_of_ItemBloodline;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPrice;
 
-class Transaction extends Thread{
+class Transaction extends Thread {
     // TODO add Player
     private double amount;
     public double priceTotal;
@@ -25,65 +25,67 @@ class Transaction extends Thread{
     private CountDownLatch latch;
     private ItemStack itemstack;
 
-
-
-    public Transaction(ItemStack itemstack, CountDownLatch latch, double amount, boolean kaufen, boolean save_priceChanges_to_Backend, Item_Node_of_ItemBloodline tree) {
-	super();
-	this.itemstack = itemstack;
-	this.latch =latch; 
-	this.amount = amount;
-	Kaufen = kaufen;
-	this.save_priceChanges_to_Backend = save_priceChanges_to_Backend;
-	this.tree = tree;
+    public Transaction(ItemStack itemstack, CountDownLatch latch,
+            double amount, boolean kaufen,
+            boolean save_priceChanges_to_Backend,
+            Item_Node_of_ItemBloodline tree) {
+        super();
+        this.itemstack = itemstack;
+        this.latch = latch;
+        this.amount = amount;
+        Kaufen = kaufen;
+        this.save_priceChanges_to_Backend = save_priceChanges_to_Backend;
+        this.tree = tree;
     }
 
-
-
-    
     private double get_price_for_enchantments() {
-        //is this supposed to get the total price of _all_ enchantments?
-    	double result = 0;
-    	
-    	Map<Enchantment, Integer> map = itemstack.getEnchantments();
-    	
-		for (Enchantment enchantment : map.keySet()) {
-			
-//			result += EnchantmentHandler.getPrice(enchantment.getId(), map.get(enchantment));
-			result += EnchantmentHandler.getPrice(enchantment.getName() , map.get(enchantment));
-		}
-    	
-    	return result;
+        // is this supposed to get the total price of _all_ enchantments?
+        double result = 0;
+
+        Map<Enchantment, Integer> map = itemstack.getEnchantments();
+
+        for (Enchantment enchantment : map.keySet()) {
+
+            // result += EnchantmentHandler.getPrice(enchantment.getId(),
+            // map.get(enchantment));
+            result += EnchantmentHandler.getPrice(enchantment.getName(),
+                    map.get(enchantment));
+        }
+
+        return result;
     }
-    
-    
+
     private void startTransactione() {
-    	
-	ReturnPrice result = this.tree.buy_this_item(this.Kaufen, this.amount, this.save_priceChanges_to_Backend);
-	if (result != null) {
-	    this.priceTotal = result.price;
-	    this.priceTotal += get_price_for_enchantments();
-	    if (this.Kaufen) {
-	    	this.priceTotal = this.priceTotal * Cofiguration_Handler.value_every_item_bought_gets_multiplied_with;	    	
-	    }else {
-	    	this.priceTotal = this.priceTotal * Cofiguration_Handler.value_every_item_sold_gets_multiplied_with;	    	
-	    }
-	    this.priceTotal = this.priceTotal * Cofiguration_Handler.globalRateOfInflation;
-	    this.transactionWasSuccessful = result.succesful;
-	    this.errorMessage = result.errorMessage;
-	    this.transactionIsCompleted = true;
-	} else {
-	    this.errorMessage = Message_Handler.resolve_to_message(13);
-	    this.transactionWasSuccessful = false;
-	    this.transactionIsCompleted = true;  
-	}
-	this.latch.countDown();
-	
+
+        ReturnPrice result = this.tree.buy_this_item(this.Kaufen, this.amount,
+                this.save_priceChanges_to_Backend);
+        if (result != null) {
+            this.priceTotal = result.price;
+            this.priceTotal += get_price_for_enchantments();
+            if (this.Kaufen) {
+                this.priceTotal = this.priceTotal
+                        * Cofiguration_Handler.value_every_item_bought_gets_multiplied_with;
+            } else {
+                this.priceTotal = this.priceTotal
+                        * Cofiguration_Handler.value_every_item_sold_gets_multiplied_with;
+            }
+            this.priceTotal = this.priceTotal
+                    * Cofiguration_Handler.globalRateOfInflation;
+            this.transactionWasSuccessful = result.succesful;
+            this.errorMessage = result.errorMessage;
+            this.transactionIsCompleted = true;
+        } else {
+            this.errorMessage = Message_Handler.resolve_to_message(13);
+            this.transactionWasSuccessful = false;
+            this.transactionIsCompleted = true;
+        }
+        this.latch.countDown();
+
     }
 
     @Override
     public void run() {
-	this.startTransactione();
+        this.startTransactione();
     }
-    
 
 }

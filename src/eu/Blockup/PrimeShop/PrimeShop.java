@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.logging.Level;
 
 import net.milkbowl.vault.economy.Economy;
-import net.minecraft.util.org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FileUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -52,37 +52,35 @@ import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.Recepie_Examiner;
 import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class PrimeShop extends JavaPlugin {
-    
+
     public static PrimeShop plugin;
     public static DatabaseIntersection databaseHandler;
     public static HashMap<String, Shop_Item> hashMap_SQL_Item;
     public static HashMap<String, List<EvaluatedRecipe>> hashMap_EvaluatedRecipe;
     private static HashMap<String, Item_Node_of_ItemBloodline> hashMap_Item_Node_of_ItemBloodline;
-    
+
     public static HashMap<String, ChestShop> hashMap_Chest_Shops;
     private Recepie_Examiner recepie_Examiner;
-//    private Item_Trader itemTrader;
+    // private Item_Trader itemTrader;
     public static Economy economy = null;
     private Cofiguration_Handler cofiguration_Handler;
     public static HashMap<String, Shop> hashMap_Shops;
     public static List<String> list_of_deaktivated_PriceLinks;
     public static HashMap<Integer, List<Shop>> hashMap_CitizensNPCs;
-    
+
     private static int permissionGroupMaximum = 100;
     private static int permissionGroupMinimum = 1;
 
     public static Map<String, InventoryInterface> hashMap_InventoryInterfaces;
     public static Map<String, Inventory> hashMap_InventorySessions;
-//    private static Map<String, ItemStack> hashMap_Inventory_handSave;
+    // private static Map<String, ItemStack> hashMap_Inventory_handSave;
     public NPC_Click_Listener citizensClickListener;
     public Sign_Click_Listener signClickListener;
     public ChestShop_Sign_Listener chestShopsignListener;
     public static Shop_Configuration_Handler shopConfigHandler;
-    public CooldownManager cooldownManager; 
-    
-    public static boolean citezens_is_enabled;
-    
+    public CooldownManager cooldownManager;
 
+    public static boolean citezens_is_enabled;
 
     @Override
     public void onEnable() {
@@ -90,35 +88,33 @@ public class PrimeShop extends JavaPlugin {
         PrimeShop.plugin = this;
         this.getDescription();
 
-        
-        // Copy Configfiles to /Plugin/PrimeShop  
+        // Copy Configfiles to /Plugin/PrimeShop
         copy_default_config_Files_to_Plugin_dir("custom_price_links.yml");
         copy_default_config_Files_to_Plugin_dir("enchantments.yml");
         copy_default_config_Files_to_Plugin_dir("items.yml");
         copy_default_config_Files_to_Plugin_dir("config.yml");
-        
-    
-        
+
         // Lade Citizens
-        if(getServer().getPluginManager().getPlugin("Citizens") == null || getServer().getPluginManager().getPlugin("Citizens").isEnabled() == false) {
-            getLogger().log(Level.SEVERE, "Citizens 2.0 not found or not enabled.  NPCs will not be supported");
+        if (getServer().getPluginManager().getPlugin("Citizens") == null
+                || getServer().getPluginManager().getPlugin("Citizens")
+                        .isEnabled() == false) {
+            getLogger()
+                    .log(Level.SEVERE,
+                            "Citizens 2.0 not found or not enabled.  NPCs will not be supported");
             citezens_is_enabled = false;
-//            getServer().getPluginManager().disablePlugin(this);    
-//            return;
+            // getServer().getPluginManager().disablePlugin(this);
+            // return;
         } else {
             // Citizens ClickListener
             citezens_is_enabled = true;
             citizensClickListener = new NPC_Click_Listener();
         }
-        
-        
-        
+
         // Sign Listener
         signClickListener = new Sign_Click_Listener();
-        
+
         // ChestShop Sign Listener
-//        chestShopsignListener = new ChestShop_Sign_Listener(); 
-        
+        // chestShopsignListener = new ChestShop_Sign_Listener();
 
         // Initialisiere die SQL Items und Rezept Datenbanken
         list_of_deaktivated_PriceLinks = new ArrayList<String>();
@@ -128,11 +124,11 @@ public class PrimeShop extends JavaPlugin {
         hashMap_Item_Node_of_ItemBloodline = new HashMap<String, Item_Node_of_ItemBloodline>();
         hashMap_InventoryInterfaces = new HashMap<String, InventoryInterface>();
         hashMap_InventorySessions = new HashMap<String, Inventory>();
-//        hashMap_Inventory_handSave = new HashMap<String, ItemStack>();
-//        hashMap_Chest_Shops = new HashMap<String, ChestShop>();
-        
+        // hashMap_Inventory_handSave = new HashMap<String, ItemStack>();
+        // hashMap_Chest_Shops = new HashMap<String, ChestShop>();
+
         recepie_Examiner = new Recepie_Examiner(this);
-//        itemTrader = new Item_Trader(this);
+        // itemTrader = new Item_Trader(this);
 
         // Setup Custom Price Links
         Custom_Price_Links.load_Custom_Price_Links();
@@ -151,7 +147,8 @@ public class PrimeShop extends JavaPlugin {
         // Lade Vault
         if (!this.setupEconomy()) {
             // TODO Disable plugin
-            getLogger().log(Level.SEVERE, Message_Handler.resolve_to_message(2));
+            getLogger()
+                    .log(Level.SEVERE, Message_Handler.resolve_to_message(2));
             this.getPluginLoader().disablePlugin(this);
             return;
         }
@@ -160,41 +157,45 @@ public class PrimeShop extends JavaPlugin {
         this.cofiguration_Handler = new Cofiguration_Handler();
         if (!cofiguration_Handler.load_Configuration()) {
             // TODO Disable plugin
-            //getServer().getPluginManager().disablePlugin((JavaPlugin) this);
-            getLogger().log(Level.SEVERE, Message_Handler.resolve_to_message(3));
+            // getServer().getPluginManager().disablePlugin((JavaPlugin) this);
+            getLogger()
+                    .log(Level.SEVERE, Message_Handler.resolve_to_message(3));
             PrimeShop.plugin.getPluginLoader().disablePlugin(PrimeShop.plugin);
             return;
         }
 
         // CooldownManager
-        cooldownManager =  new CooldownManager(Cofiguration_Handler.spamProtection_in_milliseconds); 
-        
+        cooldownManager = new CooldownManager(
+                Cofiguration_Handler.spamProtection_in_milliseconds);
+
         // Lade Datenbank
-//        databaseHandler = new Database_MySql(this, DatabseTyp.MYSQL);
+        // databaseHandler = new Database_MySql(this, DatabseTyp.MYSQL);
         databaseHandler = new Database_FLATFILE(this, DatabseTyp.MYSQL);
         if (!databaseHandler.load_Database()) {
-            getLogger().log(Level.SEVERE, Message_Handler.resolve_to_message(1));
+            getLogger()
+                    .log(Level.SEVERE, Message_Handler.resolve_to_message(1));
             this.getPluginLoader().disablePlugin(this);
             return;
         }
-        
-        
+
         // Register Saving Scheduler
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(PrimeShop.plugin,(Runnable) new Item_Saver(), 2 * 20L, Cofiguration_Handler.save_Changes_every_X_Seconds * 20L);
-        
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(PrimeShop.plugin,
+                (Runnable) new Item_Saver(), 2 * 20L,
+                Cofiguration_Handler.save_Changes_every_X_Seconds * 20L);
+
         // registen Inventory Section Listener
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvents(new SectionListener(), this);
-        
+
         // Registriere die Command Listener
         Command_Registrer.register_Command_Listeners(this);
-        
+
         // Pre render all Items in Shops
         PreRender_all_Items_in_Shops a = new PreRender_all_Items_in_Shops();
         a.start();
-        
+
         // Metrics
-        
+
         try {
             Metrics metrics = new Metrics(this);
             metrics.start();
@@ -207,10 +208,9 @@ public class PrimeShop extends JavaPlugin {
     @SuppressWarnings("deprecation")
     @Override
     public void onDisable() {
-    
-        Item_Saver itemSaver =new Item_Saver();
+
+        Item_Saver itemSaver = new Item_Saver();
         itemSaver.save_all_Items();
-        
 
         // Close all InventoryInterfaces
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -224,14 +224,13 @@ public class PrimeShop extends JavaPlugin {
         hashMap_Item_Node_of_ItemBloodline = null;
         hashMap_InventoryInterfaces = null;
         hashMap_InventorySessions = null;
-//        hashMap_Inventory_handSave = null;
+        // hashMap_Inventory_handSave = null;
         recepie_Examiner = null;
-//        itemTrader = null;
+        // itemTrader = null;
         PrimeShop.economy = null;
 
         PrimeShop.plugin = null;
     }
-
 
     private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = getServer()
@@ -242,7 +241,6 @@ public class PrimeShop extends JavaPlugin {
         }
         return (PrimeShop.economy != null);
     }
-    
 
     private static ItemStack convert_random_String_to_ItemStack(String input,
             int amount) {
@@ -298,8 +296,7 @@ public class PrimeShop extends JavaPlugin {
         // id:data
 
         if (input.contains(":")) {
-            result = PrimeShop.convert_random_String_to_ItemStack(input,
-                    0);
+            result = PrimeShop.convert_random_String_to_ItemStack(input, 0);
         }
 
         // id
@@ -397,8 +394,7 @@ public class PrimeShop extends JavaPlugin {
         if (Cofiguration_Handler.price_Linking_for_all_Items_DISABLED)
             return get_empty_Recipe_List(itemstack);
 
-        String mc_Item_ID = PrimeShop
-                .convertItemStacktoToIdString(itemstack);
+        String mc_Item_ID = PrimeShop.convertItemStacktoToIdString(itemstack);
         if (is_PriceLinking_disabled_for_Item(itemstack)) {
             return get_empty_Recipe_List(itemstack);
         }
@@ -413,18 +409,18 @@ public class PrimeShop extends JavaPlugin {
     }
 
     private boolean is_PriceLinking_disabled_for_Item(String mc_Item_ID) {
-        
+
         List<String> asd = new ArrayList<String>();
         // Firework
         asd.add("401:0");
         asd.add("401:1");
         asd.add("402:1");
         asd.add("402:0");
-//        // Leather Helemet
-//        asd.add("298:0");
-//        asd.add("298:1");
-//        asd.add("298:-1");
-//        asd.add("298:-1");
+        // // Leather Helemet
+        // asd.add("298:0");
+        // asd.add("298:1");
+        // asd.add("298:-1");
+        // asd.add("298:-1");
         // Inc Sack
         asd.add("351:-1");
         asd.add("351:0");
@@ -440,14 +436,10 @@ public class PrimeShop extends JavaPlugin {
         asd.add("358:0");
         asd.add("358:-1");
         asd.add("358:1");
-        
-        
-        if (asd.contains(mc_Item_ID)) return true;
-        
-        
-        
-        
-        
+
+        if (asd.contains(mc_Item_ID))
+            return true;
+
         for (String s : list_of_deaktivated_PriceLinks) {
             if (s.equals(mc_Item_ID)) {
                 return true;
@@ -457,8 +449,7 @@ public class PrimeShop extends JavaPlugin {
     }
 
     public boolean is_PriceLinking_disabled_for_Item(ItemStack istemStack) {
-        String mc_Item_ID = PrimeShop
-                .convertItemStacktoToIdString(istemStack);
+        String mc_Item_ID = PrimeShop.convertItemStacktoToIdString(istemStack);
         return is_PriceLinking_disabled_for_Item(mc_Item_ID);
     }
 
@@ -473,14 +464,14 @@ public class PrimeShop extends JavaPlugin {
         }
         Cofiguration_Handler.save_list_of_disabled_PriceLinks_to_Disk();
     }
-    
-    
+
     public void disable_PriceLinking_for_Item(ItemStack itemStack) {
         String mcID = convertItemStacktoToIdString(itemStack);
         list_of_deaktivated_PriceLinks.add(mcID);
         Cofiguration_Handler.save_list_of_disabled_PriceLinks_to_Disk();
-        
-        databaseHandler.get_Item_from_Databse(get_Shop_Item_of_Itemstack(itemStack));
+
+        databaseHandler
+                .get_Item_from_Databse(get_Shop_Item_of_Itemstack(itemStack));
     }
 
     private List<EvaluatedRecipe> get_empty_Recipe_List(ItemStack itemStack) {
@@ -490,8 +481,7 @@ public class PrimeShop extends JavaPlugin {
 
     public static Shop_Item get_Shop_Item_of_Itemstack(ItemStack itemstack) {
         Shop_Item result;
-        String mc_Item_ID = PrimeShop
-                .convertItemStacktoToIdString(itemstack);
+        String mc_Item_ID = PrimeShop.convertItemStacktoToIdString(itemstack);
         if (hashMap_SQL_Item.containsKey(mc_Item_ID)) {
             result = hashMap_SQL_Item.get(mc_Item_ID);
         } else {
@@ -508,8 +498,8 @@ public class PrimeShop extends JavaPlugin {
         Item_Node_of_ItemBloodline result;
         if (PrimeShop.plugin.is_PriceLinking_disabled_for_Item(itemstack)) {
             result = new Item_Node_of_ItemBloodline(null, new Shop_Item_Stack(
-                    PrimeShop.get_Shop_Item_of_Itemstack(itemstack), 1,
-                    true), PrimeShop.plugin);
+                    PrimeShop.get_Shop_Item_of_Itemstack(itemstack), 1, true),
+                    PrimeShop.plugin);
             result.grow_this_tree();
         } else {
             String mc_Item_ID = PrimeShop
@@ -530,7 +520,8 @@ public class PrimeShop extends JavaPlugin {
     }
 
     public static String convert_IemStack_to_DisplayName(ItemStack itemStack) {
-        String result = itemStack.getType().toString().toLowerCase(Locale.ENGLISH);
+        String result = itemStack.getType().toString()
+                .toLowerCase(Locale.ENGLISH);
         return result;
     }
 
@@ -539,9 +530,9 @@ public class PrimeShop extends JavaPlugin {
                 mcItemID, 1));
     }
 
-//    public static Economy getEconomy() {
-//        return economy;
-//    }
+    // public static Economy getEconomy() {
+    // return economy;
+    // }
 
     private static void setEconomy(Economy economy) {
         PrimeShop.economy = economy;
@@ -560,8 +551,9 @@ public class PrimeShop extends JavaPlugin {
         // Filter the Parent Item from List
         for (ItemStack itemstack : list) {
             itemstack.setAmount(1);
-            
-            if (!Item_Comparer.do_Items_match(itemstack, resultitem, true, false, true, true, true)) {
+
+            if (!Item_Comparer.do_Items_match(itemstack, resultitem, true,
+                    false, true, true, true)) {
 
                 list_containing_duplicates.add(itemstack);
             }
@@ -574,7 +566,8 @@ public class PrimeShop extends JavaPlugin {
             boolean duplicationFound = false;
 
             for (ItemStack itemstack2 : result) {
-                if (Item_Comparer.do_Items_match(itemstack, itemstack2, true, false, true, true, true)) {
+                if (Item_Comparer.do_Items_match(itemstack, itemstack2, true,
+                        false, true, true, true)) {
                     duplicationFound = true;
                     break;
                 }
@@ -586,23 +579,26 @@ public class PrimeShop extends JavaPlugin {
         }
         return result;
     }
-    
+
     // Get Permission Group for Item
-    private int get_Players_PermissionGroup (Player player) {
+    private int get_Players_PermissionGroup(Player player) {
         for (int i = PrimeShop.permissionGroupMaximum; i > PrimeShop.permissionGroupMinimum; i--) {
-            if (PrimeShop.has_player_Permission_for_this_Command(player, "PrimeShop.VIP.permission_Group." + i)) {
+            if (PrimeShop.has_player_Permission_for_this_Command(player,
+                    "PrimeShop.VIP.permission_Group." + i)) {
                 return i;
             }
         }
         return PrimeShop.permissionGroupMinimum;
     }
-    
-    public boolean has_Player_Permission_for_this_Item (Player player, ItemStack itemStack) {
+
+    public boolean has_Player_Permission_for_this_Item(Player player,
+            ItemStack itemStack) {
         List<ItemStack> a = get_all_SubItems_of_ItemStack(itemStack);
         int max = -100;
         int tmp;
         if (a.isEmpty()) {
-            max = get_Shop_Item_of_Itemstack(itemStack).permissionGroup.getValue();
+            max = get_Shop_Item_of_Itemstack(itemStack).permissionGroup
+                    .getValue();
         } else {
             for (ItemStack i : a) {
                 tmp = get_Shop_Item_of_Itemstack(i).permissionGroup.getValue();
@@ -612,22 +608,22 @@ public class PrimeShop extends JavaPlugin {
             }
         }
         int playersPermission = get_Players_PermissionGroup(player);
-        
-        if(playersPermission >= max) return true;
+
+        if (playersPermission >= max)
+            return true;
         return false;
-        
+
     }
 
-
-    public List<Shop> get_List_of_Shops_from_NPC (int npcID) {
+    public List<Shop> get_List_of_Shops_from_NPC(int npcID) {
         if (hashMap_CitizensNPCs.containsKey(npcID)) {
             return hashMap_CitizensNPCs.get(npcID);
         } else {
             return null;
         }
     }
-    
-    public boolean add_Shop_to_NPC (Shop shop, int npcID) {
+
+    public boolean add_Shop_to_NPC(Shop shop, int npcID) {
         if (hashMap_CitizensNPCs.containsKey(npcID)) {
             if (hashMap_CitizensNPCs.get(npcID).contains(shop)) {
                 return false;
@@ -640,21 +636,19 @@ public class PrimeShop extends JavaPlugin {
         }
         return true;
     }
-    
+
     public boolean remove_Shop_from_NPC(Shop shop, int npcID) {
         if (hashMap_CitizensNPCs.containsKey(npcID)) {
-            if (hashMap_CitizensNPCs.get(npcID).contains(shop)) {                
+            if (hashMap_CitizensNPCs.get(npcID).contains(shop)) {
                 hashMap_CitizensNPCs.get(npcID).remove(shop);
                 return true;
             }
         }
-            return false;
+        return false;
     }
-    
-    
 
-
-    public static void open_InventoyInterface(final Player player, InventoryInterface inventoryInterface) {
+    public static void open_InventoyInterface(final Player player,
+            InventoryInterface inventoryInterface) {
         PrimeShop.close_InventoyInterface(player);
         final InventoryInterface menu_ = inventoryInterface.clone();
         Bukkit.getScheduler().scheduleSyncDelayedTask(PrimeShop.plugin,
@@ -684,55 +678,62 @@ public class PrimeShop extends JavaPlugin {
         return PrimeShop.get_Players_InventoyInterface(player) != null;
     }
 
-    public static boolean has_player_Permission_for_this_Command (CommandSender cs, final String permission) {
-        if (!(cs instanceof Player)) return true;
+    public static boolean has_player_Permission_for_this_Command(
+            CommandSender cs, final String permission) {
+        if (!(cs instanceof Player))
+            return true;
         Player player = (Player) cs;
-        if (player.hasPermission(permission)) return true;
+        if (player.hasPermission(permission))
+            return true;
         String permissionString = permission;
         while (permissionString.contains(".")) {
-            permissionString = permissionString.substring(0, permissionString.length()-1);
-            if (permissionString.charAt(permissionString.length() -1) == '.') 
-            if(player.hasPermission(permissionString + "*")) return true;
+            permissionString = permissionString.substring(0,
+                    permissionString.length() - 1);
+            if (permissionString.charAt(permissionString.length() - 1) == '.')
+                if (player.hasPermission(permissionString + "*"))
+                    return true;
         }
-        
+
         return false;
-    }    
-    
-    
-    private void copy_default_config_Files_to_Plugin_dir (String filename) {
-         URL inputUrl = getClass().getResource("/eu/Blockup/PrimeShop/" + filename);
-            File dest = new File("plugins/PrimeShop/" + filename);
-           
-            if(!(dest.exists() && !dest.isDirectory())) {
-                try {
-                    FileUtils.copyURLToFile(inputUrl, dest);
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            }
     }
-    
-    public static double get_Balance_of_Player (Player player){
+
+    private void copy_default_config_Files_to_Plugin_dir(String filename) {
+        URL inputUrl = getClass().getResource(
+                "/eu/Blockup/PrimeShop/" + filename);
+        File dest = new File("plugins/PrimeShop/" + filename);
+
+        if (!(dest.exists() && !dest.isDirectory())) {
+            try {
+                FileUtils.copyURLToFile(inputUrl, dest);
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+    }
+
+    public static double get_Balance_of_Player(Player player) {
         return economy.getBalance(player);
     }
-    
-    public static boolean has_Player_more_Money_than (Player player, double value){
-        if (get_Balance_of_Player(player) >= value) return true;
+
+    public static boolean has_Player_more_Money_than(Player player, double value) {
+        if (get_Balance_of_Player(player) >= value)
+            return true;
         return false;
     }
-    
-    public static boolean withdraw_money_from_Players_Account(Player player, double value) {
-        if (value < 0) return false;
-        if (!has_Player_more_Money_than(player, value)) return false;
+
+    public static boolean withdraw_money_from_Players_Account(Player player,
+            double value) {
+        if (value < 0)
+            return false;
+        if (!has_Player_more_Money_than(player, value))
+            return false;
         economy.withdrawPlayer(player, value);
         return true;
     }
-    
-    public static void add_Money_to_Players_Account (Player player, double value) {
+
+    public static void add_Money_to_Players_Account(Player player, double value) {
         economy.depositPlayer(player, value);
     }
-    
-    
-    
+
 }

@@ -25,7 +25,8 @@ public class Interface_Shop_Page extends InventoryInterface {
     private Shop shop;
     public int pagenumber;
     private final int maxPages;
-//    @SuppressWarnings("deprecation")
+
+    // @SuppressWarnings("deprecation")
     public Interface_Shop_Page(final List<InventoryInterface> link_Back_Stack,
             Player player, final Shop shop, final int pagenumber) {
         super(shop.shopname, 6, link_Back_Stack);
@@ -43,8 +44,8 @@ public class Interface_Shop_Page extends InventoryInterface {
             boolean go_back_to_parent = true;
             if (parentMenu != null) {
                 if (parentMenu instanceof Interface_Collection_of_Shops) {
-                    if (((Interface_Collection_of_Shops) parentMenu).getList_of_Shops()
-                            .size() == 1) {
+                    if (((Interface_Collection_of_Shops) parentMenu)
+                            .getList_of_Shops().size() == 1) {
                         go_back_to_parent = false;
                     }
                 }
@@ -74,15 +75,17 @@ public class Interface_Shop_Page extends InventoryInterface {
                             current.setAmount(1);
                             shop.add_ItemStack(current);
                             shop.refresh_pageCount();
-                            PrimeShop.shopConfigHandler.write_shops_to_Harddisk();
+                            PrimeShop.shopConfigHandler
+                                    .write_shops_to_Harddisk();
                             reprint_items(player);
                             player.getInventory().remove(current);
-                            player.sendMessage(ChatColor.GREEN + Message_Handler.resolve_to_message(36));
-                            
+                            player.sendMessage(ChatColor.GREEN
+                                    + Message_Handler.resolve_to_message(36));
+
                         }
                     }
                 }
-            return false;
+                return false;
 
             }
         });
@@ -98,7 +101,8 @@ public class Interface_Shop_Page extends InventoryInterface {
 
         for (int a = 0; a < this.getWidth(); a++) {
             for (int b = 0; b < this.getHeight(); b++) {
-                this.addOption(a, b, new Button_with_no_task(Cofiguration_Handler.background_ItemStack, " "));
+                this.addOption(a, b, new Button_with_no_task(
+                        Cofiguration_Handler.background_ItemStack, " "));
             }
         }
 
@@ -116,31 +120,42 @@ public class Interface_Shop_Page extends InventoryInterface {
                     try {
                         currentItem = page.listOfItems.get(itemsAddedItems);
                     } catch (Exception e) {
-                        PrimeShop.plugin.getLogger().log(Level.SEVERE, "Internal Error finding Item in list of ShopPages");
+                        PrimeShop.plugin
+                                .getLogger()
+                                .log(Level.SEVERE,
+                                        "Internal Error finding Item in list of ShopPages");
                         e.printStackTrace();
                         return;
                     }
 
-                    this.addOption(x, y, new Button(currentItem, Message_Handler.resolve_to_message(88),
+                    this.addOption(x, y, new Button(currentItem,
+                            Message_Handler.resolve_to_message(88),
                             Message_Handler.resolve_to_message(89)) {
 
                         @Override
-                        public void onClick(InventoryInterface inventoryInterface, Player player, 
-                                ItemStack cursor, ItemStack current, ClickType type) {
-                            
+                        public void onClick(
+                                InventoryInterface inventoryInterface,
+                                Player player, ItemStack cursor,
+                                ItemStack current, ClickType type) {
+
                             int slot_position = -1;
                             for (int y = 2; y < 5; y++) {
                                 for (int x = 0; x < 9; x++) {
                                     slot_position++;
-                                    if (inventoryInterface.getOption(x, y).equals(this)) {
-                                        PrimeShop.close_InventoyInterface(player);
-                                        PrimeShop.open_InventoyInterface(
-                                            player,
-                                            new Interface_Buy_Sell_Item(
-                                                inventoryInterface.branch_back_Stack,
-                                                player, shop, page.listOfItems.get(slot_position), 1,
-                                                true, false
-                                            ));
+                                    if (inventoryInterface.getOption(x, y)
+                                            .equals(this)) {
+                                        PrimeShop
+                                                .close_InventoyInterface(player);
+                                        PrimeShop
+                                                .open_InventoyInterface(
+                                                        player,
+                                                        new Interface_Buy_Sell_Item(
+                                                                inventoryInterface.branch_back_Stack,
+                                                                player,
+                                                                shop,
+                                                                page.listOfItems
+                                                                        .get(slot_position),
+                                                                1, true, false));
                                         return;
                                     }
                                 }
@@ -151,16 +166,14 @@ public class Interface_Shop_Page extends InventoryInterface {
                 }
             }
         }
-        
+
         if (maxPages > 1) {
             int y_Row_Page_Iterator = this.getHeight() - 1;
-            
-            
+
             // Compass
             this.addOption(4, y_Row_Page_Iterator, new Button_with_no_task(
                     Material.COMPASS, String.valueOf(pagenumber)));
-            
-            
+
             // Next Page
 
             // for (int counteri = 2; counteri <= 6; counteri++) {
@@ -233,7 +246,9 @@ public class Interface_Shop_Page extends InventoryInterface {
             }
             // First Page
             if (pagenumber > 2) {
-                this.addOption(2, y_Row_Page_Iterator,
+                this.addOption(
+                        2,
+                        y_Row_Page_Iterator,
                         new Button(Material.PAPER, (short) 0, 1,
                                 Message_Handler.resolve_to_message(93), "", "") {
 
@@ -255,8 +270,6 @@ public class Interface_Shop_Page extends InventoryInterface {
                         });
             }
         }
-        
-        
 
         // Delete Shop from Collection
         if (PrimeShop.has_player_Permission_for_this_Command(player,
@@ -270,7 +283,8 @@ public class Interface_Shop_Page extends InventoryInterface {
                             5,
                             new Button(
                                     PrimeShop.convertItemIdStringToItemstack(
-                                            "160:6", 1), Message_Handler.resolve_to_message(72)) {
+                                            "160:6", 1), Message_Handler
+                                            .resolve_to_message(72)) {
 
                                 @Override
                                 public void onClick(
@@ -302,7 +316,8 @@ public class Interface_Shop_Page extends InventoryInterface {
                     8,
                     5,
                     new Button(PrimeShop.convertItemIdStringToItemstack(
-                            "160:14", 1), Message_Handler.resolve_to_message(78)) {
+                            "160:14", 1), Message_Handler
+                            .resolve_to_message(78)) {
 
                         @Override
                         public void onClick(
@@ -320,50 +335,58 @@ public class Interface_Shop_Page extends InventoryInterface {
                         }
                     });
         }
-        
-        
-        // Add Item Information Block
-        
-        if (PrimeShop.has_player_Permission_for_this_Command(
-                player, "PrimeShop.admin.addItemsToShop."
-                        + shop.shopname))
-        this.addOption(0, 5, new Button_with_no_task(PrimeShop.convertItemIdStringToItemstack("160:13", 1), Message_Handler.resolve_to_message(141), Message_Handler.resolve_to_message(138), Message_Handler.resolve_to_message(139), Message_Handler.resolve_to_message(140)));
 
-        
-        
-        
+        // Add Item Information Block
+
+        if (PrimeShop.has_player_Permission_for_this_Command(player,
+                "PrimeShop.admin.addItemsToShop." + shop.shopname))
+            this.addOption(
+                    0,
+                    5,
+                    new Button_with_no_task(PrimeShop
+                            .convertItemIdStringToItemstack("160:13", 1),
+                            Message_Handler.resolve_to_message(141),
+                            Message_Handler.resolve_to_message(138),
+                            Message_Handler.resolve_to_message(139),
+                            Message_Handler.resolve_to_message(140)));
+
         // Go Back Option
         boolean goBack = true;
         if (parentMenu != null) {
 
             if (parentMenu instanceof Interface_Collection_of_Shops) {
-                if (((Interface_Collection_of_Shops) parentMenu).getList_of_Shops()
-                        .size() == 1) {
+                if (((Interface_Collection_of_Shops) parentMenu)
+                        .getList_of_Shops().size() == 1) {
                     goBack = false;
                 }
 
             }
 
             if (goBack) {
-                this.addOption(0, 0, new Button(Cofiguration_Handler.backToCollectionButton_ItemStack, Message_Handler.resolve_to_message(61), Message_Handler.resolve_to_message(62)) {
+                this.addOption(
+                        0,
+                        0,
+                        new Button(
+                                Cofiguration_Handler.backToCollectionButton_ItemStack,
+                                Message_Handler.resolve_to_message(61),
+                                Message_Handler.resolve_to_message(62)) {
 
-                    @Override
-                    public void onClick(InventoryInterface inventoryInterface,
-                            Player player, ItemStack cursor, ItemStack current,
-                            ClickType type) {
-                        inventoryInterface.return_to_predecessor(
-                                position_in_Stack - 1, player);
-                    }
-                });
+                            @Override
+                            public void onClick(
+                                    InventoryInterface inventoryInterface,
+                                    Player player, ItemStack cursor,
+                                    ItemStack current, ClickType type) {
+                                inventoryInterface.return_to_predecessor(
+                                        position_in_Stack - 1, player);
+                            }
+                        });
             }
 
         }
 
-        
-
         // Close Option
         this.addOption(8, 0, new Button_close_Interface());
-        
+
         this.refresh(player);
     }
 }

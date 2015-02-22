@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 //import java.util.logging.Logger;
 
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -28,150 +27,160 @@ import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.Shops.Shop;
 
 public class Sign_Click_Listener implements Listener {
-    public Sign_Click_Listener () {
-        PrimeShop.plugin.getServer().getPluginManager().registerEvents(this, PrimeShop.plugin);
+    public Sign_Click_Listener() {
+        PrimeShop.plugin.getServer().getPluginManager()
+                .registerEvents(this, PrimeShop.plugin);
     }
-        
+
     @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteract(PlayerInteractEvent event) {
-        String name  =  Cofiguration_Handler.Sign_Shop_Headline;
-    
-        if (event.getPlayer() !=  null && event.getClickedBlock() !=  null && event.getClickedBlock().getState() instanceof Sign) {
-            Sign sign  =  (Sign) event.getClickedBlock().getState();
-            
-            Player player  =  event.getPlayer();
-            
-            String[] lines  =  sign.getLines();
-            if (lines[0].toUpperCase().contains(name.toUpperCase())){
-                
-                
-            if (event.getAction()  ==  Action.RIGHT_CLICK_BLOCK) {
-                // Use an Arrow...
-                if (PrimeShop.has_player_Permission_for_this_Command(player, "PrimeShop.admin.createSigns")) {
-                    player.sendMessage(Message_Handler.resolve_to_message(128));
-                    event.setCancelled(true);
-                    return;
-                }
-            }
-            
-            if (event.getAction()  ==  Action.LEFT_CLICK_BLOCK) {
-                
-                    // PrimeShop
-            
-                    
-                    // Permission Sign interact
-                    if (!PrimeShop.has_player_Permission_for_this_Command(player, "PrimeShop.Defaults.interactWithSigns")) {
-                        player.sendMessage(Message_Handler.resolve_to_message(130));
+        String name = Cofiguration_Handler.Sign_Shop_Headline;
+
+        if (event.getPlayer() != null && event.getClickedBlock() != null
+                && event.getClickedBlock().getState() instanceof Sign) {
+            Sign sign = (Sign) event.getClickedBlock().getState();
+
+            Player player = event.getPlayer();
+
+            String[] lines = sign.getLines();
+            if (lines[0].toUpperCase().contains(name.toUpperCase())) {
+
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                    // Use an Arrow...
+                    if (PrimeShop.has_player_Permission_for_this_Command(
+                            player, "PrimeShop.admin.createSigns")) {
+                        player.sendMessage(Message_Handler
+                                .resolve_to_message(128));
                         event.setCancelled(true);
                         return;
                     }
-                        
-                    
-                    
+                }
+
+                if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
+
+                    // PrimeShop
+
+                    // Permission Sign interact
+                    if (!PrimeShop.has_player_Permission_for_this_Command(
+                            player, "PrimeShop.Defaults.interactWithSigns")) {
+                        player.sendMessage(Message_Handler
+                                .resolve_to_message(130));
+                        event.setCancelled(true);
+                        return;
+                    }
+
                     // Arrow Destory
-                    if (PrimeShop.has_player_Permission_for_this_Command(player, "PrimeShop.admin.createSigns")) {
-                        if (player.getInventory().getItemInHand().getData().getItemTypeId()  ==  262) {
+                    if (PrimeShop.has_player_Permission_for_this_Command(
+                            player, "PrimeShop.admin.createSigns")) {
+                        if (player.getInventory().getItemInHand().getData()
+                                .getItemTypeId() == 262) {
                             event.setCancelled(false);
                             return;
                         }
                     }
-                    
-                    //Shopname
-                    String shopname  =  lines[1];
-                    boolean found  =  false;
-                    Shop shop  =  null;
 
-                    for (Map.Entry<String, Shop> entry : PrimeShop.hashMap_Shops.entrySet()) {
-                        if (shopname.toUpperCase().contains(entry.getKey().toUpperCase())) {
-                            found  =  true;
-                            shop  =  entry.getValue();
-                        }
-                    }
-
-                    if (! (found && shop !=  null)) {
-                        player.sendMessage("");
-                        player.sendMessage("");
-                        if (PrimeShop.has_player_Permission_for_this_Command(player, "PrimeShop.admin.createShops")) {
-                            // shop not found
-                            player.sendMessage(Message_Handler.resolve_to_message(98));
-                            player.sendMessage(Message_Handler.resolve_to_message(99));                            
-                        } else {
-                            // inform administrator
-                            player.sendMessage(Message_Handler.resolve_to_message(131));
-                        }
-                        
-                        event.setCancelled(true);
-                        return;
-                    } else {
-                        PrimeShop.open_InventoyInterface(player, new Interface_Shop_Page(
-                                new ArrayList<InventoryInterface>(), player, shop, 1
-                            )
-                        );
-                        event.setCancelled(true);
-                        
-                        
-                        return;
-                    }
-
-                    
-                } else {
-                    return;
-                
-                }
-                
-            }
-        }  
-    }
-    
-     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onSignChange(SignChangeEvent event) {
-        // clicked on a sign and signs enabled?
-        if (event.getPlayer() !=  null) {
-            Player player  =  event.getPlayer();
-            String[] lines  =  event.getLines();
-            
-            String name  =  Cofiguration_Handler.Sign_Shop_Headline;
-            if (lines[0].toUpperCase().contains(name.toUpperCase())){
-                if (PrimeShop.has_player_Permission_for_this_Command(player, "PrimeShop.admin.createSigns")) {
-                    
-                    String shopname  =  lines[1];
-                    boolean found  =  false;
-                    Shop shop  =  null;
+                    // Shopname
+                    String shopname = lines[1];
+                    boolean found = false;
+                    Shop shop = null;
 
                     for (Map.Entry<String, Shop> entry : PrimeShop.hashMap_Shops
                             .entrySet()) {
-                        if (entry.getKey().toUpperCase().contains(shopname.toUpperCase())) {
-                            found  =  true;
-                            shop  =  entry.getValue();
+                        if (shopname.toUpperCase().contains(
+                                entry.getKey().toUpperCase())) {
+                            found = true;
+                            shop = entry.getValue();
                         }
                     }
 
-                    if (! (found && shop !=  null)) {
-                        player.sendMessage(Message_Handler.resolve_to_message(98));
-                        player.sendMessage(Message_Handler.resolve_to_message(99));
+                    if (!(found && shop != null)) {
+                        player.sendMessage("");
+                        player.sendMessage("");
+                        if (PrimeShop.has_player_Permission_for_this_Command(
+                                player, "PrimeShop.admin.createShops")) {
+                            // shop not found
+                            player.sendMessage(Message_Handler
+                                    .resolve_to_message(98));
+                            player.sendMessage(Message_Handler
+                                    .resolve_to_message(99));
+                        } else {
+                            // inform administrator
+                            player.sendMessage(Message_Handler
+                                    .resolve_to_message(131));
+                        }
+
+                        event.setCancelled(true);
+                        return;
+                    } else {
+                        PrimeShop.open_InventoyInterface(player,
+                                new Interface_Shop_Page(
+                                        new ArrayList<InventoryInterface>(),
+                                        player, shop, 1));
+                        event.setCancelled(true);
+
+                        return;
+                    }
+
+                } else {
+                    return;
+
+                }
+
+            }
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onSignChange(SignChangeEvent event) {
+        // clicked on a sign and signs enabled?
+        if (event.getPlayer() != null) {
+            Player player = event.getPlayer();
+            String[] lines = event.getLines();
+
+            String name = Cofiguration_Handler.Sign_Shop_Headline;
+            if (lines[0].toUpperCase().contains(name.toUpperCase())) {
+                if (PrimeShop.has_player_Permission_for_this_Command(player,
+                        "PrimeShop.admin.createSigns")) {
+
+                    String shopname = lines[1];
+                    boolean found = false;
+                    Shop shop = null;
+
+                    for (Map.Entry<String, Shop> entry : PrimeShop.hashMap_Shops
+                            .entrySet()) {
+                        if (entry.getKey().toUpperCase()
+                                .contains(shopname.toUpperCase())) {
+                            found = true;
+                            shop = entry.getValue();
+                        }
+                    }
+
+                    if (!(found && shop != null)) {
+                        player.sendMessage(Message_Handler
+                                .resolve_to_message(98));
+                        player.sendMessage(Message_Handler
+                                .resolve_to_message(99));
                         event.setCancelled(true);
                         return;
                     }
 
-                    event.setLine(0,ChatColor.BLUE + "[" + name + "]");
+                    event.setLine(0, ChatColor.BLUE + "[" + name + "]");
                     event.setLine(1, ChatColor.DARK_PURPLE + shop.shopname);
-                    
 
-                } else {  // No Permission
+                } else { // No Permission
                     player.sendMessage(Message_Handler.resolve_to_message(127));
                     event.setCancelled(true);
                     return;
                 }
-            }            
-        }  
+            }
+        }
     }
-     
-     
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockBreak(BlockBreakEvent event) {
-        //This event doesn't get executed?!
-        
+        // This event doesn't get executed?!
+
         Block eventBlock = event.getBlock();
 
         // check surrounding blocks for a Sign
@@ -183,7 +192,6 @@ public class Sign_Click_Listener implements Listener {
         blockList.add(eventBlock.getRelative(BlockFace.SOUTH, 1));
         blockList.add(eventBlock.getRelative(BlockFace.NORTH, 1));
 
-        
         for (Block b : blockList) {
             if (b != null && b.getState() instanceof Sign) {
                 Sign sign = (Sign) b.getState();

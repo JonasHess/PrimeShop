@@ -22,7 +22,8 @@ public class InventoryInterface implements Cloneable {
     public InventoryInterface parentMenu;
     private ClickHandler clickHandler;
 
-    private List<InventoryInterface> copy_Stack_list(final List<InventoryInterface> originallist) {
+    private List<InventoryInterface> copy_Stack_list(
+            final List<InventoryInterface> originallist) {
         List<InventoryInterface> result = new ArrayList<InventoryInterface>();
 
         for (InventoryInterface m : originallist) {
@@ -39,22 +40,27 @@ public class InventoryInterface implements Cloneable {
             return parentMenu.branch_back_Stack;
         }
     }
-   
-     public InventoryInterface(String title, final List<InventoryInterface> link_Back_Stack) {
-         this(title, 3, link_Back_Stack);
-     }
 
-    public InventoryInterface(String title, int lines, final List<InventoryInterface> Stack_List) {
+    public InventoryInterface(String title,
+            final List<InventoryInterface> link_Back_Stack) {
+        this(title, 3, link_Back_Stack);
+    }
+
+    public InventoryInterface(String title, int lines,
+            final List<InventoryInterface> Stack_List) {
         List<InventoryInterface> branch_List;
         if (Stack_List == null) {
-            branch_List = new  ArrayList<InventoryInterface>();
+            branch_List = new ArrayList<InventoryInterface>();
         } else {
             branch_List = Stack_List;
         }
-        
-        if (branch_List.size() >0) { parentMenu = branch_List.get(branch_List.size()-1);
-        } else { parentMenu = null; }
-        
+
+        if (branch_List.size() > 0) {
+            parentMenu = branch_List.get(branch_List.size() - 1);
+        } else {
+            parentMenu = null;
+        }
+
         position_in_Stack = branch_List.size();
         this.branch_back_Stack = copy_Stack_list(branch_List);
         this.setTitle(title);
@@ -70,7 +76,7 @@ public class InventoryInterface implements Cloneable {
             this.close(p);
             PrimeShop.open_InventoyInterface(p, branch_back_Stack.get(i));
         } else {
-            p.sendMessage(""+i);
+            p.sendMessage("" + i);
         }
         return;
     }
@@ -200,6 +206,6 @@ public class InventoryInterface implements Cloneable {
     @Override
     public InventoryInterface clone() {
         // System.out.println("Starte Clonen");
-        return this; //this.clone(this.getTitle());
+        return this; // this.clone(this.getTitle());
     }
 }

@@ -28,8 +28,6 @@ public class Shop_Item {
     public Variabler_typ<Double> timesItemWasSold;
     public Variabler_typ<Integer> permissionGroup;
 
-
-
     // Konstructor
 
     public Shop_Item(ItemStack itemstack, int stockFloor) {
@@ -44,8 +42,7 @@ public class Shop_Item {
     private Shop_Item(String mcItemID, int stockFloor) {
         this.setMcItemID(mcItemID);
         initialize_after_konstruction();
-        this.initial_price
-                .setValue(Cofiguration_Handler.default_initial_price);
+        this.initial_price.setValue(Cofiguration_Handler.default_initial_price);
         this.itemDisplayname.setValue(PrimeShop
                 .convert_IemStack_to_DisplayName(mcItemID));
 
@@ -97,7 +94,6 @@ public class Shop_Item {
         this.mcItemid = mcItemID;
     }
 
-
     public synchronized Shop_Item clone() {
         Shop_Item result = new Shop_Item(this.mcItemid, this.stockFloorId);
 
@@ -118,6 +114,7 @@ public class Shop_Item {
         return result;
 
     }
+
     private synchronized double get_defaultPrice() {
         if (this.initial_price.getValue() < Cofiguration_Handler.smallestValueItemCanHave)
             return Cofiguration_Handler.smallestValueItemCanHave;
@@ -130,8 +127,9 @@ public class Shop_Item {
     // Kaufen / Verkaufen
 
     private synchronized double get_Changing_Rate() {
-        if (Cofiguration_Handler.dynamic_pricing_for_all_Items_DISABLED) return 0.0;
-        
+        if (Cofiguration_Handler.dynamic_pricing_for_all_Items_DISABLED)
+            return 0.0;
+
         if (this.rate_of_price_change.is_value_eq_defaultValue())
             return Cofiguration_Handler.default_rate_of_price_change;
         return this.rate_of_price_change.getValue();
@@ -154,7 +152,8 @@ public class Shop_Item {
             if (!temp_result.succesful) {
                 result.succesful = false;
                 result.errorMessage = temp_result.errorMessage;
-                PrimeShop.plugin.getLogger().log(Level.SEVERE, ChatColor.RED + Message_Handler.resolve_to_message(1));
+                PrimeShop.plugin.getLogger().log(Level.SEVERE,
+                        ChatColor.RED + Message_Handler.resolve_to_message(1));
                 return result;
             }
         }
@@ -176,16 +175,16 @@ public class Shop_Item {
                 // aktueller Preis ist NICHT kleiner als Minimum!
 
                 if (future_preis <= Cofiguration_Handler.smallestValueItemCanHave) {
-                    // zukünftiger Preis ist kleiner als Minimum!
+                    // zukï¿½nftiger Preis ist kleiner als Minimum!
                     result.price = aktueller_preis
                             - Cofiguration_Handler.smallestValueItemCanHave; // TODO
-                                                                                // Dead
-                                                                                // code
+                                                                             // Dead
+                                                                             // code
 
                     this.timesItemWasSold
                             .setValue(calculate_amount_of_times_sold_for_break_point());
                 } else {
-                    // zukünftiger Preis ist NICHT kleiner als Minimum!
+                    // zukï¿½nftiger Preis ist NICHT kleiner als Minimum!
                     // standart Fall!
                     result.price = this.calculate_price(
                             this.timesItemWasBought.getValue(),
@@ -197,7 +196,7 @@ public class Shop_Item {
                 }
             }
         } else {
-            // kaufen --> Preis wird größer!
+            // kaufen --> Preis wird grï¿½ï¿½er!
             this.timesItemWasBought.setValue(this.timesItemWasBought.getValue()
                     + amount);
             result.price = this.calculate_price(
@@ -211,11 +210,12 @@ public class Shop_Item {
         try {
             this.lastPriceItemWasTradedWith.setValue(result.price / amount);
         } catch (Exception e) {
-            PrimeShop.plugin.getLogger().log(Level.SEVERE, ChatColor.RED + "Division by 0 in price calculation");
+            PrimeShop.plugin.getLogger().log(Level.SEVERE,
+                    ChatColor.RED + "Division by 0 in price calculation");
             this.lastPriceItemWasTradedWith.setValue(0.0);
         }
 
-        if (save_after_buy) {  //TODO remove
+        if (save_after_buy) { // TODO remove
             // this.write_Object_to_SQL();
         }
         notifyAll();
@@ -231,7 +231,7 @@ public class Shop_Item {
             return result;
         }
 
-        // Wenn default geändert werden soll dann deaktiviere default
+        // Wenn default geï¿½ndert werden soll dann deaktiviere default
         if ((offset != 0) && (initial_price.is_value_eq_defaultValue())) {
             this.initial_price.set_value_is_defaultValue(false);
         }
@@ -259,7 +259,7 @@ public class Shop_Item {
 
         }
 
-        // Wenn default geändert werden soll dann deaktiviere default
+        // Wenn default geï¿½ndert werden soll dann deaktiviere default
         if ((offset != 0) && (rate_of_price_change.is_value_eq_defaultValue())) {
             this.rate_of_price_change.set_value_is_defaultValue(false);
         }
@@ -267,12 +267,14 @@ public class Shop_Item {
         // Wenn der neuer Wer eq dem default Wert dann setze auf default
         if ((this.rate_of_price_change.getValue() + offset) == rate_of_price_change
                 .get_defaultValue()) {
-            this.rate_of_price_change.setValue(rate_of_price_change.getValue() + offset);
+            this.rate_of_price_change.setValue(rate_of_price_change.getValue()
+                    + offset);
             this.rate_of_price_change.set_to_defaultValue();
             return result;
         }
 
-        this.rate_of_price_change.setValue(this.rate_of_price_change.getValue() + offset);
+        this.rate_of_price_change.setValue(this.rate_of_price_change.getValue()
+                + offset);
         result.succesful = true;
 
         return result;

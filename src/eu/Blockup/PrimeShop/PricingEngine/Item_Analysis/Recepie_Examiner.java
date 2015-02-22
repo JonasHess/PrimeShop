@@ -19,59 +19,68 @@ public class Recepie_Examiner {
     public Recepie_Examiner(PrimeShop plugin) {
     }
 
-    // TODO Globaler iterator für alle Bukkit Rezept.. Welher verkleinert wird,
+    // TODO Globaler iterator fï¿½r alle Bukkit Rezept.. Welher verkleinert wird,
     // wann immer ein rezept ausgewertet wurden.
 
     public List<EvaluatedRecipe> findRecipesOfItem(ItemStack materialData) {
 
-    	List<Recipe> recipies = PrimeShop.plugin.getServer().getRecipesFor(materialData);
-    	
-	List<EvaluatedRecipe> result = new ArrayList<EvaluatedRecipe>();
-	EvaluatedRecipe tempEvaluatedRecepie;
-	
-	for ( Recipe recipe : recipies) {
-						
-	    if (Item_Comparer.do_Items_match(recipe.getResult(), materialData, true, false, true, true, true)) {
+        List<Recipe> recipies = PrimeShop.plugin.getServer().getRecipesFor(
+                materialData);
 
-		// ShapedRecipe
-		if (recipe instanceof ShapedRecipe) {
+        List<EvaluatedRecipe> result = new ArrayList<EvaluatedRecipe>();
+        EvaluatedRecipe tempEvaluatedRecepie;
 
-		    tempEvaluatedRecepie = (new EvaluatedRecipe("ShapedRecipe", recipe.getResult()));
+        for (Recipe recipe : recipies) {
 
-		    Map<Character, ItemStack> itemMap = ((ShapedRecipe) recipe).getIngredientMap();
-		    for (Character key : itemMap.keySet()) {
-			if (itemMap.get(key) != null) {
-			    tempEvaluatedRecepie.addImputItem(itemMap.get(key));
-			}
-		    }
-		    itemMap.clear();
-		    result.add(tempEvaluatedRecepie);
-		    tempEvaluatedRecepie = null;
-		}
+            if (Item_Comparer.do_Items_match(recipe.getResult(), materialData,
+                    true, false, true, true, true)) {
 
-		// FurnaceRecipe
-		if (recipe instanceof FurnaceRecipe) {
-		    tempEvaluatedRecepie = (new EvaluatedRecipe("FurnaceRecipe", recipe.getResult()));
-		    tempEvaluatedRecepie.addImputItem(((FurnaceRecipe) recipe).getInput());
-		    result.add(tempEvaluatedRecepie);
-		    tempEvaluatedRecepie = null;
-		}
+                // ShapedRecipe
+                if (recipe instanceof ShapedRecipe) {
 
-		// ShapelessRecipe
-		if (recipe instanceof ShapelessRecipe) {
-		    tempEvaluatedRecepie = (new EvaluatedRecipe("FurnaceRecipe", recipe.getResult()));
-		    List<ItemStack> itemlist = ((ShapelessRecipe) recipe).getIngredientList();
-		    for (ItemStack listelement : itemlist) {
-			if (listelement.clone() != null) {
-			    tempEvaluatedRecepie.addImputItem(listelement.clone());
-			}
-		    }
-		    result.add(tempEvaluatedRecepie);
-		    tempEvaluatedRecepie = null;
-		}
-	    }
-	}
-	return result;
+                    tempEvaluatedRecepie = (new EvaluatedRecipe("ShapedRecipe",
+                            recipe.getResult()));
+
+                    Map<Character, ItemStack> itemMap = ((ShapedRecipe) recipe)
+                            .getIngredientMap();
+                    for (Character key : itemMap.keySet()) {
+                        if (itemMap.get(key) != null) {
+                            tempEvaluatedRecepie.addImputItem(itemMap.get(key));
+                        }
+                    }
+                    itemMap.clear();
+                    result.add(tempEvaluatedRecepie);
+                    tempEvaluatedRecepie = null;
+                }
+
+                // FurnaceRecipe
+                if (recipe instanceof FurnaceRecipe) {
+                    tempEvaluatedRecepie = (new EvaluatedRecipe(
+                            "FurnaceRecipe", recipe.getResult()));
+                    tempEvaluatedRecepie.addImputItem(((FurnaceRecipe) recipe)
+                            .getInput());
+                    result.add(tempEvaluatedRecepie);
+                    tempEvaluatedRecepie = null;
+                }
+
+                // ShapelessRecipe
+                if (recipe instanceof ShapelessRecipe) {
+                    tempEvaluatedRecepie = (new EvaluatedRecipe(
+                            "FurnaceRecipe", recipe.getResult()));
+                    List<ItemStack> itemlist = ((ShapelessRecipe) recipe)
+                            .getIngredientList();
+                    for (ItemStack listelement : itemlist) {
+                        if (listelement.clone() != null) {
+                            tempEvaluatedRecepie.addImputItem(listelement
+                                    .clone());
+                        }
+                    }
+                    result.add(tempEvaluatedRecepie);
+                    tempEvaluatedRecepie = null;
+                }
+            }
+        }
+        return result;
     }
 
 }

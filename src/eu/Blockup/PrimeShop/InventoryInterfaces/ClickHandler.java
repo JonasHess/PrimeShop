@@ -5,6 +5,7 @@ import org.bukkit.inventory.ItemStack;
 
 public interface ClickHandler {
 
-	public boolean onClick(Player player, ItemStack cursor, ItemStack current, ClickType type);
-	
+    public boolean onClick(Player player, ItemStack cursor, ItemStack current,
+            ClickType type);
+
 }

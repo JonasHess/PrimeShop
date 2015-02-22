@@ -44,19 +44,18 @@ class PrimeShop_Command implements CommandExecutor {
 
         Player p = null;
 
-//        if (!PrimeShop.has_player_Permission_for_this_Command(cs,
-//                "PrimeShop.admin.basics")) {
-//            cs.sendMessage(Message_Handler.resolve_to_message(104));
-//            return true;
-//        }
+        // if (!PrimeShop.has_player_Permission_for_this_Command(cs,
+        // "PrimeShop.admin.basics")) {
+        // cs.sendMessage(Message_Handler.resolve_to_message(104));
+        // return true;
+        // }
 
         // Es gibt Parameter
         if (!(args.length == 0)) {
             // if (args[0].equalsIgnoreCase("Shop") ||
             // (args[0].equalsIgnoreCase("s"))) {
 
-            
-         // Open
+            // Open
 
             if (args[0].equalsIgnoreCase("open")) {
 
@@ -108,15 +107,15 @@ class PrimeShop_Command implements CommandExecutor {
                     return true;
                 }
             }
-            
-         // List
+
+            // List
             if (args[0].equalsIgnoreCase("list")) {
                 if (!PrimeShop.has_player_Permission_for_this_Command(cs,
                         "PrimeShop.VIP.canSeeAListOfAllShops")) {
                     cs.sendMessage(Message_Handler.resolve_to_message(104));
                     return true;
                 }
-                
+
                 cs.sendMessage("");
                 if (PrimeShop.hashMap_Shops.size() == 0) {
                     cs.sendMessage(Message_Handler.resolve_to_message(16));
@@ -129,15 +128,14 @@ class PrimeShop_Command implements CommandExecutor {
                 }
                 return true;
             }
-            
-            
+
             // ADMIN BASIC PERMISSION
             if (!PrimeShop.has_player_Permission_for_this_Command(cs,
                     "PrimeShop.admin.basics")) {
                 cs.sendMessage(Message_Handler.resolve_to_message(104));
                 return true;
             }
-            
+
             // Create
 
             if (args[0].equalsIgnoreCase("create")
@@ -219,10 +217,6 @@ class PrimeShop_Command implements CommandExecutor {
                 return true;
 
             }
-
-            
-
-            
 
             // Delete
             if (args[0].equalsIgnoreCase("delete")) {
@@ -458,49 +452,49 @@ class PrimeShop_Command implements CommandExecutor {
 
             // ////////////////////////
 
-//            if (args[0].equalsIgnoreCase("addall")) {
-//                if (!(args.length == 2)) {
-//                    cs.sendMessage(ChatColor.LIGHT_PURPLE
-//                            + "/PrimeShop addall <shopname>");
-//                    return true;
-//                }
-//
-//                String originalShopname = args[1];
-//                boolean found = false;
-//
-//                for (Map.Entry<String, Shop> entry : PrimeShop.hashMap_Shops
-//                        .entrySet()) {
-//                    if (entry.getKey().toUpperCase()
-//                            .contains(originalShopname.toUpperCase())) {
-//                        found = true;
-//                        originalShopname = entry.getKey();
-//                    }
-//                }
-//                if (!found) {
-//                    cs.sendMessage(ChatColor.RED
-//                            + Message_Handler.resolve_to_message(98));
-//                    return true;
-//                } else {
-//                    Shop shop = PrimeShop.hashMap_Shops.get(originalShopname);
-//
-//                    Iterator<Recipe> iter = this.plugin.getServer()
-//                            .recipeIterator();
-//                    while (iter.hasNext()) {
-//                        Recipe recipe = iter.next();
-//                        shop.add_ItemStack(recipe.getResult());
-//                    }
-//                    shop.refresh_pageCount();
-//                    PrimeShop.shopConfigHandler.write_shops_to_Harddisk();
-//                    return true;
-//                }
-//            }
+            // if (args[0].equalsIgnoreCase("addall")) {
+            // if (!(args.length == 2)) {
+            // cs.sendMessage(ChatColor.LIGHT_PURPLE
+            // + "/PrimeShop addall <shopname>");
+            // return true;
+            // }
+            //
+            // String originalShopname = args[1];
+            // boolean found = false;
+            //
+            // for (Map.Entry<String, Shop> entry : PrimeShop.hashMap_Shops
+            // .entrySet()) {
+            // if (entry.getKey().toUpperCase()
+            // .contains(originalShopname.toUpperCase())) {
+            // found = true;
+            // originalShopname = entry.getKey();
+            // }
+            // }
+            // if (!found) {
+            // cs.sendMessage(ChatColor.RED
+            // + Message_Handler.resolve_to_message(98));
+            // return true;
+            // } else {
+            // Shop shop = PrimeShop.hashMap_Shops.get(originalShopname);
+            //
+            // Iterator<Recipe> iter = this.plugin.getServer()
+            // .recipeIterator();
+            // while (iter.hasNext()) {
+            // Recipe recipe = iter.next();
+            // shop.add_ItemStack(recipe.getResult());
+            // }
+            // shop.refresh_pageCount();
+            // PrimeShop.shopConfigHandler.write_shops_to_Harddisk();
+            // return true;
+            // }
+            // }
 
             // Get ID
 
             if (args[0].equalsIgnoreCase("id")) {
 
                 if (!(cs instanceof Player)) {
-                    cs.sendMessage("Du kannst diesen Befehl nicht in der Console öffnen!");
+                    cs.sendMessage("Du kannst diesen Befehl nicht in der Console ï¿½ffnen!");
                     return true;
                 }
 
@@ -666,8 +660,7 @@ class PrimeShop_Command implements CommandExecutor {
             int i = 5;
             break;
         }
-        
-        
+
         // Hauptmenu
         for (int i = 0; i < 3; i++) {
             cs.sendMessage("");
@@ -676,13 +669,13 @@ class PrimeShop_Command implements CommandExecutor {
         cs.sendMessage(" - " + ChatColor.GOLD + "open " + ChatColor.AQUA
                 + "<shopname>");
         cs.sendMessage(" - " + ChatColor.GOLD + "list");
-        
-     // ADMIN BASIC PERMISSION
+
+        // ADMIN BASIC PERMISSION
         if (!PrimeShop.has_player_Permission_for_this_Command(cs,
                 "PrimeShop.admin.basics")) {
             return true;
         }
-        
+
         cs.sendMessage(" - " + ChatColor.GOLD + "create " + ChatColor.AQUA
                 + "<shopname> <itemID | itemName | hand>");
         cs.sendMessage(" - " + ChatColor.GOLD + "rename " + ChatColor.AQUA

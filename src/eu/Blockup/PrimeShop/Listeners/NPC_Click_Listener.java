@@ -48,7 +48,7 @@ public class NPC_Click_Listener implements Listener { // NO_UCD (unused code)
                         new Interface_Shop_Page(list, event.getClicker(), shop,
                                 1));
             } else {
-                
+
                 PrimeShop.open_InventoyInterface(event.getClicker(),
                         new Interface_Collection_of_Shops(event.getClicker(),
                                 event.getNPC().getFullName(), list_of_shops,
