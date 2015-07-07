@@ -41,7 +41,7 @@ class ChestShop_Commands implements CommandExecutor {
                 }
             }
 
-            if (args[0].equalsIgnoreCase("füllen")) {
+            if (args[0].equalsIgnoreCase("fullen")) {
                 ChestShop cS = new ChestShop("asdf79as7df987sdf", 99.99D);
                 ItemStack item = new ItemStack(Material.DIAMOND_AXE);
                 cS.add_Item_to_Ankauf(item, 100);
