@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.logging.Level;
 
 import net.milkbowl.vault.economy.Economy;
-import org.apache.commons.io.FileUtils.*;
 
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
