@@ -17,16 +17,19 @@ public class Button_Confrim_add_Item extends Button {
     private ItemStack item_to_be_added;
     private Shop shop;
 
-    public Button_Confrim_add_Item(Shop shop, ItemStack item_to_be_added, Material type_of_Icon, short data_of_Icon,String name, String... description) {
-        super(type_of_Icon, data_of_Icon, item_to_be_added.getEnchantments(), item_to_be_added.getAmount(), name, description);
+    public Button_Confrim_add_Item(Shop shop, ItemStack item_to_be_added,
+            Material type_of_Icon, short data_of_Icon, String name,
+            String... description) {
+        super(type_of_Icon, data_of_Icon, item_to_be_added.getEnchantments(),
+                item_to_be_added.getAmount(), name, description);
         this.shop = shop;
         this.item_to_be_added = item_to_be_added;
-        
+
     }
 
     @Override
-    public void onClick(InventoryInterface inventoryInterface, Player player, ItemStack cursor,
-            ItemStack current, ClickType type) {
+    public void onClick(InventoryInterface inventoryInterface, Player player,
+            ItemStack cursor, ItemStack current, ClickType type) {
         shop.add_ItemStack(item_to_be_added);
         PrimeShop.shopConfigHandler.write_shops_to_Harddisk();
         player.sendMessage(Message_Handler.resolve_to_message(36));

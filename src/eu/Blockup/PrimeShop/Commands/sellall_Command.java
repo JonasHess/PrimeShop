@@ -20,7 +20,7 @@ class sellall_Command implements CommandExecutor {
             String[] args) {
 
         // Sell / Buy / changePrice
-        
+
         if (!(cs instanceof Player)) {
             cs.sendMessage(ChatColor.RED
                     + Message_Handler.resolve_to_message(27));
@@ -29,32 +29,37 @@ class sellall_Command implements CommandExecutor {
 
         Player p = (Player) cs;
 
-        
-        if (!PrimeShop.has_player_Permission_for_this_Command(p,"PrimeShop.VIP.sellEntireIventory")) {            
+        if (!PrimeShop.has_player_Permission_for_this_Command(p,
+                "PrimeShop.VIP.sellEntireIventory")) {
             p.sendMessage(Message_Handler.resolve_to_message(104));
             return true;
         }
 
         if (args.length < 1) {
             p.sendMessage(Message_Handler.resolve_to_message(135));
-            p.sendMessage(Message_Handler.resolve_to_message(136, " /pSellAll confirm"));
+            p.sendMessage(Message_Handler.resolve_to_message(136,
+                    " /pSellAll confirm"));
             return true;
         }
-        
+
         if (!args[0].equalsIgnoreCase("confirm")) {
             p.sendMessage(Message_Handler.resolve_to_message(135));
-            p.sendMessage(Message_Handler.resolve_to_message(136, " /pSellAll confirm"));
+            p.sendMessage(Message_Handler.resolve_to_message(136,
+                    " /pSellAll confirm"));
             return true;
         }
-        
+
         double totalPrice = 0;
-        for (ItemStack item_to_be_added : p.getInventory()) {  // doppelter zugriff?
-            
+        for (ItemStack item_to_be_added : p.getInventory()) { // doppelter
+                                                              // zugriff?
+
             if (item_to_be_added != null) {
                 Item_Trader itemTrader = Pool_of_Item_Traders.get_ItemTrader();
 
-                ReturnPrice resultPrice = itemTrader.sell_ItemStack(item_to_be_added, item_to_be_added.getAmount(), p, false, false, null);
-                
+                ReturnPrice resultPrice = itemTrader.sell_ItemStack(
+                        item_to_be_added, item_to_be_added.getAmount(), p,
+                        false, false, null);
+
                 Pool_of_Item_Traders.return_Item_Trader(itemTrader);
 
                 if (resultPrice.succesful) {
@@ -63,10 +68,11 @@ class sellall_Command implements CommandExecutor {
                     cs.sendMessage("Internal Error occurt. Please contact a moderator");
                 }
             }
-            
+
         }
-        p.sendMessage(Message_Handler.resolve_to_message(137, PrimeShop.economy.format(totalPrice)));
-        
+        p.sendMessage(Message_Handler.resolve_to_message(137,
+                PrimeShop.economy.format(totalPrice)));
+
         return true;
     }
 

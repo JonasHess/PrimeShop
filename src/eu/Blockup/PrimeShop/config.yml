@@ -6,7 +6,7 @@
 # |_|    |_|   |_||_| |_| |_| \___||_____/ |_| |_| \___/ | .__/ 
 #                                                        | |    
 #                                                        |_| 
-verion: 1.0
+version: 1.1
 Save_Changes_every_X_Seconds: 60
 SpamProtection_in_milliseconds: 60
 Price_Linking:
@@ -19,9 +19,9 @@ Price_Calculation:
   value_every_item_sold_gets_multiplied_with: 1.0
   taxValueItemIncreasesWhenItWasCrafted: 0.05
 Appearance:
-  allow_ESC_to_close_inventories: false
-  Buy_Button: '119:0'
-  Sell_Button: '119:0'
+  allow_ESC_to_close_inventories: true
+  Buy_Button: '35:5'
+  Sell_Button: '35:14'
   Close_Button: '160:0'
   NPC_Button: '389:0'
   background_Item: '160:15'

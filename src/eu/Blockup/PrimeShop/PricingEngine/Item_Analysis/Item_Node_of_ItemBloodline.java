@@ -25,10 +25,7 @@ public class Item_Node_of_ItemBloodline {
     boolean write_Objects_to_SQL() {
 
         boolean result = true;
-        result = result
-                && PrimeShop.databaseHandler
-                        .save_Item_to_Databse(this.sqlItemStack.getSql_Item()).succesful;
-
+        result = result && PrimeShop.databaseHandler.save_Item_to_Databse(this.sqlItemStack.getSql_Item()).succesful;
         for (Recepie_Node_of_ItemBloodline temp_node : this.listOfRecepieNodes) {
             result = result && temp_node.write_Objects_to_SQL();
         }
@@ -68,7 +65,7 @@ public class Item_Node_of_ItemBloodline {
 
         if (!(temp_listOfRecepies.isEmpty())) {
 
-            // Für jedes Rezept in der Liste
+            // Fï¿½r jedes Rezept in der Liste
 
             for (EvaluatedRecipe recepie : temp_listOfRecepies) {
 
@@ -77,7 +74,7 @@ public class Item_Node_of_ItemBloodline {
                 Recepie_Node_of_ItemBloodline temp_recepie_node = new Recepie_Node_of_ItemBloodline(
                         this);
 
-                // Prüfe ob Rezept Evil ist
+                // Prï¿½fe ob Rezept Evil ist
 
                 if (this.Recepie_results_in_parent_Item(recepie)) {
                     temp_recepie_node.setEvilRecepie(true);
@@ -85,12 +82,12 @@ public class Item_Node_of_ItemBloodline {
                             .setEvilRecepie(true);
                 }
 
-                // übergibt den Result ItemStack des Bukkit Rezepts, damit
-                // später das Preis/Amount Verhältnis ermittelt werden kann.
+                // ï¿½bergibt den Result ItemStack des Bukkit Rezepts, damit
+                // spï¿½ter das Preis/Amount Verhï¿½ltnis ermittelt werden kann.
                 temp_recepie_node.parentRecepieItemAmount = recepie
                         .getResultedItem().getAmount();
 
-                // für jedes Imput Item aus dem Rezept
+                // fï¿½r jedes Imput Item aus dem Rezept
                 for (ItemStack itemstack : recepie.getImputItemList()) {
 
                     // speichere Item in das temp Objekt (writes itemstack
@@ -189,7 +186,7 @@ public class Item_Node_of_ItemBloodline {
                             resultPrice.price = resultPrice.price
                                     + temp_Price.price;
                         } else { // TODO was passiert, wenn der Kauf
-                            // fehlschlägt? Gibt es alternativen?
+                            // fehlschlï¿½gt? Gibt es alternativen?
                             resultPrice = temp_Price;
                             resultPrice.price = 0;
                             return resultPrice;
@@ -230,7 +227,7 @@ public class Item_Node_of_ItemBloodline {
                             resultPrice.price = resultPrice.price
                                     + temp_Price.price;
                         } else { // TODO was passiert, wenn der Kauf
-                            // fehlschlägt? Gibt es alternativen?
+                            // fehlschlï¿½gt? Gibt es alternativen?
                             resultPrice = temp_Price;
                             resultPrice.price = 0;
                             return resultPrice;

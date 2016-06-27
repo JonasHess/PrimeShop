@@ -58,7 +58,7 @@ public class Interface_Buy_Sell_Item extends InventoryInterface {
             @Override
             public boolean onClick(Player player, ItemStack cursor,
                     ItemStack current, ClickType type) {
-                // player.sendMessage("Du hast gedrückt");
+                // player.sendMessage("Du hast gedrï¿½ckt");
                 return false;
 
             }
@@ -149,7 +149,8 @@ public class Interface_Buy_Sell_Item extends InventoryInterface {
                                         Player player, ItemStack cursor,
                                         ItemStack current, ClickType type) {
                                     if (Cofiguration_Handler.dynamic_pricing_for_all_Items_DISABLED) {
-                                        player.sendMessage(ChatColor.RED + "Dynamic pricing is disabled in the config.yml!");
+                                        player.sendMessage(ChatColor.RED
+                                                + "Dynamic pricing is disabled in the config.yml!");
                                         return;
                                     }
                                     PrimeShop.close_InventoyInterface(player);

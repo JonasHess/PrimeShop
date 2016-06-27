@@ -11,27 +11,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 class MySql {
-    private String     host;
-    private int        port;
-    private String     user;
-    private String     password;
-    private String     database;
+    private String host;
+    private int port;
+    private String user;
+    private String password;
+    private String database;
     private Connection conn;
-//    private PrimeShop  plugin;
+
+    // private PrimeShop plugin;
 
     public MySql(PrimeShop plugin) throws Exception {
-        host      = Cofiguration_Handler.host;
-        port      = Cofiguration_Handler.port;
-        user      = Cofiguration_Handler.user;
-        password  = Cofiguration_Handler.password;
-        database  = Cofiguration_Handler.database;
-        
+        host = Cofiguration_Handler.host;
+        port = Cofiguration_Handler.port;
+        user = Cofiguration_Handler.user;
+        password = Cofiguration_Handler.password;
+        database = Cofiguration_Handler.database;
+
         this.conn = openConnection();
     }
 
     private Connection openConnection() throws Exception {
         Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database, this.user, this.password);
+        Connection conn = DriverManager.getConnection("jdbc:mysql://"
+                + this.host + ":" + this.port + "/" + this.database, this.user,
+                this.password);
         this.conn = conn;
         return conn;
     }
@@ -42,21 +45,21 @@ class MySql {
 
     }
 
-// TODO Remove unused code found by UCDetector
-//     public synchronized boolean hasConnection(Connection conn) {
-//         boolean result = false;
-//         if (conn == null) {
-//             result = false;
-//         } else {
-//             try {
-//                 result = conn.isValid(1);
-//             } catch (SQLException e) {
-//                 return false;
-//             }
-//         }
-//         notifyAll();
-//         return result;
-//     }
+    // TODO Remove unused code found by UCDetector
+    // public synchronized boolean hasConnection(Connection conn) {
+    // boolean result = false;
+    // if (conn == null) {
+    // result = false;
+    // } else {
+    // try {
+    // result = conn.isValid(1);
+    // } catch (SQLException e) {
+    // return false;
+    // }
+    // }
+    // notifyAll();
+    // return result;
+    // }
 
     private synchronized ReturnBoolean queryUpdate(String query) {
         ReturnBoolean result = new ReturnBoolean();
@@ -76,7 +79,8 @@ class MySql {
         return result;
     }
 
-    public synchronized boolean closeRessources(Connection conn, ResultSet rs, PreparedStatement st) {
+    public synchronized boolean closeRessources(Connection conn, ResultSet rs,
+            PreparedStatement st) {
         boolean result = true;
         if (rs != null) {
             try {
@@ -105,8 +109,9 @@ class MySql {
             this.conn = null;
         }
     }
-    
+
     public boolean createTabels() {
-        return this.queryUpdate("CREATE TABLE IF NOT EXISTS `Economy_Items` (`sqlId` bigint(20) NOT NULL AUTO_INCREMENT,`mcItemid` text,`itemDisplayname` text,`itemWasCrafted` tinyint(1) DEFAULT NULL,`changingRate` double DEFAULT NULL,`defaultPrice` double DEFAULT NULL,`defaultPriceWasSetBySystem` double DEFAULT NULL,`neededPermissionToBuy` text,`neededPermissionToSell` text,`timesItemWasBought` double DEFAULT NULL,`timesItemWasSold` double DEFAULT NULL,`lastPriceItemWasTradedWith` double DEFAULT NULL, PRIMARY KEY (`sqlId`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;").succesful;
+        return this
+                .queryUpdate("CREATE TABLE IF NOT EXISTS `Economy_Items` (`sqlId` bigint(20) NOT NULL AUTO_INCREMENT,`mcItemid` text,`itemDisplayname` text,`itemWasCrafted` tinyint(1) DEFAULT NULL,`changingRate` double DEFAULT NULL,`defaultPrice` double DEFAULT NULL,`defaultPriceWasSetBySystem` double DEFAULT NULL,`neededPermissionToBuy` text,`neededPermissionToSell` text,`timesItemWasBought` double DEFAULT NULL,`timesItemWasSold` double DEFAULT NULL,`lastPriceItemWasTradedWith` double DEFAULT NULL, PRIMARY KEY (`sqlId`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;").succesful;
     }
 }

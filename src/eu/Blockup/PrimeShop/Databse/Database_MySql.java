@@ -11,7 +11,8 @@ import eu.Blockup.PrimeShop.Other.Message_Handler;
 import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnBoolean;
 
-public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused code)
+public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused
+                                                           // code)
 
     private MySql[] MySQL_Pool;
     private int MySQL_Pointer;
@@ -19,8 +20,7 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
     public Database_MySql(PrimeShop plugin, DatabseTyp databseTyp) {
         super(plugin, databseTyp);
     }
-    
-    
+
     @Override
     public ReturnBoolean link_with_Databse_if_not_allready_linked(
             Shop_Item sql_Item) {
@@ -31,15 +31,14 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
             return get_Item_from_Databse(sql_Item);
         }
     }
-    
-    
 
     @Override
     public ReturnBoolean get_Item_from_Databse(Shop_Item sql_Item) {
         ReturnBoolean result = new ReturnBoolean();
         if (!sql_Item.Object_is_linked_with_Database.getValue()) {
 
-            result.succesful = result.succesful && this.find_and_set_SQL_ID_of_this_Item(sql_Item);
+            result.succesful = result.succesful
+                    && this.find_and_set_SQL_ID_of_this_Item(sql_Item);
 
             if (!result.succesful) {
 
@@ -48,7 +47,8 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
                     result.errorMessage = "Konnte kein neues Objekt in die Datenbank schreiben!";
 
                 } else {
-                    result.succesful = result.succesful && this.find_and_set_SQL_ID_of_this_Item(sql_Item);
+                    result.succesful = result.succesful
+                            && this.find_and_set_SQL_ID_of_this_Item(sql_Item);
 
                     if (result.succesful) {
                         this.save_Item_to_Databse(sql_Item);
@@ -62,36 +62,44 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
             ResultSet rs = null;
             PreparedStatement st = null;
             try {
-                st = conn.prepareStatement("SELECT * FROM Economy_Items WHERE mcItemid=?"); // AND
-                                                                                            // Stockfloor
-                                                                                            // is
-                                                                                            // ep
+                st = conn
+                        .prepareStatement("SELECT * FROM Economy_Items WHERE mcItemid=?"); // AND
+                                                                                           // Stockfloor
+                                                                                           // is
+                                                                                           // ep
                 st.setString(1, sql_Item.mcItemid);
                 rs = st.executeQuery();
                 rs.last();
                 if (rs.getRow() != 0) {
                     rs.first();
 
-                    sql_Item.itemDisplayname.setValue(rs.getString("itemDisplayname"));
+                    sql_Item.itemDisplayname.setValue(rs
+                            .getString("itemDisplayname"));
                     sql_Item.itemDisplayname.set_change_value_to(false);
 
-                    sql_Item.rate_of_price_change.setValue(rs.getDouble("changingRate"));
+                    sql_Item.rate_of_price_change.setValue(rs
+                            .getDouble("changingRate"));
                     sql_Item.rate_of_price_change.set_change_value_to(false);
 
                     // sql_Item.itemWasCrafted.setValue(rs.getBoolean("itemWasCrafted"));
                     // sql_Item.itemWasCrafted.set_change_value_to(false);
 
-                    sql_Item.initial_price.setValue(rs.getDouble("defaultPrice"));
+                    sql_Item.initial_price.setValue(rs
+                            .getDouble("defaultPrice"));
                     sql_Item.initial_price.set_change_value_to(false);
 
-                    sql_Item.timesItemWasBought.setValue(rs.getDouble("timesItemWasBought"));
+                    sql_Item.timesItemWasBought.setValue(rs
+                            .getDouble("timesItemWasBought"));
                     sql_Item.timesItemWasBought.set_change_value_to(false);
 
-                    sql_Item.timesItemWasSold.setValue(rs.getDouble("timesItemWasSold"));
+                    sql_Item.timesItemWasSold.setValue(rs
+                            .getDouble("timesItemWasSold"));
                     sql_Item.timesItemWasSold.set_change_value_to(false);
 
-                    sql_Item.lastPriceItemWasTradedWith.setValue(rs.getDouble("lastPriceItemWasTradedWith"));
-                    sql_Item.lastPriceItemWasTradedWith.set_change_value_to(false);
+                    sql_Item.lastPriceItemWasTradedWith.setValue(rs
+                            .getDouble("lastPriceItemWasTradedWith"));
+                    sql_Item.lastPriceItemWasTradedWith
+                            .set_change_value_to(false);
 
                 } else {
                     result.errorMessage = "Select-Befehl erzielte keine Resultate!";
@@ -107,35 +115,37 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
             }
         }
 
-//        notifyAll();
+        // notifyAll();
         return result;
     }
 
-
-
-    
     @Override
     public synchronized ReturnBoolean save_Item_to_Databse(Shop_Item sql_Item) {
         ReturnBoolean result = new ReturnBoolean();
 
         if (sql_Item.itemDisplayname.has_changed()) {
-            result.succesful = result.succesful && this.write_SQL_itemDisplayname(sql_Item).succesful;
+            result.succesful = result.succesful
+                    && this.write_SQL_itemDisplayname(sql_Item).succesful;
         }
         if (sql_Item.rate_of_price_change.has_changed()) {
-            result.succesful = result.succesful && this.write_SQL_Changin_Rate(sql_Item).succesful;
+            result.succesful = result.succesful
+                    && this.write_SQL_Changin_Rate(sql_Item).succesful;
         }
         // if (sql_Item.itemWasCrafted.has_changed()) {
         // result.succesful = result.succesful &&
         // this.write_SQL_itemWasCrafted(sql_Item).succesful;
         // }
         if (sql_Item.initial_price.has_changed()) {
-            result.succesful = result.succesful && this.write_SQL_defaultPrice(sql_Item).succesful;
+            result.succesful = result.succesful
+                    && this.write_SQL_defaultPrice(sql_Item).succesful;
         }
         if (sql_Item.timesItemWasBought.has_changed()) {
-            result.succesful = result.succesful && this.write_SQL_timesItemWasBought(sql_Item).succesful;
+            result.succesful = result.succesful
+                    && this.write_SQL_timesItemWasBought(sql_Item).succesful;
         }
         if (sql_Item.timesItemWasSold.has_changed()) {
-            result.succesful = result.succesful && this.write_SQL_timesItemWasSold(sql_Item).succesful;
+            result.succesful = result.succesful
+                    && this.write_SQL_timesItemWasSold(sql_Item).succesful;
         }
         if (!result.succesful) {
             result.errorMessage = "Konnte Objekt nicht in die Datenbank speichern!";
@@ -143,8 +153,6 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
         notifyAll();
         return result;
     }
-    
-    
 
     public synchronized MySql getMySql() {
         this.MySQL_Pointer++;
@@ -166,7 +174,8 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
 
             try {
 
-                System.out.println(Message_Handler.resolve_to_message(6, String.valueOf(i), String.valueOf(max)));
+                System.out.println(Message_Handler.resolve_to_message(6,
+                        String.valueOf(i), String.valueOf(max)));
                 try {
                     this.MySQL_Pool[i] = new MySql(this.plugin);
                 } catch (Exception e) {
@@ -176,14 +185,16 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
                     break;
                 }
             } catch (Exception e) {
-                System.err.println(Message_Handler.resolve_to_message(4) + "  (" + e.getMessage() + ").");
+                System.err.println(Message_Handler.resolve_to_message(4)
+                        + "  (" + e.getMessage() + ").");
                 result.succesful = false;
                 break;
             }
 
         }
         if (result.succesful) {
-            result.succesful = result.succesful && this.MySQL_Pool[0].createTabels();
+            result.succesful = result.succesful
+                    && this.MySQL_Pool[0].createTabels();
         }
         return result;
     }
@@ -219,9 +230,6 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
 
     }
 
-    
-    
-    
     public synchronized ReturnBoolean queryUpdate(String query) {
         ReturnBoolean result = new ReturnBoolean();
         Connection conn = this.getMySql().getConnection();
@@ -243,7 +251,20 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
 
     public synchronized ReturnBoolean write_NEW_Item_to_SQL(Shop_Item sql_Item) {
         ReturnBoolean result;
-        this.queryUpdate("INSERT INTO `Economy_Items` (`mcItemid`, `itemDisplayname`, `changingRate`, `defaultPrice`, `timesItemWasBought`, `timesItemWasSold`, `lastPriceItemWasTradedWith`) VALUES ('" + sql_Item.mcItemid + "', '" + sql_Item.itemDisplayname.getValue() + "', '" + sql_Item.rate_of_price_change.getValue() + "', '" + sql_Item.initial_price.getValue() + "', '" + sql_Item.timesItemWasBought.getValue() + "' ,'"+ sql_Item.timesItemWasSold.getValue() + "', '" + sql_Item.lastPriceItemWasTradedWith.getValue() + "')");
+        this.queryUpdate("INSERT INTO `Economy_Items` (`mcItemid`, `itemDisplayname`, `changingRate`, `defaultPrice`, `timesItemWasBought`, `timesItemWasSold`, `lastPriceItemWasTradedWith`) VALUES ('"
+                + sql_Item.mcItemid
+                + "', '"
+                + sql_Item.itemDisplayname.getValue()
+                + "', '"
+                + sql_Item.rate_of_price_change.getValue()
+                + "', '"
+                + sql_Item.initial_price.getValue()
+                + "', '"
+                + sql_Item.timesItemWasBought.getValue()
+                + "' ,'"
+                + sql_Item.timesItemWasSold.getValue()
+                + "', '"
+                + sql_Item.lastPriceItemWasTradedWith.getValue() + "')");
 
         if (this.find_and_set_SQL_ID_of_this_Item(sql_Item)) {
             result = this.save_Item_to_Databse(sql_Item);
@@ -252,25 +273,27 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
             result.succesful = false;
             result.errorMessage = "Error:   Can not write to backend!";
             System.out.println(result.errorMessage);
-            
+
         }
         notifyAll();
         return result;
 
     }
 
-    public synchronized boolean find_and_set_SQL_ID_of_this_Item(Shop_Item sql_Item) {
+    public synchronized boolean find_and_set_SQL_ID_of_this_Item(
+            Shop_Item sql_Item) {
         boolean result = true;
         MySql sql = this.getMySql();
         Connection conn = sql.getConnection();
         ResultSet rs = null;
         PreparedStatement st = null;
         try {
-            st = conn.prepareStatement("SELECT * FROM Economy_Items WHERE mcItemid=?"); // TODO
-                                                                                        // AND
-                                                                                        // Stackfloor
-                                                                                        // is
-                                                                                        // eq
+            st = conn
+                    .prepareStatement("SELECT * FROM Economy_Items WHERE mcItemid=?"); // TODO
+                                                                                       // AND
+                                                                                       // Stackfloor
+                                                                                       // is
+                                                                                       // eq
             st.setString(1, sql_Item.mcItemid);
             rs = st.executeQuery();
             rs.last();
@@ -296,12 +319,13 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
         return result;
     }
 
-
-
-    public synchronized ReturnBoolean write_SQL_itemDisplayname(Shop_Item sql_Item) {
+    public synchronized ReturnBoolean write_SQL_itemDisplayname(
+            Shop_Item sql_Item) {
         ReturnBoolean result;
 
-        result = this.queryUpdate("UPDATE Economy_Items SET itemDisplayname='" + sql_Item.itemDisplayname.getValue() + "' WHERE sqlId='" + sql_Item.sqlId.getValue() + "'");
+        result = this.queryUpdate("UPDATE Economy_Items SET itemDisplayname='"
+                + sql_Item.itemDisplayname.getValue() + "' WHERE sqlId='"
+                + sql_Item.sqlId.getValue() + "'");
 
         if (result.succesful) {
             sql_Item.itemDisplayname.set_change_value_to(false);
@@ -311,7 +335,9 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
 
     public synchronized ReturnBoolean write_SQL_Changin_Rate(Shop_Item sql_Item) {
         ReturnBoolean result;
-        result = this.queryUpdate("UPDATE Economy_Items SET changinRate='" + sql_Item.rate_of_price_change.getValue() + "' WHERE sqlId='" + sql_Item.sqlId.getValue() + "'");
+        result = this.queryUpdate("UPDATE Economy_Items SET changinRate='"
+                + sql_Item.rate_of_price_change.getValue() + "' WHERE sqlId='"
+                + sql_Item.sqlId.getValue() + "'");
         if (result.succesful) {
             sql_Item.rate_of_price_change.set_change_value_to(false);
         }
@@ -321,7 +347,9 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
 
     public synchronized ReturnBoolean write_SQL_defaultPrice(Shop_Item sql_Item) {
         ReturnBoolean result;
-        result = this.queryUpdate("UPDATE Economy_Items SET defaultPrice='" + sql_Item.initial_price.getValue() + "' WHERE sqlId='" + sql_Item.sqlId.getValue() + "'");
+        result = this.queryUpdate("UPDATE Economy_Items SET defaultPrice='"
+                + sql_Item.initial_price.getValue() + "' WHERE sqlId='"
+                + sql_Item.sqlId.getValue() + "'");
         if (result.succesful) {
             sql_Item.initial_price.set_change_value_to(false);
         }
@@ -329,9 +357,13 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
 
     }
 
-    public synchronized ReturnBoolean write_SQL_timesItemWasBought(Shop_Item sql_Item) {
+    public synchronized ReturnBoolean write_SQL_timesItemWasBought(
+            Shop_Item sql_Item) {
         ReturnBoolean result;
-        result = this.queryUpdate("UPDATE Economy_Items SET timesItemWasBought='" + sql_Item.timesItemWasBought.getValue() + "' WHERE sqlId='" + sql_Item.sqlId.getValue() + "'");
+        result = this
+                .queryUpdate("UPDATE Economy_Items SET timesItemWasBought='"
+                        + sql_Item.timesItemWasBought.getValue()
+                        + "' WHERE sqlId='" + sql_Item.sqlId.getValue() + "'");
 
         if (result.succesful) {
             sql_Item.timesItemWasBought.set_change_value_to(false);
@@ -340,9 +372,12 @@ public class Database_MySql extends DatabaseIntersection { // NO_UCD (unused cod
 
     }
 
-    public synchronized ReturnBoolean write_SQL_timesItemWasSold(Shop_Item sql_Item) {
+    public synchronized ReturnBoolean write_SQL_timesItemWasSold(
+            Shop_Item sql_Item) {
         ReturnBoolean result;
-        result = this.queryUpdate("UPDATE Economy_Items SET timesItemWasSold='" + sql_Item.timesItemWasSold.getValue() + "' WHERE sqlId='" + sql_Item.sqlId.getValue() + "'");
+        result = this.queryUpdate("UPDATE Economy_Items SET timesItemWasSold='"
+                + sql_Item.timesItemWasSold.getValue() + "' WHERE sqlId='"
+                + sql_Item.sqlId.getValue() + "'");
 
         if (result.succesful) {
             sql_Item.timesItemWasSold.set_change_value_to(false);

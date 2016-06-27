@@ -8,48 +8,50 @@ public class CooldownManager {
 
     private long time;
     private HashMap<String, Long> players;
-    
-// TODO Remove unused code found by UCDetector
-//     public CooldownManager(int time, Time type) {
-//         if(type == Time.SECONDS)
-//             this.time = time * 1000;
-//         else
-//             this.time = time * 1000 * type.getValue();
-//         this.players = new HashMap<String, Long>();
-//     }
-    
+
+    // TODO Remove unused code found by UCDetector
+    // public CooldownManager(int time, Time type) {
+    // if(type == Time.SECONDS)
+    // this.time = time * 1000;
+    // else
+    // this.time = time * 1000 * type.getValue();
+    // this.players = new HashMap<String, Long>();
+    // }
+
     public CooldownManager(long miliseconds) {
         this.time = miliseconds;
         this.players = new HashMap<String, Long>();
     }
-    
+
     private boolean interact(Player player) {
         long currentTime = System.currentTimeMillis();
-        
-        if(players.containsKey(player.getName())) {
-            if((players.get(player.getName()) + time) > currentTime) return false;
+
+        if (players.containsKey(player.getName())) {
+            if ((players.get(player.getName()) + time) > currentTime)
+                return false;
         }
-        
+
         players.put(player.getName(), currentTime);
-        
+
         return true;
     }
-    
+
     private boolean allowed(Player player) {
         long currentTime = System.currentTimeMillis();
-        
-        if(players.containsKey(player.getName())) {
-            if((players.get(player.getName()) + time) > currentTime) return false;
+
+        if (players.containsKey(player.getName())) {
+            if ((players.get(player.getName()) + time) > currentTime)
+                return false;
         }
         return true;
     }
-      
+
     public boolean is_player_Spamming(Player player) {
         return !allowed(player);
     }
-    
+
     public void player_Clicked(Player player) {
         interact(player);
     }
-    
+
 }

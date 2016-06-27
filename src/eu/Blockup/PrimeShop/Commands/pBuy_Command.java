@@ -19,7 +19,7 @@ class pBuy_Command implements CommandExecutor {
             String[] args) {
 
         // Sell / Buy / changePrice
-        
+
         if (!(cs instanceof Player)) {
             cs.sendMessage(ChatColor.RED
                     + Message_Handler.resolve_to_message(27));
@@ -69,9 +69,8 @@ class pBuy_Command implements CommandExecutor {
             if ((PrimeShop
                     .has_player_Permission_for_this_Command(p,
                             "PrimeShop.VIP.canBuySellAllItemsRegardlessIfTheyWereAddedToAShop") && (!has_permission))
-                    || (PrimeShop
-                            .has_player_Permission_for_this_Command(p,
-                                    "PrimeShop.admin.changePrices"))) {
+                    || (PrimeShop.has_player_Permission_for_this_Command(p,
+                            "PrimeShop.admin.changePrices"))) {
 
                 // if
                 // (p.hasPermission("PrimeShop.VIP.canBuySellAllItemsRegardlessIfTheyWereAddedToAShop")
@@ -81,11 +80,10 @@ class pBuy_Command implements CommandExecutor {
                 shop = lastshop_with_access_to;
             }
 
-            
             if (!has_permission) {
                 p.sendMessage(Message_Handler.resolve_to_message(108));
             } else {
-                
+
                 int amount = 1;
                 if (args.length >= 2) {
                     if (PrimeShop.isThisStringNumeric(args[1])) {
@@ -97,15 +95,16 @@ class pBuy_Command implements CommandExecutor {
                             amount = item_to_be_added.getMaxStackSize();
                         }
                     }
-                } 
-                
+                }
+
                 boolean shop_is_null = false;
-                if (shop == null) shop_is_null =  true;
-                
+                if (shop == null)
+                    shop_is_null = true;
+
                 PrimeShop.open_InventoyInterface(p,
                         new Interface_Buy_Sell_Item(null, p, shop,
                                 item_to_be_added, amount, false, shop_is_null)); // TODO
-                                                                // amount
+                // amount
             }
         }
 

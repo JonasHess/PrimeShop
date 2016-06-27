@@ -27,7 +27,6 @@
  */
 package eu.Blockup.PrimeShop.Metrics;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -85,7 +84,8 @@ public class Metrics {
     /**
      * All of the custom graphs to submit to metrics
      */
-    private final Set<Graph> graphs = Collections.synchronizedSet(new HashSet<Graph>());
+    private final Set<Graph> graphs = Collections
+            .synchronizedSet(new HashSet<Graph>());
 
     /**
      * The plugin configuration file
@@ -135,7 +135,8 @@ public class Metrics {
 
         // Do we need to create the file?
         if (configuration.get("guid", null) == null) {
-            configuration.options().header("http://mcstats.org").copyDefaults(true);
+            configuration.options().header("http://mcstats.org")
+                    .copyDefaults(true);
             configuration.save(configurationFile);
         }
 
@@ -145,11 +146,14 @@ public class Metrics {
     }
 
     /**
-     * Construct and create a Graph that can be used to separate specific plotters to their own graphs on the metrics
-     * website. Plotters can be added to the graph object returned.
+     * Construct and create a Graph that can be used to separate specific
+     * plotters to their own graphs on the metrics website. Plotters can be
+     * added to the graph object returned.
      *
-     * @param name The name of the graph
-     * @return Graph object created. Will never return NULL under normal circumstances unless bad parameters are given
+     * @param name
+     *            The name of the graph
+     * @return Graph object created. Will never return NULL under normal
+     *         circumstances unless bad parameters are given
      */
     public Graph createGraph(final String name) { // NO_UCD (unused code)
         if (name == null) {
@@ -167,9 +171,11 @@ public class Metrics {
     }
 
     /**
-     * Add a Graph object to BukkitMetrics that represents data for the plugin that should be sent to the backend
+     * Add a Graph object to BukkitMetrics that represents data for the plugin
+     * that should be sent to the backend
      *
-     * @param graph The name of the graph
+     * @param graph
+     *            The name of the graph
      */
     public void addGraph(final Graph graph) { // NO_UCD (unused code)
         if (graph == null) {
@@ -180,9 +186,10 @@ public class Metrics {
     }
 
     /**
-     * Start measuring statistics. This will immediately create an async repeating task as the plugin and send the
-     * initial data to the metrics backend, and then after that it will post in increments of PING_INTERVAL * 1200
-     * ticks.
+     * Start measuring statistics. This will immediately create an async
+     * repeating task as the plugin and send the initial data to the metrics
+     * backend, and then after that it will post in increments of PING_INTERVAL
+     * * 1200 ticks.
      *
      * @return True if statistics measuring is running, otherwise false.
      */
@@ -199,40 +206,49 @@ public class Metrics {
             }
 
             // Begin hitting the server with glorious data
-            task = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
+            task = plugin.getServer().getScheduler()
+                    .runTaskTimerAsynchronously(plugin, new Runnable() {
 
-                private boolean firstPost = true;
+                        private boolean firstPost = true;
 
-                public void run() {
-                    try {
-                        // This has to be synchronized or it can collide with the disable method.
-                        synchronized (optOutLock) {
-                            // Disable Task, if it is running and the server owner decided to opt-out
-                            if (isOptOut() && task != null) {
-                                task.cancel();
-                                task = null;
-                                // Tell all plotters to stop gathering information.
-                                for (Graph graph : graphs) {
-                                    graph.onOptOut();
+                        public void run() {
+                            try {
+                                // This has to be synchronized or it can collide
+                                // with the disable method.
+                                synchronized (optOutLock) {
+                                    // Disable Task, if it is running and the
+                                    // server owner decided to opt-out
+                                    if (isOptOut() && task != null) {
+                                        task.cancel();
+                                        task = null;
+                                        // Tell all plotters to stop gathering
+                                        // information.
+                                        for (Graph graph : graphs) {
+                                            graph.onOptOut();
+                                        }
+                                    }
+                                }
+
+                                // We use the inverse of firstPost because if it
+                                // is the first time we are posting,
+                                // it is not a interval ping, so it evaluates to
+                                // FALSE
+                                // Each time thereafter it will evaluate to
+                                // TRUE, i.e PING!
+                                postPlugin(!firstPost);
+
+                                // After the first post we set firstPost to
+                                // false
+                                // Each post thereafter will be a ping
+                                firstPost = false;
+                            } catch (IOException e) {
+                                if (debug) {
+                                    Bukkit.getLogger().log(Level.INFO,
+                                            "[Metrics] " + e.getMessage());
                                 }
                             }
                         }
-
-                        // We use the inverse of firstPost because if it is the first time we are posting,
-                        // it is not a interval ping, so it evaluates to FALSE
-                        // Each time thereafter it will evaluate to TRUE, i.e PING!
-                        postPlugin(!firstPost);
-
-                        // After the first post we set firstPost to false
-                        // Each post thereafter will be a ping
-                        firstPost = false;
-                    } catch (IOException e) {
-                        if (debug) {
-                            Bukkit.getLogger().log(Level.INFO, "[Metrics] " + e.getMessage());
-                        }
-                    }
-                }
-            }, 0, PING_INTERVAL * 1200);
+                    }, 0, PING_INTERVAL * 1200);
 
             return true;
         }
@@ -250,12 +266,14 @@ public class Metrics {
                 configuration.load(getConfigFile());
             } catch (IOException ex) {
                 if (debug) {
-                    Bukkit.getLogger().log(Level.INFO, "[Metrics] " + ex.getMessage());
+                    Bukkit.getLogger().log(Level.INFO,
+                            "[Metrics] " + ex.getMessage());
                 }
                 return true;
             } catch (InvalidConfigurationException ex) {
                 if (debug) {
-                    Bukkit.getLogger().log(Level.INFO, "[Metrics] " + ex.getMessage());
+                    Bukkit.getLogger().log(Level.INFO,
+                            "[Metrics] " + ex.getMessage());
                 }
                 return true;
             }
@@ -264,14 +282,17 @@ public class Metrics {
     }
 
     /**
-     * Enables metrics for the server by setting "opt-out" to false in the config file and starting the metrics task.
+     * Enables metrics for the server by setting "opt-out" to false in the
+     * config file and starting the metrics task.
      *
      * @throws java.io.IOException
      */
     public void enable() throws IOException { // NO_UCD (unused code)
-        // This has to be synchronized or it can collide with the check in the task.
+        // This has to be synchronized or it can collide with the check in the
+        // task.
         synchronized (optOutLock) {
-            // Check if the server owner has already set opt-out, if not, set it.
+            // Check if the server owner has already set opt-out, if not, set
+            // it.
             if (isOptOut()) {
                 configuration.set("opt-out", false);
                 configuration.save(configurationFile);
@@ -285,14 +306,17 @@ public class Metrics {
     }
 
     /**
-     * Disables metrics for the server by setting "opt-out" to true in the config file and canceling the metrics task.
+     * Disables metrics for the server by setting "opt-out" to true in the
+     * config file and canceling the metrics task.
      *
      * @throws java.io.IOException
      */
     public void disable() throws IOException { // NO_UCD (unused code)
-        // This has to be synchronized or it can collide with the check in the task.
+        // This has to be synchronized or it can collide with the check in the
+        // task.
         synchronized (optOutLock) {
-            // Check if the server owner has already set opt-out, if not, set it.
+            // Check if the server owner has already set opt-out, if not, set
+            // it.
             if (!isOptOut()) {
                 configuration.set("opt-out", true);
                 configuration.save(configurationFile);
@@ -307,12 +331,14 @@ public class Metrics {
     }
 
     /**
-     * Gets the File object of the config file that should be used to store data such as the GUID and opt-out status
+     * Gets the File object of the config file that should be used to store data
+     * such as the GUID and opt-out status
      *
      * @return the File object for the config file
      */
     public File getConfigFile() {
-        // I believe the easiest way to get the base folder (e.g craftbukkit set via -P) for plugins to use
+        // I believe the easiest way to get the base folder (e.g craftbukkit set
+        // via -P) for plugins to use
         // is to abuse the plugin object we already have
         // plugin.getDataFolder() => base/plugins/PluginA/
         // pluginsFolder => base/plugins/
@@ -330,20 +356,23 @@ public class Metrics {
         // Server software specific section
         PluginDescriptionFile description = plugin.getDescription();
         String pluginName = description.getName();
-        boolean onlineMode = Bukkit.getServer().getOnlineMode(); // TRUE if online mode is enabled
+        boolean onlineMode = Bukkit.getServer().getOnlineMode(); // TRUE if
+                                                                 // online mode
+                                                                 // is enabled
         String pluginVersion = description.getVersion();
         String serverVersion = Bukkit.getVersion();
-        
-        @SuppressWarnings("deprecation")
-        int playersOnline = Bukkit.getServer().getOnlinePlayers().length;
 
-        // END server software specific section -- all code below does not use any code outside of this class / Java
+        int playersOnline = Bukkit.getServer().getOnlinePlayers().size();
+
+        // END server software specific section -- all code below does not use
+        // any code outside of this class / Java
 
         // Construct the post data
         StringBuilder json = new StringBuilder(1024);
         json.append('{');
 
-        // The plugin's description file containg all of the plugin data such as name, version, author, etc
+        // The plugin's description file containg all of the plugin data such as
+        // name, version, author, etc
         appendJSONPair(json, "guid", guid);
         appendJSONPair(json, "plugin_version", pluginVersion);
         appendJSONPair(json, "server_version", serverVersion);
@@ -393,7 +422,8 @@ public class Metrics {
                     graphJson.append('{');
 
                     for (Plotter plotter : graph.getPlotters()) {
-                        appendJSONPair(graphJson, plotter.getColumnName(), Integer.toString(plotter.getValue()));
+                        appendJSONPair(graphJson, plotter.getColumnName(),
+                                Integer.toString(plotter.getValue()));
                     }
 
                     graphJson.append('}');
@@ -417,7 +447,8 @@ public class Metrics {
         json.append('}');
 
         // Create the url
-        URL url = new URL(BASE_URL + String.format(REPORT_URL, urlEncode(pluginName)));
+        URL url = new URL(BASE_URL
+                + String.format(REPORT_URL, urlEncode(pluginName)));
 
         // Connect to the website
         URLConnection connection;
@@ -430,7 +461,6 @@ public class Metrics {
             connection = url.openConnection();
         }
 
-
         byte[] uncompressed = json.toString().getBytes();
         byte[] compressed = gzip(json.toString());
 
@@ -438,14 +468,17 @@ public class Metrics {
         connection.addRequestProperty("User-Agent", "MCStats/" + REVISION);
         connection.addRequestProperty("Content-Type", "application/json");
         connection.addRequestProperty("Content-Encoding", "gzip");
-        connection.addRequestProperty("Content-Length", Integer.toString(compressed.length));
+        connection.addRequestProperty("Content-Length",
+                Integer.toString(compressed.length));
         connection.addRequestProperty("Accept", "application/json");
         connection.addRequestProperty("Connection", "close");
 
         connection.setDoOutput(true);
 
         if (debug) {
-            System.out.println("[Metrics] Prepared request for " + pluginName + " uncompressed=" + uncompressed.length + " compressed=" + compressed.length);
+            System.out.println("[Metrics] Prepared request for " + pluginName
+                    + " uncompressed=" + uncompressed.length + " compressed="
+                    + compressed.length);
         }
 
         // Write the data
@@ -454,24 +487,28 @@ public class Metrics {
         os.flush();
 
         // Now read the response
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(
+                connection.getInputStream()));
         String response = reader.readLine();
 
         // close resources
         os.close();
         reader.close();
 
-        if (response == null || response.startsWith("ERR") || response.startsWith("7")) {
+        if (response == null || response.startsWith("ERR")
+                || response.startsWith("7")) {
             if (response == null) {
                 response = "null";
             } else if (response.startsWith("7")) {
-                response = response.substring(response.startsWith("7,") ? 2 : 1);
+                response = response
+                        .substring(response.startsWith("7,") ? 2 : 1);
             }
 
             throw new IOException(response);
         } else {
             // Is this the first update this hour?
-            if (response.equals("1") || response.contains("This is your first update this hour")) {
+            if (response.equals("1")
+                    || response.contains("This is your first update this hour")) {
                 synchronized (graphs) {
                     final Iterator<Graph> iter = graphs.iterator();
 
@@ -503,17 +540,19 @@ public class Metrics {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (gzos != null) try {
-                gzos.close();
-            } catch (IOException ignore) {
-            }
+            if (gzos != null)
+                try {
+                    gzos.close();
+                } catch (IOException ignore) {
+                }
         }
 
         return baos.toByteArray();
     }
 
     /**
-     * Check if mineshafter is present. If it is, we need to bypass it to send POST requests
+     * Check if mineshafter is present. If it is, we need to bypass it to send
+     * POST requests
      *
      * @return true if mineshafter is installed on the server
      */
@@ -534,7 +573,8 @@ public class Metrics {
      * @param value
      * @throws UnsupportedEncodingException
      */
-    private static void appendJSONPair(StringBuilder json, String key, String value) throws UnsupportedEncodingException {
+    private static void appendJSONPair(StringBuilder json, String key,
+            String value) throws UnsupportedEncodingException {
         boolean isValueNumeric = false;
 
         try {
@@ -574,31 +614,31 @@ public class Metrics {
             char chr = text.charAt(index);
 
             switch (chr) {
-                case '"':
-                case '\\':
-                    builder.append('\\');
+            case '"':
+            case '\\':
+                builder.append('\\');
+                builder.append(chr);
+                break;
+            case '\b':
+                builder.append("\\b");
+                break;
+            case '\t':
+                builder.append("\\t");
+                break;
+            case '\n':
+                builder.append("\\n");
+                break;
+            case '\r':
+                builder.append("\\r");
+                break;
+            default:
+                if (chr < ' ') {
+                    String t = "000" + Integer.toHexString(chr);
+                    builder.append("\\u" + t.substring(t.length() - 4));
+                } else {
                     builder.append(chr);
-                    break;
-                case '\b':
-                    builder.append("\\b");
-                    break;
-                case '\t':
-                    builder.append("\\t");
-                    break;
-                case '\n':
-                    builder.append("\\n");
-                    break;
-                case '\r':
-                    builder.append("\\r");
-                    break;
-                default:
-                    if (chr < ' ') {
-                        String t = "000" + Integer.toHexString(chr);
-                        builder.append("\\u" + t.substring(t.length() - 4));
-                    } else {
-                        builder.append(chr);
-                    }
-                    break;
+                }
+                break;
             }
         }
         builder.append('"');
@@ -609,10 +649,12 @@ public class Metrics {
     /**
      * Encode text as UTF-8
      *
-     * @param text the text to encode
+     * @param text
+     *            the text to encode
      * @return the encoded text, as UTF-8
      */
-    private static String urlEncode(final String text) throws UnsupportedEncodingException {
+    private static String urlEncode(final String text)
+            throws UnsupportedEncodingException {
         return URLEncoder.encode(text, "UTF-8");
     }
 
@@ -622,8 +664,8 @@ public class Metrics {
     private static class Graph {
 
         /**
-         * The graph's name, alphanumeric and spaces only :) If it does not comply to the above when submitted, it is
-         * rejected
+         * The graph's name, alphanumeric and spaces only :) If it does not
+         * comply to the above when submitted, it is rejected
          */
         private final String name;
 
@@ -648,7 +690,8 @@ public class Metrics {
         /**
          * Add a plotter to the graph, which will be used to plot entries
          *
-         * @param plotter the plotter to add to the graph
+         * @param plotter
+         *            the plotter to add to the graph
          */
         @SuppressWarnings("unused")
         public void addPlotter(final Plotter plotter) { // NO_UCD (unused code)
@@ -658,10 +701,12 @@ public class Metrics {
         /**
          * Remove a plotter from the graph
          *
-         * @param plotter the plotter to remove from the graph
+         * @param plotter
+         *            the plotter to remove from the graph
          */
         @SuppressWarnings("unused")
-        public void removePlotter(final Plotter plotter) { // NO_UCD (unused code)
+        public void removePlotter(final Plotter plotter) { // NO_UCD (unused
+                                                           // code)
             plotters.remove(plotter);
         }
 
@@ -690,7 +735,8 @@ public class Metrics {
         }
 
         /**
-         * Called when the server owner decides to opt-out of BukkitMetrics while the server is running.
+         * Called when the server owner decides to opt-out of BukkitMetrics
+         * while the server is running.
          */
         private void onOptOut() {
         }
@@ -717,16 +763,20 @@ public class Metrics {
         /**
          * Construct a plotter with a specific plot name
          *
-         * @param name the name of the plotter to use, which will show up on the website
+         * @param name
+         *            the name of the plotter to use, which will show up on the
+         *            website
          */
         private Plotter(final String name) {
             this.name = name;
         }
 
         /**
-         * Get the current value for the plotted point. Since this function defers to an external function it may or may
-         * not return immediately thus cannot be guaranteed to be thread friendly or safe. This function can be called
-         * from any thread so care should be taken when accessing resources that need to be synchronized.
+         * Get the current value for the plotted point. Since this function
+         * defers to an external function it may or may not return immediately
+         * thus cannot be guaranteed to be thread friendly or safe. This
+         * function can be called from any thread so care should be taken when
+         * accessing resources that need to be synchronized.
          *
          * @return the current value for the point to be plotted.
          */
@@ -759,7 +809,8 @@ public class Metrics {
             }
 
             final Plotter plotter = (Plotter) object;
-            return plotter.name.equals(name) && plotter.getValue() == getValue();
+            return plotter.name.equals(name)
+                    && plotter.getValue() == getValue();
         }
     }
 }

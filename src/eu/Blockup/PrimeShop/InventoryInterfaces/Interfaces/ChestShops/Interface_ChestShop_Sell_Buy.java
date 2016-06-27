@@ -22,7 +22,6 @@ import eu.Blockup.PrimeShop.PricingEngine.Item_Trader;
 import eu.Blockup.PrimeShop.PricingEngine.Pool_of_Item_Traders;
 import eu.Blockup.PrimeShop.PricingEngine.Item_Analysis.ReturnObjects.ReturnPrice;
 
-
 public class Interface_ChestShop_Sell_Buy extends InventoryInterface {
 
     public Item_Supply itemStack_to_be_bought;
@@ -33,26 +32,25 @@ public class Interface_ChestShop_Sell_Buy extends InventoryInterface {
     public String permissionToSELL;
     private final boolean kaufen;
 
-    public Interface_ChestShop_Sell_Buy(final List<InventoryInterface> link_Back_Stack, Player player,
-            ChestShop chestShop, final Item_Supply itemStack_to_be_bought, boolean kaufen,
-            final int amount) {
+    public Interface_ChestShop_Sell_Buy(
+            final List<InventoryInterface> link_Back_Stack, Player player,
+            ChestShop chestShop, final Item_Supply itemStack_to_be_bought,
+            boolean kaufen, final int amount) {
         super(Message_Handler.resolve_to_message(63), 4, link_Back_Stack);
         this.chestShop = chestShop;
         this.setCloseable(false);
         this.amount = amount;
         this.itemStack_to_be_bought = itemStack_to_be_bought;
         this.kaufen = kaufen;
-        // TODO  PERMISSIONS
-            this.permissionToBUY = "PrimeShop.VIP.canBuySellAllItemsRegardlessIfTheyWereAddedToAShop";
-            this.permissionToSELL = "PrimeShop.VIP.canBuySellAllItemsRegardlessIfTheyWereAddedToAShop";
-
-        
+        // TODO PERMISSIONS
+        this.permissionToBUY = "PrimeShop.VIP.canBuySellAllItemsRegardlessIfTheyWereAddedToAShop";
+        this.permissionToSELL = "PrimeShop.VIP.canBuySellAllItemsRegardlessIfTheyWereAddedToAShop";
 
         this.setClickHandler(new ClickHandler() {
             @Override
             public boolean onClick(Player player, ItemStack cursor,
                     ItemStack current, ClickType type) {
-//              player.sendMessage("Du hast gedrückt");
+                // player.sendMessage("Du hast gedrï¿½ckt");
                 return false;
 
             }
@@ -61,63 +59,77 @@ public class Interface_ChestShop_Sell_Buy extends InventoryInterface {
         // Empty Option
         for (int a = 0; a < this.getWidth(); a++) {
             for (int b = 0; b < this.getHeight(); b++) {
-                this.addOption(a, b, new Button_with_no_task(Cofiguration_Handler.background_ItemStack, " "));
+                this.addOption(a, b, new Button_with_no_task(
+                        Cofiguration_Handler.background_ItemStack, " "));
             }
         }
 
-        
-
         // Verkaufen
 
-        Button_Buy_Sell_Item_in_ChestShop sell_Button = new Button_Buy_Sell_Item_in_ChestShop(chestShop, itemStack_to_be_bought, permissionToSELL, kaufen, this.amount, itemStack_to_be_bought.getItemStack(),"");
+        Button_Buy_Sell_Item_in_ChestShop sell_Button = new Button_Buy_Sell_Item_in_ChestShop(
+                chestShop, itemStack_to_be_bought, permissionToSELL, kaufen,
+                this.amount, itemStack_to_be_bought.getItemStack(), "");
         this.addOption(4, 2, sell_Button);
         sell_Button.setDisplayIcon(Cofiguration_Handler.buyButton_ItemStack);
         sell_Button.refresh_price(this.amount);
-        
-        
-        
-        if (PrimeShop.has_player_Permission_for_this_Command(player, "PrimeShop.admin.changePrices")) { 
-            
-        
-       
 
-        // Display Icon
+        if (PrimeShop.has_player_Permission_for_this_Command(player,
+                "PrimeShop.admin.changePrices")) {
 
-        
-        if (itemStack_to_be_bought.getItemStack().getMaxStackSize() > 1) {
-        Button_Amount button_Amount = new Button_Amount(itemStack_to_be_bought.getItemStack(), "", 
-                Message_Handler.resolve_to_message(56), Message_Handler.resolve_to_message(57), Message_Handler.resolve_to_message(58), Message_Handler.resolve_to_message(59));
-        button_Amount.setAmount(this.amount);
-        this.addOption(4, 0, button_Amount);
-        } else {
-            this.addOption(4, 0, new Button_with_no_task(itemStack_to_be_bought.getItemStack(), "", Message_Handler.resolve_to_message(56, PrimeShop.convert_IemStack_to_DisplayName(itemStack_to_be_bought.getItemStack())), Message_Handler.resolve_to_message(60)));
-        }
-        
-        
-        
-        // Close Option
-        this.addOption(8, 0, new Button_close_Interface());
+            // Display Icon
 
-        // Go Back Option
+            if (itemStack_to_be_bought.getItemStack().getMaxStackSize() > 1) {
+                Button_Amount button_Amount = new Button_Amount(
+                        itemStack_to_be_bought.getItemStack(), "",
+                        Message_Handler.resolve_to_message(56),
+                        Message_Handler.resolve_to_message(57),
+                        Message_Handler.resolve_to_message(58),
+                        Message_Handler.resolve_to_message(59));
+                button_Amount.setAmount(this.amount);
+                this.addOption(4, 0, button_Amount);
+            } else {
+                this.addOption(
+                        4,
+                        0,
+                        new Button_with_no_task(
+                                itemStack_to_be_bought.getItemStack(),
+                                "",
+                                Message_Handler.resolve_to_message(
+                                        56,
+                                        PrimeShop
+                                                .convert_IemStack_to_DisplayName(itemStack_to_be_bought
+                                                        .getItemStack())),
+                                Message_Handler.resolve_to_message(60)));
+            }
+
+            // Close Option
+            this.addOption(8, 0, new Button_close_Interface());
+
+            // Go Back Option
             if (position_in_Stack > 0) {
-    
-                this.addOption(0, 0, new Button(new ItemStack(Material.CHEST),
-                        Message_Handler.resolve_to_message(61), Message_Handler.resolve_to_message(62)) {
-    
-                    @Override
-                    public void onClick(InventoryInterface inventoryInterface, Player player, ItemStack cursor,
-                            ItemStack current, ClickType type) {
-                        PrimeShop.close_InventoyInterface(player);
-                        PrimeShop.open_InventoyInterface(player,
-                                inventoryInterface.branch_back_Stack.get(position_in_Stack - 1));
-                    }
-                });
-    
+
+                this.addOption(0, 0,
+                        new Button(new ItemStack(Material.CHEST),
+                                Message_Handler.resolve_to_message(61),
+                                Message_Handler.resolve_to_message(62)) {
+
+                            @Override
+                            public void onClick(
+                                    InventoryInterface inventoryInterface,
+                                    Player player, ItemStack cursor,
+                                    ItemStack current, ClickType type) {
+                                PrimeShop.close_InventoyInterface(player);
+                                PrimeShop.open_InventoyInterface(player,
+                                        inventoryInterface.branch_back_Stack
+                                                .get(position_in_Stack - 1));
+                            }
+                        });
+
             }
         }
 
     }
-        
+
     public static String get_Price2(ItemStack itemStack, boolean kaufen,
             int amount) {
         Item_Trader itemTrader = Pool_of_Item_Traders.get_ItemTrader();
@@ -127,10 +139,10 @@ public class Interface_ChestShop_Sell_Buy extends InventoryInterface {
         itemTrader = null;
 
         if (ReturnSELL.succesful) {
-            return Message_Handler.resolve_to_message(40, PrimeShop.economy.format(ReturnSELL.price));
+            return Message_Handler.resolve_to_message(40,
+                    PrimeShop.economy.format(ReturnSELL.price));
         } else {
             return Message_Handler.resolve_to_message(13);
         }
     }
 }
-

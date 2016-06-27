@@ -23,16 +23,21 @@ import eu.Blockup.PrimeShop.PricingEngine.DataHandling.Shop_Item;
 class Interface_Change_Price extends InventoryInterface {
 
     private Shop_Item sqlItem;
-    
+
     @SuppressWarnings("deprecation")
-    public Interface_Change_Price(final List<InventoryInterface> link_Back_Stack, Player player, final ItemStack itemStack_to_be_bought) {
-        super(Message_Handler.resolve_to_message(64), 4, link_Back_Stack); // TODO Correct ItemName
-        
+    public Interface_Change_Price(
+            final List<InventoryInterface> link_Back_Stack, Player player,
+            final ItemStack itemStack_to_be_bought) {
+        super(Message_Handler.resolve_to_message(64), 4, link_Back_Stack); // TODO
+                                                                           // Correct
+                                                                           // ItemName
+
         this.setCloseable(false);
 
         this.setClickHandler(new ClickHandler() {
             @Override
-            public boolean onClick(Player player, ItemStack cursor, ItemStack current, ClickType type) {
+            public boolean onClick(Player player, ItemStack cursor,
+                    ItemStack current, ClickType type) {
                 return false;
             }
         });
@@ -41,87 +46,155 @@ class Interface_Change_Price extends InventoryInterface {
 
         for (int a = 0; a < this.getWidth(); a++) {
             for (int b = 0; b < this.getHeight(); b++) {
-                this.addOption(a, b, new Button_with_no_task(Cofiguration_Handler.background_ItemStack, " "));
+                this.addOption(a, b, new Button_with_no_task(
+                        Cofiguration_Handler.background_ItemStack, " "));
             }
         }
 
         // Current Price
 
-        this.sqlItem = PrimeShop.get_Shop_Item_of_Itemstack(itemStack_to_be_bought);
+        this.sqlItem = PrimeShop
+                .get_Shop_Item_of_Itemstack(itemStack_to_be_bought);
 
-        this.addOption(4, 0, new Button_pricetag_Price(sqlItem, Material.getMaterial(421)));
+        this.addOption(4, 0,
+                new Button_pricetag_Price(sqlItem, Material.getMaterial(421)));
 
         // Changing Rate
 
         // +1000
-        this.addOption(1, 2, new Button_modify_Price(sqlItem, 1000.0, Material.getMaterial(388), "+" + PrimeShop.economy.format(1000), ""));
+        this.addOption(
+                1,
+                2,
+                new Button_modify_Price(sqlItem, 1000.0, Material
+                        .getMaterial(388),
+                        "+" + PrimeShop.economy.format(1000), ""));
 
         // -1000
-        this.addOption(1, 3, new Button_modify_Price(sqlItem, -1000.0, Material.getMaterial(388), PrimeShop.economy.format(-1000), ""));
+        this.addOption(
+                1,
+                3,
+                new Button_modify_Price(sqlItem, -1000.0, Material
+                        .getMaterial(388), PrimeShop.economy.format(-1000), ""));
 
         // +100
-        this.addOption(2, 2, new Button_modify_Price(sqlItem, 100.0, Material.getMaterial(264), "+" + PrimeShop.economy.format(100), ""));
+        this.addOption(
+                2,
+                2,
+                new Button_modify_Price(sqlItem, 100.0, Material
+                        .getMaterial(264), "+" + PrimeShop.economy.format(100),
+                        ""));
 
         // -100
-        this.addOption(2, 3, new Button_modify_Price(sqlItem, -100.0, Material.getMaterial(264), PrimeShop.economy.format(-100), ""));
+        this.addOption(
+                2,
+                3,
+                new Button_modify_Price(sqlItem, -100.0, Material
+                        .getMaterial(264), PrimeShop.economy.format(-100), ""));
 
         // +10
-        this.addOption(3, 2, new Button_modify_Price(sqlItem, 10.0, Material.getMaterial(266), "+" + PrimeShop.economy.format(10), ""));
+        this.addOption(
+                3,
+                2,
+                new Button_modify_Price(sqlItem, 10.0, Material
+                        .getMaterial(266), "+" + PrimeShop.economy.format(10),
+                        ""));
 
         // -10
-        this.addOption(3, 3, new Button_modify_Price(sqlItem, -10.0, Material.getMaterial(266), PrimeShop.economy.format(-10), ""));
+        this.addOption(
+                3,
+                3,
+                new Button_modify_Price(sqlItem, -10.0, Material
+                        .getMaterial(266), PrimeShop.economy.format(-10), ""));
 
         // +1
-        this.addOption(4, 2, new Button_modify_Price(sqlItem, 1.0, Material.getMaterial(265), "+" + PrimeShop.economy.format(1), ""));
+        this.addOption(
+                4,
+                2,
+                new Button_modify_Price(sqlItem, 1.0,
+                        Material.getMaterial(265), "+"
+                                + PrimeShop.economy.format(1), ""));
         // -1
-        this.addOption(4, 3, new Button_modify_Price(sqlItem, -1.0, Material.getMaterial(265), PrimeShop.economy.format(-1), ""));
+        this.addOption(
+                4,
+                3,
+                new Button_modify_Price(sqlItem, -1.0, Material
+                        .getMaterial(265), PrimeShop.economy.format(-1), ""));
 
         // +0,1
-        this.addOption(5, 2, new Button_modify_Price(sqlItem, 0.1, Material.getMaterial(331), "+" + PrimeShop.economy.format(0.1), ""));
+        this.addOption(
+                5,
+                2,
+                new Button_modify_Price(sqlItem, 0.1,
+                        Material.getMaterial(331), "+"
+                                + PrimeShop.economy.format(0.1), ""));
 
         // -0,1
-        this.addOption(5, 3, new Button_modify_Price(sqlItem, -0.1, Material.getMaterial(331), PrimeShop.economy.format(-0.1), ""));
+        this.addOption(
+                5,
+                3,
+                new Button_modify_Price(sqlItem, -0.1, Material
+                        .getMaterial(331), PrimeShop.economy.format(-0.1), ""));
 
         // +0,01
-        this.addOption(6, 2, new Button_modify_Price(sqlItem, 0.01, Material.getMaterial(263), "+" + PrimeShop.economy.format(0.01), ""));
+        this.addOption(
+                6,
+                2,
+                new Button_modify_Price(sqlItem, 0.01, Material
+                        .getMaterial(263),
+                        "+" + PrimeShop.economy.format(0.01), ""));
 
         // -0,01
-        this.addOption(6, 3, new Button_modify_Price(sqlItem, -0.01, Material.getMaterial(263), PrimeShop.economy.format(-0.01), ""));
+        this.addOption(
+                6,
+                3,
+                new Button_modify_Price(sqlItem, -0.01, Material
+                        .getMaterial(263), PrimeShop.economy.format(-0.01), ""));
 
-        
-        
         // Price to 0
-        
-        this.addOption(8, 3, new Button_modify_Price(sqlItem, -1 * sqlItem.initial_price.getValue(), Material.getMaterial(35), Message_Handler.resolve_to_message(146), ""));
-        
-        
+
+        this.addOption(8, 3, new Button_modify_Price(sqlItem, -1
+                * sqlItem.initial_price.getValue(), Material.getMaterial(35),
+                Message_Handler.resolve_to_message(146), ""));
+
         // Close Option
         this.addOption(8, 0, new Button_close_Interface());
 
         // Go Back Option
         if (position_in_Stack > 0) {
 
-            this.addOption(0, 0, new Button(itemStack_to_be_bought, Message_Handler.resolve_to_message(61), Message_Handler.resolve_to_message(62)) {
+            this.addOption(
+                    0,
+                    0,
+                    new Button(itemStack_to_be_bought, Message_Handler
+                            .resolve_to_message(61), Message_Handler
+                            .resolve_to_message(62)) {
 
-                @Override
-                public void onClick(InventoryInterface inventoryInterface, Player player, ItemStack cursor, ItemStack current, ClickType type) {
-                    PrimeShop.close_InventoyInterface(player);
+                        @Override
+                        public void onClick(
+                                InventoryInterface inventoryInterface,
+                                Player player, ItemStack cursor,
+                                ItemStack current, ClickType type) {
+                            PrimeShop.close_InventoyInterface(player);
 
-                    Interface_Buy_Sell_Item parentShop = (Interface_Buy_Sell_Item) inventoryInterface.branch_back_Stack.get(position_in_Stack - 1);
-                    for (Button button : parentShop.getButtons()) {
+                            Interface_Buy_Sell_Item parentShop = (Interface_Buy_Sell_Item) inventoryInterface.branch_back_Stack
+                                    .get(position_in_Stack - 1);
+                            for (Button button : parentShop.getButtons()) {
 
-                        if (button instanceof Button_Buy_Sell_Item) {
-                            try {
-                                ((Button_Buy_Sell_Item) button).refresh_price();
-                            } catch (Exception e) {
-                                player.sendMessage(Message_Handler.resolve_to_message(13));
+                                if (button instanceof Button_Buy_Sell_Item) {
+                                    try {
+                                        ((Button_Buy_Sell_Item) button)
+                                                .refresh_price();
+                                    } catch (Exception e) {
+                                        player.sendMessage(Message_Handler
+                                                .resolve_to_message(13));
+                                    }
+                                }
                             }
+                            parentShop.refresh(player);
+                            PrimeShop
+                                    .open_InventoyInterface(player, parentShop);
                         }
-                    }
-                    parentShop.refresh(player);
-                    PrimeShop.open_InventoyInterface(player, parentShop);
-                }
-            });
+                    });
 
         }
 

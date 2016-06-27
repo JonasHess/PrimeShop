@@ -16,7 +16,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class Item_Trader {
 
-//    private PrimeShop plugin;
+    // private PrimeShop plugin;
 
     Item_Trader(PrimeShop plugin) {
     }
@@ -31,13 +31,13 @@ public class Item_Trader {
 
         ReturnPrice result = new ReturnPrice();
         double finalPrice = 0.0;
-        if (!PrimeShop.plugin.has_Player_Permission_for_this_Item(player, itemStack)) {
+        if (!PrimeShop.plugin.has_Player_Permission_for_this_Item(player,
+                itemStack)) {
             result.succesful = false;
             result.errorMessage = Message_Handler.resolve_to_message(30);
             return result;
         }
-        
-        
+
         result.succesful = false;
         PlayerInventory playerInventory = player.getInventory();
 
@@ -49,31 +49,35 @@ public class Item_Trader {
             result.errorMessage = Message_Handler.resolve_to_message(31);
             return result;
         }
-        if (!(playerInventory.firstEmpty() == -1)) { 
+        if (!(playerInventory.firstEmpty() == -1)) {
             ReturnPrice futureprice = this.get_Price_of_Itemstack(itemStack,
                     (int) amount, true);
             if (futureprice.succesful) {
-                if (PrimeShop.has_Player_more_Money_than(player, futureprice.price)) {
+                if (PrimeShop.has_Player_more_Money_than(player,
+                        futureprice.price)) {
                     finalPrice = futureprice.price;
                     CountDownLatch latch = new CountDownLatch(1);
                     Item_Node_of_ItemBloodline tree = PrimeShop
                             .get_Tree_of_Itemstack(itemStack);
-                    Transaction transaction = new Transaction(itemStack, latch, amount,
-                            true, false, tree);
+                    Transaction transaction = new Transaction(itemStack, latch,
+                            amount, true, false, tree);
                     transaction.start();
 
                     try {
                         latch.await(3, TimeUnit.SECONDS);
                     } catch (InterruptedException e) {
                         transaction.transactionWasSuccessful = false;
-                        transaction.errorMessage = Message_Handler.resolve_to_message(10);
+                        transaction.errorMessage = Message_Handler
+                                .resolve_to_message(10);
                         e.printStackTrace();
                     }
                     if (!transaction.transactionIsCompleted) {
                         transaction.stop();
                         result.succesful = false;
-                        result.errorMessage = Message_Handler.resolve_to_message(13);
-                        player.sendMessage(Message_Handler.resolve_to_message(13));
+                        result.errorMessage = Message_Handler
+                                .resolve_to_message(13);
+                        player.sendMessage(Message_Handler
+                                .resolve_to_message(13));
                         return result;
                     }
                     if (transaction.transactionWasSuccessful) {
@@ -94,7 +98,7 @@ public class Item_Trader {
             }
 
         } else {
-            // Player hat nicht genügent Platz
+            // Player hat nicht genï¿½gent Platz
             result.succesful = false;
             result.errorMessage = Message_Handler.resolve_to_message(11);
         }
@@ -103,7 +107,8 @@ public class Item_Trader {
             PrimeShop.withdraw_money_from_Players_Account(player, finalPrice);
             player.sendMessage(Message_Handler.resolve_to_message(8,
                     convert_price_to_String(result.price)));
-            playerInventory.addItem(itemStack); // TODO hat schon einmal nicht funktioniert!
+            playerInventory.addItem(itemStack); // TODO hat schon einmal nicht
+                                                // funktioniert!
 
         } else {
             player.sendMessage(result.errorMessage);
@@ -115,17 +120,19 @@ public class Item_Trader {
 
     @SuppressWarnings("deprecation")
     public synchronized ReturnPrice sell_ItemStack(ItemStack itemStack,
-            int amount, Player player, boolean output_enabled, boolean sell_to_an_Chestshop, ChestShop chestShop) {
+            int amount, Player player, boolean output_enabled,
+            boolean sell_to_an_Chestshop, ChestShop chestShop) {
 
         ReturnPrice result = new ReturnPrice();
-        
+
         // Permission check
-        if (!PrimeShop.plugin.has_Player_Permission_for_this_Item(player, itemStack)) {
+        if (!PrimeShop.plugin.has_Player_Permission_for_this_Item(player,
+                itemStack)) {
             result.succesful = false;
             result.errorMessage = Message_Handler.resolve_to_message(32);
             return result;
         }
-        
+
         // Initialization
         result.succesful = false;
         ItemStack players_Item = null;
@@ -141,28 +148,27 @@ public class Item_Trader {
             result.errorMessage = Message_Handler.resolve_to_message(12);
             return result;
         }
-        
+
         // Player has Item he is going to sell?
-        
+
         if (hasPlayerThisITem(player, itemStack, amount)) {
-            
-            
+
             if (sell_to_an_Chestshop) {
-                
+
                 // check, if ChestShop has enough money to pay the User
-                futurePrice = this.get_Price_of_Itemstack(itemStack, amount, false);
+                futurePrice = this.get_Price_of_Itemstack(itemStack, amount,
+                        false);
                 if (futurePrice.succesful) {
                     if (!chestShop.has_money(futurePrice.price)) {
                         result.succesful = false;
-                        result.errorMessage = "Shop has not enough money"; // TODO 
+                        result.errorMessage = "Shop has not enough money"; // TODO
                         return result;
                     }
-                }else {
+                } else {
                     return futurePrice;
                 }
             }
-            
-            
+
             playerInventory.removeItem(itemStack);
             // players_Item = itemStack.clone(); // TODO test if this is valide
             players_Item = itemStack;
@@ -170,8 +176,8 @@ public class Item_Trader {
             CountDownLatch latch = new CountDownLatch(1);
             Item_Node_of_ItemBloodline tree = PrimeShop
                     .get_Tree_of_Itemstack(itemStack);
-            Transaction transaction = new Transaction(itemStack, latch, amount, false,
-                    false, tree);
+            Transaction transaction = new Transaction(itemStack, latch, amount,
+                    false, false, tree);
             transaction.start();
 
             try {
@@ -202,8 +208,8 @@ public class Item_Trader {
                 if (sell_to_an_Chestshop) {
                     sell_price = futurePrice.price;
                     chestShop.withdraw_money(sell_price);
-                    chestShop.add_Item_to_Mailbox(itemStack, amount); 
-                }                    
+                    chestShop.add_Item_to_Mailbox(itemStack, amount);
+                }
                 PrimeShop.add_Money_to_Players_Account(player, sell_price);
                 if (output_enabled) {
                     player.sendMessage(Message_Handler.resolve_to_message(15,
@@ -215,7 +221,7 @@ public class Item_Trader {
             }
 
         } else {
-            // Player hat die Items nicht, die er verkaufen möchte
+            // Player hat die Items nicht, die er verkaufen mï¿½chte
             result.errorMessage = Message_Handler.resolve_to_message(14);
         }
         notifyAll();
@@ -237,10 +243,12 @@ public class Item_Trader {
             return result;
         }
         CountDownLatch latch = new CountDownLatch(1);
-//        Item_Node_of_ItemBloodline tree = this.plugin.get_Tree_of_Itemstack(itemStack).clone(null);
-        Item_Node_of_ItemBloodline tree = PrimeShop.get_Tree_of_Itemstack(itemStack).clone(null);
-        Transaction transaction = new Transaction(itemStack, latch, amount, kaufen, false,
-                tree);
+        // Item_Node_of_ItemBloodline tree =
+        // this.plugin.get_Tree_of_Itemstack(itemStack).clone(null);
+        Item_Node_of_ItemBloodline tree = PrimeShop.get_Tree_of_Itemstack(
+                itemStack).clone(null);
+        Transaction transaction = new Transaction(itemStack, latch, amount,
+                kaufen, false, tree);
         transaction.start();
         try {
             latch.await(3, TimeUnit.SECONDS);
@@ -266,8 +274,6 @@ public class Item_Trader {
         return result;
 
     }
-
-
 
     private boolean hasPlayerThisITem(Player p, ItemStack i, int amount) {
 
